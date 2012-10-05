@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  member_id: 
+  group_id: 
+  from: 2012-10-05 21:06:59
+  to: 2012-10-05 21:06:59
+
+two:
+  member_id: 
+  group_id: 
+  from: 2012-10-05 21:06:59
+  to: 2012-10-05 21:06:59

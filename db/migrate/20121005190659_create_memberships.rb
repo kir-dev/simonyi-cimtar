@@ -1,9 +1,8 @@
-class CreateMemberPosts < ActiveRecord::Migration
+class CreateMemberships < ActiveRecord::Migration
   def change
-    create_table :member_posts do |t|
+    create_table :memberships do |t|
       t.integer :member_id
       t.integer :group_id
-      t.integer :post_id
       t.datetime :from
       t.datetime :to
 

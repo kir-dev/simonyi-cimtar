@@ -1,7 +1,8 @@
 class Member < ActiveRecord::Base
-  attr_accessible :address, :email, :fullName, :hobby, :intro, :phone, :room, :univYear
+  #attr_accessible :address, :email, :fullName, :hobby, :intro, :phone, :room, :univYear
   #
-  has_many :member_active_statuses, class_name: 'MemberActiveStatus', foreign_key: :member_id
+  has_many :memberships, class_name: 'MemberShip', foreign_key: :member_id
+  has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
 
   # mandatory fields
   validates :fullName, :email, :presence => true, :length => {:maximum => 130}

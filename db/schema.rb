@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915213659) do
+ActiveRecord::Schema.define(:version => 20121005204635) do
+
+  create_table "member_posts", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "group_id"
+    t.integer  "post_id"
+    t.datetime "from"
+    t.datetime "to"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "members", :force => true do |t|
     t.string   "fullName"
@@ -22,6 +32,16 @@ ActiveRecord::Schema.define(:version => 20120915213659) do
     t.text     "intro"
     t.integer  "univYear"
     t.string   "hobby"
+    t.boolean  "deleted"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "group_id"
+    t.datetime "from"
+    t.datetime "to"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
