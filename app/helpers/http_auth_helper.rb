@@ -1,10 +1,22 @@
+#encoding: utf-8 # dark magic az ékezetes karakterekhez
 # innen https://github.com/AdamLantos/redmine_http_auth/blob/master/app/helpers/http_auth_helper.rb
 # módosítva
 module HttpAuthHelper
   unloadable
 
+  ENTITLEMENT_SZK = 'urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16'
+
   def member_attributes
-    ['login', 'email', 'fullName', 'nick']
+    ['login', 'email', 'full_name', 'nick']
+  end
+
+  def attribute_mapping
+    {'login' => 'HTTP_UID',
+     'email' => 'HTTP_EMAIL',
+     'full_name' => 'HTTP_COMMON_NAME',
+     'nick' => 'HTTP_NICKNAME',
+     'entitlement' => 'HTTP_EDUPERSONENTITLEMENT'
+    }
   end
 
   def set_attributes(member)
@@ -14,15 +26,14 @@ module HttpAuthHelper
   end
 
   def remote_user
-    request.env['HTTP_UID']
+    get_attribute_value 'login'
   end
 
   def get_attribute_value(attribute_name)
-    conf = Setting.plugin_redmine_http_auth['attribute_mapping'] # todo
-    if conf.nil? || !conf.has_key?(attribute_name)
-      nil
+    if attribute_mapping.has_key?(attribute_name)
+      request.env[attribute_mapping[attribute_name]]
     else
-      request.env[conf[attribute_name]]
+      nil
     end
   end
 

@@ -10,9 +10,7 @@
 
 <%= yield %>
 
-<% if Rails.env.development?
-     # request.env['HTTP_REMOTE_USER'] = 'test'
-%>
+<% if Rails.env.development? %>
     <div>
       <br/><br/>
       <input type="button" onclick="$('#request_env_div').toggle();" value="REQUEST"/>
