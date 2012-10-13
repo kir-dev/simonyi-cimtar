@@ -1,0 +1,28 @@
+
+- # not_registered_and_member_on_vir:
+        login: not_reg_virmember
+        email: test1@test.cc
+        full_name: T. NotReg Árvíztükörfúrógép
+        nick: not reg jani
+        entitlement: urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16;urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:KIR fejlesztők és Üzemeltetők:106;urn:geant:niif.hu:sch.bme.hu:entitlement:tag:KIR fejlesztők és Üzemeltetők:106;urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Konferencia:371
+
+- # registered_and_member_on_vir:
+        login: reg_virmember
+        email: test2@test.cc
+        full_name: T. Reg. Árvíztükörfúrógép
+        nick: reg jani
+        entitlement: urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16;urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:KIR fejlesztők és Üzemeltetők:106;urn:geant:niif.hu:sch.bme.hu:entitlement:tag:KIR fejlesztők és Üzemeltetők:106
+
+- #not_registered_not_member_on_vir:
+        login: not_reg_not_member_test
+        email: test3@test.cc
+        full_name: T. NagyonKülsős Sándor
+        nick: not reg not virmember sanyi
+        entitlement: urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:Random kör:666;urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Konferencia:371
+
+- # registered_not_member_on_vir:
+        login: reg_test_not_virmember
+        email: test4@test.cc
+        full_name: T. Öregtag Pityu
+        nick: reg not virmember öregtag pityu
+        entitlement: urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:Random kör:999
