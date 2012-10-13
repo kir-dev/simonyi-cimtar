@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(:version => 20121006153013) do
   end
 
   create_table "members", :force => true do |t|
-    t.string   "fullName"
+    t.string   "full_name"
     t.string   "email"
     t.string   "phone"
     t.string   "room"
     t.string   "address"
     t.text     "intro"
-    t.integer  "univYear"
+    t.integer  "univ_year"
     t.string   "hobby"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

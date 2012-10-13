@@ -17,13 +17,13 @@
 
 <% @members.each do |member| %>
   <tr>
-    <td><%= member.fullName %></td>
+    <td><%= member.full_name %></td>
     <td><%= member.email %></td>
     <td><%= member.phone %></td>
     <td><%= member.room %></td>
     <td><%= member.address %></td>
     <td><%= member.intro %></td>
-    <td><%= member.univYear %></td>
+    <td><%= member.univ_year %></td>
     <td><%= member.hobby %></td>
     <td><%= link_to 'Show', member %></td>
     <td><%= link_to 'Edit', edit_member_path(member) %></td>

@@ -5,9 +5,9 @@ class Member < ActiveRecord::Base
   has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
 
   # mandatory fields
-  validates :fullName, :email, :presence => true, :length => {:maximum => 130}
+  validates :full_name, :email, :presence => true, :length => {:maximum => 130}
   validates :email, :uniqueness => {:case_sensitive => false}, :email => true
-  validates :univYear, :presence => true, :numericality => {:greater_than => 1970, :less_than => 2030}
+  validates :univ_year, :presence => true, :numericality => {:greater_than => 1970, :less_than => 2030}
 
   validates :address, :hobby, :length => {:maximum => 250}
   validates :intro, :length => {:maximum => 1000}
