@@ -29,7 +29,7 @@ module AppAuthHelper
     get_attribute_value 'login'
   end
 
-  def isMemberOnVir
+  def is_member_on_vir
     entitlement = get_attribute_value 'entitlement'
     if !entitlement.nil? and entitlement.include? ENTITLEMENT_SZK
       true
