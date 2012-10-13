@@ -1,7 +1,7 @@
 #encoding: utf-8 # dark magic az ékezetes karakterekhez
 # innen https://github.com/AdamLantos/redmine_http_auth/blob/master/app/helpers/http_auth_helper.rb
 # módosítva
-module HttpAuthHelper
+module AppAuthHelper
   unloadable
 
   ENTITLEMENT_SZK = 'urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16'
@@ -27,6 +27,15 @@ module HttpAuthHelper
 
   def remote_user
     get_attribute_value 'login'
+  end
+
+  def isMemberOnVir
+    entitlement = get_attribute_value 'entitlement'
+    if !entitlement.nil? and entitlement.include? ENTITLEMENT_SZK
+      true
+    else
+      false
+    end
   end
 
   def get_attribute_value(attribute_name)
