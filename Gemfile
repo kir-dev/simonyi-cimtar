@@ -8,7 +8,7 @@ gem 'rails', '3.2.8'
 gem 'pg'
 gem 'sqlite3'
 gem 'twitter-bootstrap-rails', '~> 2.1.3'
-gem 'factory_girl_rails'
+#gem 'factory_girl_rails'
 gem 'cucumber'
 
 gem 'therubyracer'
