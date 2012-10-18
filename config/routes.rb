@@ -1,9 +1,11 @@
 SzkCimtar::Application.routes.draw do
-  resources :members
+  resources :members, :except => :destroy
 
   get "home/index"
 
   match '/403', :to => redirect('/403.html')
+  match '/404', :to => redirect('/404.html')
+  match '/500', :to => redirect('/500.html')
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

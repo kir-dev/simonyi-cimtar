@@ -15,10 +15,20 @@ class ApplicationController < ActionController::Base
     case authenticate_logic
       when :goto_login
         redirect_to Rails.application.config.login_url
-      when :goto_reg
-        puts 'reg'
+      when :reg
+        @member = Member.new
+        set_attributes @member
+
+        if @member.save
+          redirect_to member_url(@member), notice: 'reg successful, blabla'
+        else
+          redirect_to '/500'
+        end
       when :ok
-        puts 'ok'
+        puts request.path.inspect
+        if request.path.blank? or request.path == '/'
+          redirect_to @member
+        end
       else
         redirect_to '/403'
         return false
@@ -33,7 +43,7 @@ class ApplicationController < ActionController::Base
       @member = Member.find_by_login(remote_user)
       if @member.nil?
         if is_member_on_vir
-          :goto_reg
+          :reg
         else
           :access_denied
         end

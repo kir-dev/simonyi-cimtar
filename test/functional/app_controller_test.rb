@@ -18,7 +18,7 @@ class AppControllerTest < ActionController::TestCase
 
   test "login with a not registered but member on vir user aka newuser" do
     set_test_data @users[0]
-    assert_equal :goto_reg, @controller.send(:authenticate_logic)
+    assert_equal :reg, @controller.send(:authenticate_logic)
   end
 
   test "login with a registered and member on vir user aka user" do
