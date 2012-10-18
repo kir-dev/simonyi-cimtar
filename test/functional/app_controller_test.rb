@@ -11,9 +11,7 @@ class AppControllerTest < ActionController::TestCase
   end
 
   test "login with no sso user" do
-    @controller.send(:authenticate_logic)
-    assert_response 302
-    assert_equal Rails.application.config.login_url, @controller.response.header['Location']
+    assert_equal :goto_login, @controller.send(:authenticate_logic)
   end
 
   test "login with a not registered but member on vir user aka newuser" do

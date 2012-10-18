@@ -15,23 +15,25 @@ class ApplicationController < ActionController::Base
     case authenticate_logic
       when :goto_login
         redirect_to Rails.application.config.login_url
-      when :reg
-        @member = Member.new
-        set_attributes @member
-
-        if @member.save
-          redirect_to member_url(@member), notice: 'reg successful, blabla'
-        else
-          redirect_to '/500'
-        end
       when :ok
-        puts request.path.inspect
-        if request.path.blank? or request.path == '/'
-          redirect_to @member
-        end
+        # nothing for now
+      when :reg
+        new_member
       else
         redirect_to '/403'
         return false
+    end
+  end
+
+  private
+  def new_member
+    @member = Member.new
+    set_attributes @member
+
+    if @member.save
+      redirect_to member_url(@member), notice: 'reg successful, blabla'
+    else
+      redirect_to '/500'
     end
   end
 
