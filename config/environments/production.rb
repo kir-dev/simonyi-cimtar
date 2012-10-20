@@ -65,6 +65,7 @@ SzkCimtar::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  # Login url
-  config.login_url = 'https://idp.sch.bme.hu' # todo
+  # Custom urls #todo
+  config.login_url = 'https://idp.sch.bme.hu'
+  config.logout_url = 'https://szkcimtar.sch.bme.hu/Shibboleth.sso/Logout?return=xy/logout'
 end

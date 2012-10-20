@@ -3,6 +3,8 @@ SzkCimtar::Application.routes.draw do
 
   get "home/index"
 
+  match '/logout' => 'members#logout'
+
   match '/403', :to => redirect('/403.html')
   match '/404', :to => redirect('/404.html')
   match '/500', :to => redirect('/500.html')

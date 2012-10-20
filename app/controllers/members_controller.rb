@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  layout 'logout', :only => :logout
+
   # GET /members
   def index
     @members = Member.all
@@ -54,6 +56,14 @@ class MembersController < ApplicationController
       else
         format.html { render action: "edit" }
       end
+    end
+  end
+
+  # GET /logout
+  def logout
+    if !remote_user.nil? and !remote_user.empty?
+      #redirect to shib logout
+      redirect_to Rails.application.config.logout_url
     end
   end
 end
