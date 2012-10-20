@@ -7,7 +7,6 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 gem 'sqlite3'
-gem 'twitter-bootstrap-rails', '~> 2.1.3'
 #gem 'factory_girl_rails'
 gem 'cucumber'
 
@@ -23,6 +22,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'twitter-bootstrap-rails', '~> 2.1.3'
 end
 
 gem 'jquery-rails'
