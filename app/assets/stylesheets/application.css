@@ -36,6 +36,9 @@
     border-radius: 100px;
     background: #AAA;
 }
+.notification-indicator > .mail-status.unread {
+    background: rgb(255, 89, 89);
+}
 
 .navbar-link-to-profile {
     line-height: 20px;
