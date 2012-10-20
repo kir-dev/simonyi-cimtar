@@ -15,24 +15,24 @@
 
   <%= stylesheet_link_tag "application", :media => "all" %>
 
-   <!--For third-generation iPad with high-resolution Retina display: -->
-   <!--Size should be 144 x 144 pixels -->
+  <!--For third-generation iPad with high-resolution Retina display: -->
+  <!--Size should be 144 x 144 pixels -->
   <!--<%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>-->
 
-   <!--For iPhone with high-resolution Retina display: -->
-   <!--Size should be 114 x 114 pixels -->
+  <!--For iPhone with high-resolution Retina display: -->
+  <!--Size should be 114 x 114 pixels -->
   <!--<%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>-->
 
-   <!--For first- and second-generation iPad: -->
-   <!--Size should be 72 x 72 pixels -->
+  <!--For first- and second-generation iPad: -->
+  <!--Size should be 72 x 72 pixels -->
   <!--<%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>-->
 
-   <!--For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-   <!--Size should be 57 x 57 pixels -->
+  <!--For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <!--Size should be 57 x 57 pixels -->
   <!--<%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>-->
 
-   <!--For all other devices -->
-   <!--Size should be 32 x 32 pixels -->
+  <!--For all other devices -->
+  <!--Size should be 32 x 32 pixels -->
   <!--<%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>-->
 </head>
 <body>
@@ -50,7 +50,7 @@
       </a>
 
       <a href="/notifications" class="notification-indicator">
-        <span class="mail-status all-read"></span>
+        <span class="mail-status unread"></span>
       </a>
 
       <div class="nav-collapse">
@@ -59,14 +59,14 @@
         </form>
         <ul class="nav pull-right">
           <li>
-            <a href="#" class="navbar-link-to-profile">
-              <img src="" alt="profile"/>
-              <span>Vezeték Keresztnév</span>
-            </a>
+            <%= link_to(@user, :class => 'navbar-link-to-profile') do %>
+                <img src="" alt="profile"/>
+                <span><%= @user.full_name %></span>
+            <% end %>
           </li>
           <li class="divider-vertical"></li>
           <li>
-            <a href="/logout">Kilépés</a>
+            <%= link_to "Kilépés", :controller => "members", :action => "logout" %>
           </li>
         </ul>
       </div>
@@ -124,7 +124,6 @@
       </pre>
     </div>
 <% end %>
-
 
 </body>
 </html>

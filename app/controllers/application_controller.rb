@@ -27,11 +27,11 @@ class ApplicationController < ActionController::Base
 
   private
   def new_member
-    @member = Member.new
-    set_attributes @member
+    @user = Member.new
+    set_attributes @user
 
-    if @member.save
-      redirect_to member_url(@member), notice: 'reg successful, blabla'
+    if @user.save
+      redirect_to member_url(@user), notice: 'reg successful, blabla'
     else
       redirect_to '/500'
     end
@@ -42,8 +42,8 @@ class ApplicationController < ActionController::Base
     if remote_user.nil? or remote_user.empty?
       :goto_login
     else
-      @member = Member.find_by_login(remote_user)
-      if @member.nil?
+      @user = Member.find_by_login(remote_user)
+      if @user.nil?
         if is_member_on_vir
           :reg
         else
