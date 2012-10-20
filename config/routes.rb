@@ -1,5 +1,6 @@
 SzkCimtar::Application.routes.draw do
-  resources :members, :except => :destroy
+  resources :members
+  resources :groups
 
   get "home/index"
 
