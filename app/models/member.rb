@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   attr_readonly :login
   attr_accessible :email, :full_name, :nick, :address, :hobby, :intro, :phone, :univ_year, :room
   #
-  has_many :memberships, class_name: 'MemberShip', foreign_key: :member_id
+  has_many :memberships, class_name: 'Membership', foreign_key: :member_id
   has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
 
   # mandatory fields
