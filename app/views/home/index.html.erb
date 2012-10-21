@@ -1,1 +1,25 @@
-hello
+<div class="row" style="margin-top: 35px;">
+  <div class="span2">&nbsp;</div>
+  <div class="span5">
+    <form class="form-search">
+      <div class="input-append controls controls-row">
+        <input type="text" class="span4 search-query">
+        <button type="submit" class="btn">Keresés</button>
+      </div>
+    </form>
+  </div>
+  <div class="span2">&nbsp;</div>
+</div>
+
+<div class="row">
+  <h3 style="text-align: center;">Egységek</h3>
+
+  <div class="span2">&nbsp;</div>
+  <div class="span5">
+    <%=
+        @groups = Group.all
+        render @groups
+    %>
+  </div>
+  <div class="span2">&nbsp;</div>
+</div>
