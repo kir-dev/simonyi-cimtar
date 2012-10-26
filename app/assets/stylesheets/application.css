@@ -36,6 +36,7 @@
     border-radius: 100px;
     background: #AAA;
 }
+
 .notification-indicator > .mail-status.unread {
     background: rgb(255, 89, 89);
 }
@@ -53,5 +54,39 @@
 
 .navbar-link-to-profile span {
     font-weight: bold;
+}
+
+.best_in_place {
+    padding: 0.1em;
+    cursor: hand;
+    cursor: pointer;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.best_in_place:hover, .do_hover {
+    padding-right: 1.5em;
+    background: #CCC url('/assets/red_pen.png') no-repeat right;
+}
+
+.purr {
+    position: fixed;
+    width: 250px;
+    top: 60px;
+    right: 50px;
+    padding: 15px;
+    background-color: #FCC;
+    color: #000;
+    border: 2px solid #C66;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
 
 }

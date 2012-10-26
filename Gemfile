@@ -10,6 +10,7 @@ gem 'sqlite3'
 #gem 'factory_girl_rails'
 gem 'cucumber'
 
+gem 'best_in_place'
 gem 'therubyracer'
 
 # Gems used only for assets and not required

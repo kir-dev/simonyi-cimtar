@@ -11,6 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require best_in_place
+//= require best_in_place.purr
+
+$(document).ready(function () {
+    jQuery(".best_in_place").best_in_place();
+});

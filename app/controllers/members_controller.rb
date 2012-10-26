@@ -28,11 +28,6 @@ class MembersController < ApplicationController
     end
   end
 
-  # GET /members/1/edit
-  def edit
-    @member = Member.find(params[:id])
-  end
-
   # POST /members
   def create
     @member = Member.new(params[:member])
@@ -53,8 +48,10 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.update_attributes(params[:member])
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
+        format.json { respond_with_bip(@member) }
       else
         format.html { render action: "edit" }
+        format.json { respond_with_bip(@member) }
       end
     end
   end

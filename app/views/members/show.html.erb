@@ -1,41 +1,66 @@
 <%- model_class = Member -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:full_name) %>:</strong></dt>
-  <dd><%= @member.full_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @member.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
-  <dd><%= @member.phone %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:room) %>:</strong></dt>
-  <dd><%= @member.room %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd><%= @member.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:intro) %>:</strong></dt>
-  <dd><%= @member.intro %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:univ_year) %>:</strong></dt>
-  <dd><%= @member.univ_year %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:hobby) %>:</strong></dt>
-  <dd><%= @member.hobby %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:deleted) %>:</strong></dt>
-  <dd><%= @member.deleted %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:login) %>:</strong></dt>
-  <dd><%= @member.login %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:nick) %>:</strong></dt>
-  <dd><%= @member.nick %></dd>
-</dl>
+<div class="row">
+  <div class="span3">
+    <img class="profile-img" src="/assets/avatar.jpg"/>
+
+    <div class="profile-nick">
+      <strong>
+        <%= best_in_place @member, :nick, :type => :input %>
+      </strong>
+    </div>
+  </div>
+  <div class="span6">
+    <h2>
+      <%= best_in_place_if false, @member, :full_name, :type => :input %>
+    </h2>
+
+    <table id="member-data" class="table table-bordered">
+      <tr>
+        <td><label>E-mail:</label></td>
+        <td><%= best_in_place @member, :email, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>Telefonszám:</label></td>
+        <td><%= best_in_place @member, :phone, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>Koliszoba:</label></td>
+        <td><%= best_in_place @member, :room, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>Levelezési cím:</label></td>
+        <td><%= best_in_place @member, :address, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>Egyetem kezdési éve:</label></td>
+        <td><%= best_in_place @member, :univ_year, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>Bemutatkozás:</label></td>
+        <td><%= best_in_place @member, :intro, :type => :textarea %></td>
+      </tr>
+      <tr>
+        <td><label>Hobby:</label></td>
+        <td><%= best_in_place @member, :hobby, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>SSO Login:</label></td>
+        <td><%= @member.login %></td>
+      </tr>
+      <tr>
+        <td><label>Törölve:</label></td>
+        <td><%= best_in_place_if false, @member, :deleted,
+                                 :type => :checkbox,
+                                 :collection => ["No, thanks", "Yes, of course!"]
+        %></td>
+      </tr>
+    </table>
+
+  </div>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              members_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_member_path(@member), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              member_path(@member),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              members_path, :class => 'btn' %>
 </div>

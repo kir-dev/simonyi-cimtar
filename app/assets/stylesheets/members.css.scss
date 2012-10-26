@@ -1,3 +1,42 @@
 // Place all the styles related to the Members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-img {
+  width: 100%;
+  margin-top: 17px;
+  margin-bottom: 10px;
+}
+
+.profile-nick {
+  text-align: center;
+  font-size: 20px;
+}
+
+#member-data td:first-child {
+  width: 12em;
+}
+
+#member-data td {
+  vertical-align: middle;
+  padding: 8px;
+  padding-bottom: 6px;
+}
+
+#member-data input, #member-data input[type="text"] {
+  width: 80%;
+  margin-bottom: 0px;
+}
+
+#member-data input[type=submit], #member-data input[type=button] {
+  width: 5em;
+}
+
+#member-data input[type=checkbox] {
+  width: 1em;
+}
+
+#member-data textarea {
+  max-height: 15em;
+  min-width: 40em;
+}
