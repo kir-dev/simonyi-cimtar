@@ -21,7 +21,8 @@
         <ul class="nav pull-right">
           <li>
             <%= link_to(@user, :class => 'navbar-link-to-profile') do %>
-                <%= image_tag @user.gravatar_url(:size => 20) %>
+                <%= image_tag @user.gravatar_url(:size => 20),
+                              :alt => '', :width => 20 %>
                 <span><%= @user.full_name %></span>
             <% end %>
           </li>
