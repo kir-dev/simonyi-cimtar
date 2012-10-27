@@ -4,12 +4,12 @@ one:
   name: MyString
   founded: 
   url: MyString
-  list: MyString
+  mail_list: MyString
   shortname: MyString
 
 two:
   name: MyString
   founded: 
   url: MyString
-  list: MyString
+  mail_list: MyString
   shortname: MyString
