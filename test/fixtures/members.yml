@@ -2,39 +2,48 @@
 
 one:
   full_name: MyString
-  email: MyString
+  login: one
+  email: a0@b0.cc
+  nick: a0
   phone: MyString
   room: MyString
   address: MyString
   intro: MyText
-  univ_year: 1
+  univ_year: 2005
   hobby: MyString
+  deleted: false
 
 two:
   full_name: MyString
-  email: MyString
+  login: two
+  email: a1@b1.cc
+  nick: a1
   phone: MyString
   room: MyString
   address: MyString
   intro: MyText
-  univ_year: 1
+  univ_year: 2005
   hobby: MyString
+  deleted: false
 
 registered_and_member_on_vir:
   full_name: T. Reg. Árvíztükörfúrógép
   email: test2@test.cc
   login: reg_virmember
   nick: reg jani
+  univ_year: 2005
 
 registered_not_member_on_vir:
   full_name: T. Öregtag Pityu
   email: test4@test.cc
   login: reg_test_not_virmember
   nick: reg not virmember öregtag pityu
+  univ_year: 2005
 
 registered_deleted:
   full_name: T. Troll Pista
   email: test5@test.cc
   login: login_test_deleted
   nick: login troll pista
+  univ_year: 2005
   deleted: true
