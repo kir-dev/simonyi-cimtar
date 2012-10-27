@@ -4,8 +4,10 @@ class Member < ActiveRecord::Base
              :filetype => :png,
              :default => 'mm'
 
-  attr_readonly :login
-  attr_accessible :email, :full_name, :nick, :address, :hobby, :intro, :phone, :univ_year, :room
+  #attr_readonly :login #TODO: how?
+  attr_accessible :login, :email, :full_name, :nick, :address, :hobby, :intro,
+                  :phone, :univ_year, :room, :deleted
+
   #
   has_many :memberships, class_name: 'Membership', foreign_key: :member_id
   has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
