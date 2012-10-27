@@ -9,6 +9,7 @@ class Member < ActiveRecord::Base
   #
   has_many :memberships, class_name: 'Membership', foreign_key: :member_id
   has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
+  has_many :job_positions, class_name: 'JobPosition', foreign_key: :member_id
 
   # mandatory fields
   validates :full_name, :email, :login, :presence => true, :length => {:maximum => 130}
