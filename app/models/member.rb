@@ -1,4 +1,9 @@
 class Member < ActiveRecord::Base
+  include Gravtastic
+  gravtastic :secure => true,
+             :filetype => :png,
+             :default => 'mm'
+
   attr_readonly :login
   attr_accessible :email, :full_name, :nick, :address, :hobby, :intro, :phone, :univ_year, :room
   #

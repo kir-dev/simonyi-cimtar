@@ -2,7 +2,8 @@
 
 <div class="row">
   <div class="span3">
-    <img class="profile-img" src="/assets/avatar.jpg"/>
+    <!--<img class="profile-img" src="/assets/avatar.jpg"/>-->
+    <%= image_tag @member.gravatar_url(:size => 270), :class => 'profile-img' %>
 
     <div class="profile-nick">
       <strong>
@@ -54,6 +55,10 @@
                                  :type => :checkbox,
                                  :collection => ["No, thanks", "Yes, of course!"]
         %></td>
+      </tr>
+      <tr>
+        <td><label>Munkahelyek:</label></td>
+        <td><%= %></td>
       </tr>
     </table>
 

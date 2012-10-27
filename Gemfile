@@ -8,9 +8,10 @@ gem 'rails', '3.2.8'
 gem 'pg'
 gem 'sqlite3'
 #gem 'factory_girl_rails'
-gem 'cucumber'
+#gem 'cucumber'
 
 gem 'best_in_place'
+gem 'gravtastic'
 gem 'therubyracer'
 
 # Gems used only for assets and not required
