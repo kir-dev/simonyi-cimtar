@@ -20,7 +20,12 @@
 }
 
 #member-data td:first-child {
-  width: 12em;
+  width: 150px;
+}
+
+#member-data td:last-child {
+  width: 40px;
+  text-align: center;
 }
 
 #member-data td {

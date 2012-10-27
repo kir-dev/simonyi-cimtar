@@ -1,0 +1,2 @@
+class JobPositionsController < ApplicationController
+end
