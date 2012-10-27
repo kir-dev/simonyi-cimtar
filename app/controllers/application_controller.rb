@@ -1,13 +1,15 @@
-#encoding: utf-8 # dark magic az ékezetes karakterekhez
+#encoding: utf-8 # dark magic for international characters
 class ApplicationController < ActionController::Base
   include AppAuthHelper
 
   protect_from_forgery
 
-  if Rails.env.development?
-    before_filter :set_account, :authenticate
-  else #production
+  if Rails.env.production?
     before_filter :authenticate
+  else
+    if Rails.env.development?
+      before_filter :set_account, :authenticate
+    end
   end
 
   private
