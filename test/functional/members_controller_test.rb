@@ -18,7 +18,13 @@ class MembersControllerTest < ActionController::TestCase
 
   test "should create member" do
     assert_difference('Member.count') do
-      post :create, member: { address: @member.address, email: @member.email, full_name: @member.full_name, hobby: @member.hobby, intro: @member.intro, phone: @member.phone, room: @member.room, univ_year: @member.univ_year }
+      post :create, member: {address: @member.address,
+                             email: @member.email + Member.count.to_s,
+                             full_name: @member.full_name, hobby: @member.hobby,
+                             intro: @member.intro, phone: @member.phone,
+                             room: @member.room, univ_year: @member.univ_year,
+                             nick: @member.nick, deleted: @member.deleted,
+                             login: 'unique_login_' + Member.count.to_s}
     end
 
     assert_redirected_to member_path(assigns(:member))
@@ -29,21 +35,9 @@ class MembersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @member
-    assert_response :success
-  end
-
   test "should update member" do
-    put :update, id: @member, member: { address: @member.address, email: @member.email, full_name: @member.full_name, hobby: @member.hobby, intro: @member.intro, phone: @member.phone, room: @member.room, univ_year: @member.univ_year }
+    put :update, id: @member, member: {address: @member.address, email: @member.email, full_name: @member.full_name, hobby: @member.hobby, intro: @member.intro, phone: @member.phone, room: @member.room, univ_year: @member.univ_year}
     assert_redirected_to member_path(assigns(:member))
   end
 
-  test "should destroy member" do
-    assert_difference('Member.count', -1) do
-      delete :destroy, id: @member
-    end
-
-    assert_redirected_to members_path
-  end
 end
