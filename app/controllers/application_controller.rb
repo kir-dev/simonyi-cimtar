@@ -50,7 +50,11 @@ class ApplicationController < ActionController::Base
           :access_denied
         end
       else
-        :ok
+        if @user.deleted?
+          :deleted
+        else
+          :ok
+        end
       end
     end
   end

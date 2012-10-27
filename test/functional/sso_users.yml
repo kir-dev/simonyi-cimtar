@@ -26,3 +26,10 @@
         full_name: T. Öregtag Pityu
         nick: reg not virmember öregtag pityu
         entitlement: urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:Random kör:999
+
+- # registered_deleted:
+        login: login_test_deleted
+        email: test5@test.cc
+        full_name: T. Troll Pista
+        nick: login troll pista
+        entitlement: urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:Random kör:999

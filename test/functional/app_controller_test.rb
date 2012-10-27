@@ -34,6 +34,11 @@ class AppControllerTest < ActionController::TestCase
     assert_equal :ok, @controller.send(:authenticate_logic)
   end
 
+  test "login with a registered and deleted user aka banned troll" do
+    set_test_data @users[4]
+    assert_equal :deleted, @controller.send(:authenticate_logic)
+  end
+
   private
   def set_test_data(sso_user)
     member_attributes.each do |attr|
