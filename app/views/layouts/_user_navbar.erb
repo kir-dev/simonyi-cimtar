@@ -19,17 +19,19 @@
           <input type="text" class="search-query span2" placeholder="Keresés">
         </form>
         <ul class="nav pull-right">
-          <li>
-            <%= link_to(@user, :class => 'navbar-link-to-profile') do %>
-                <%= image_tag @user.gravatar_url(:size => 20),
-                              :alt => '', :width => 20 %>
-                <span><%= @user.full_name %></span>
-            <% end %>
-          </li>
-          <li class="divider-vertical"></li>
-          <li>
-            <%= link_to "Kilépés", :controller => "members", :action => "logout" %>
-          </li>
+          <% unless @user.nil? %>
+              <li>
+                <%= link_to(@user, :class => 'navbar-link-to-profile') do %>
+                    <%= image_tag @user.gravatar_url(:size => 20),
+                                  :alt => '', :width => 20 %>
+                    <span><%= @user.full_name %></span>
+                <% end %>
+              </li>
+              <li class="divider-vertical"></li>
+              <li>
+                <%= link_to "Kilépés", :controller => "members", :action => "logout" %>
+              </li>
+          <% end %>
         </ul>
       </div>
       <!--/.nav-collapse -->
