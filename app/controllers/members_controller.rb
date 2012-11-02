@@ -47,10 +47,8 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
-        format.html { redirect_to @member, notice: 'Member was successfully updated.' }
         format.json { respond_with_bip(@member) }
       else
-        format.html { render action: "edit" }
         format.json { respond_with_bip(@member) }
       end
     end
