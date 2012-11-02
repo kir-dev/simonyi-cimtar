@@ -20,47 +20,77 @@
       <tr>
         <td><label>E-mail:</label></td>
         <td><%= best_in_place @member, :email, :type => :input %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>Telefonszám:</label></td>
         <td><%= best_in_place @member, :phone, :type => :input %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>Koliszoba:</label></td>
         <td><%= best_in_place @member, :room, :type => :input %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>Levelezési cím:</label></td>
         <td><%= best_in_place @member, :address, :type => :input %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>Egyetem kezdési éve:</label></td>
         <td><%= best_in_place @member, :univ_year, :type => :input %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>Bemutatkozás:</label></td>
         <td><%= best_in_place @member, :intro, :type => :textarea %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>Hobby:</label></td>
         <td><%= best_in_place @member, :hobby, :type => :input %></td>
+        <td></td>
       </tr>
       <tr>
         <td><label>SSO Login:</label></td>
         <td><%= @member.login %></td>
+        <td></td>
       </tr>
-      <tr>
-        <td><label>Törölve:</label></td>
-        <td><%= best_in_place_if false, @member, :deleted,
-                                 :type => :checkbox,
-                                 :collection => ["No, thanks", "Yes, of course!"]
-        %></td>
-      </tr>
-      <tr>
+      <tr class="joblist">
         <td><label>Munkahelyek:</label></td>
-        <td><%= %></td>
+        <td>
+          <div class="accordion" id="accordion1">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#new_job_position">
+                  <i class="icon-plus-sign"></i>
+                  Új munkahely felvétele
+                </a>
+              </div>
+
+              <%= render :partial => 'job_positions/ajaxform' %>
+            </div>
+          </div>
+
+          <ul id="member_jobs_list" class="table table-hover table-condensed">
+            <%=
+                render :partial => 'job_positions/list', :locals => {:jobs => @member.job_positions}
+            %>
+          </ul>
+
+        </td>
+        <td>
+        </td>
       </tr>
     </table>
+
+    <div class="well" style="color: red">
+      Archiválva: <%= best_in_place_if false, @member, :deleted,
+                                       :type => :checkbox,
+                                       :collection => %w(Nem Igen)
+    %>
+    </div>
 
   </div>
 </div>

@@ -11,6 +11,7 @@ gem 'sqlite3'
 #gem 'cucumber'
 
 gem 'best_in_place'
+gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
 gem 'therubyracer'
 

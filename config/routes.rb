@@ -1,8 +1,10 @@
 SzkCimtar::Application.routes.draw do
-  resources :members, :except => [:edit, :destroy]
-  resources :groups
+  resources :members, :except => [:edit, :destroy] do
+    resources :job_positions, :only => [:create, :update, :destroy]
+  end
+  resources :groups, :except => [:destroy]
 
-  get "home/index"
+  get 'home/index'
 
   match '/logout' => 'members#logout'
 

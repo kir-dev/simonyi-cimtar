@@ -1,0 +1,65 @@
+<div id="new_job_position" class="accordion-body collapse">
+  <div class="accordion-inner">
+    <%= form_for([@member, JobPosition.new],
+                 :remote => true, :html => {:class => 'form-horizontal'}) do |f| %>
+
+        <div class="control-group">
+          <%= f.label 'Cég', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :company, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label 'Poszt', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :title, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label 'Hol', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :location, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label 'Mikor', :class => 'control-label' %>
+          <div class="controls">
+            <label class="checkbox">
+              <%=
+                  f.check_box :present
+              %>
+              Jelenleg itt dolgozom
+            </label>
+
+            <div>
+
+              <%=
+                  f.date_select :from_date, {:discard_day => true,
+                                             :start_year => 1990,
+                                             :end_year => 2025,
+                                             :use_short_month => true},
+                                {:class => 'job_date'}
+              %>
+            </div>
+
+            <div id="to_date_container">
+              <%=
+                  f.date_select :to_date, {:discard_day => true,
+                                           :start_year => 1990,
+                                           :end_year => 2025,
+                                           :use_short_month => true},
+                                {:class => 'job_date'}
+              %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit "Mentés", :class => 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>

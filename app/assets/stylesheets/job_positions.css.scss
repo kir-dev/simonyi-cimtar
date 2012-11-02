@@ -1,3 +1,19 @@
 // Place all the styles related to the JobPositions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#new_job_position .controls {
+  margin-left: 50px;
+}
+
+#new_job_position .control-label {
+  width: 0px;
+}
+
+#new_job_position .job_date {
+  width: 70px;
+}
+
+#new_job_position .form-actions {
+  padding: 7px 20px 7px 216px;
+}

@@ -27,10 +27,9 @@ ActiveRecord::Schema.define(:version => 20121027191458) do
     t.string   "company"
     t.string   "title"
     t.string   "location"
-    t.integer  "from_month"
-    t.integer  "from_year"
-    t.integer  "to_month"
-    t.integer  "to_year"
+    t.date     "from_date"
+    t.date     "to_date"
+    t.boolean  "present"
     t.integer  "member_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
