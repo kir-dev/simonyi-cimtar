@@ -54,7 +54,7 @@
       </tr>
       <tr>
         <td><label>SSO Login:</label></td>
-        <td><%= @member.login %></td>
+        <td><a href="https://profile.sch.bme.hu/profile/show/uid/<%= @member.login %>"><%= @member.login %></a></td>
         <td></td>
       </tr>
       <tr class="joblist">
@@ -82,6 +82,11 @@
         </td>
         <td>
         </td>
+      </tr>
+      <tr>
+        <td><label>Social:</label></td>
+        <td></td>
+        <td></td>
       </tr>
     </table>
 
