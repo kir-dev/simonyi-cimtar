@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ * require jquery.ui.datepicker
  */
 
 .notification-indicator {
@@ -93,5 +94,8 @@
     -ms-border-radius: 10px;
     -khtml-border-radius: 10px;
     border-radius: 10px;
+}
 
+.delete-link :hover {
+    text-decoration: none;
 }

@@ -38,7 +38,14 @@ class JobPositionsController < ApplicationController
   def destroy
     @job_position = JobPosition.find(params[:id])
     @job_position.destroy
-    flash[:notice] = "Successfully destroyed job_position."
-    @job_positions = JobPosition.all
+
+    respond_to do |format|
+      if @job_position.destroyed?
+        format.js { render :partial => 'create' }
+      else
+        format.js { render :partial => 'error' }
+      end
+    end
   end
+
 end

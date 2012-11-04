@@ -2,3 +2,5 @@ $('#member_jobs_list').html('<%=
         escape_javascript(render :partial => 'job_positions/list',
                                  :locals => {:jobs => @job_position.member.job_positions})
     %>');
+
+$(":input[type=text]").val("");

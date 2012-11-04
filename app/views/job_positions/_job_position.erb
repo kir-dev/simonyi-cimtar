@@ -1,10 +1,74 @@
-<div>
+<div class="job_container">
+
+  <div class="job_container_head">
+    <span class="pull-left">
+      <i class="icon-briefcase"></i>
+      <%=
+          best_in_place job, :company, :type => :input, :path => url_for([job.member, job])
+      %>
+    </span>
+    <span class="pull-right">
+      <%=
+          link_to(raw('<i class="icon-trash"></i>'),
+                  url_for([job.member, job]),
+                  :method => :delete,
+                  :remote => true,
+                  :confirm => "Biztos, hogy törlöd a munkahelyet?",
+                  :class => 'delete-link')
+      %>
+    </span>
+  </div>
+  <div class="clearfix"></div>
+
+  <div>
+    <i class="icon-globe"></i>
+    <%=
+        best_in_place job, :location, :type => :input, :path => url_for([job.member, job])
+    %>
+  </div>
+
+  <div>
+    <i class="icon-user"></i>
+    <%=
+        best_in_place job, :title, :type => :input, :path => url_for([job.member, job])
+    %>
+  </div>
+
+  <div>
+    <i class="icon-calendar"></i>
+    <%=
+        job.from_date.strftime '%Y %B'
+    %>
+    -
+    <%=
+        if job.present_job?
+          'Jelenleg is'
+        else
+          job.to_date.strftime('%Y %B')
+        end
+    %>
+  </div>
+
+  <!-- TODO: ajaxos dátum / present módosítás; majd egyszer... -->
+
   <%=
-      best_in_place job, :company, :type => :input, :path => url_for([job.member, job])
+      #best_in_place job, :from_date, :type => :date, :path => url_for([job.member, job])
   %>
-</div>
-<div>
+
+  <!--<label class="checkbox" style="font-style: italic;">-->
+  <!--Jelenleg itt dolgozom:-->
   <%=
-      best_in_place job, :title, :type => :input, :path => url_for([job.member, job])
+      #best_in_place job, :present_job,
+      #              :type => :checkbox,
+      #              :collection => %w(nem igen),
+      #              :path => url_for([job.member, job])
   %>
+  <!--</label>-->
+
+  <%=
+      #unless job.present_job?
+      #  best_in_place job, :to_date, :type => :date, :path => url_for([job.member, job])
+      #end
+  %>
+
 </div>

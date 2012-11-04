@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20121027191458) do
     t.string   "location"
     t.date     "from_date"
     t.date     "to_date"
-    t.boolean  "present"
+    t.boolean  "present_job"
     t.integer  "member_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

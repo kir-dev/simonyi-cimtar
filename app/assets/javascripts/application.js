@@ -17,6 +17,8 @@
 //= require_tree .
 //= require best_in_place
 //= require best_in_place.purr
+// require jquery.ui.datepicker
+// require jquery.ui.datepicker-hu
 
 $(document).ready(function () {
     jQuery(".best_in_place").best_in_place();
