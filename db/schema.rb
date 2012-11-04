@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20121027191458) do
     t.string   "address"
     t.text     "intro"
     t.integer  "univ_year"
+    t.integer  "enrollment_year"
     t.string   "hobby"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
