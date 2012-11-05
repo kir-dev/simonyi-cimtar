@@ -7,11 +7,10 @@ class JobPosition < ActiveRecord::Base
 
   validates_date :from_date,
                  :on_or_after => lambda { Date.new(1990, 1, 1) },
-                 :on_or_before => lambda { Date.new(2025, 12, 1) }
+                 :on_or_before => lambda { Date.current }
 
   #unless :present_job #??? TODO
   validates_date :to_date,
-                 :on_or_before => lambda { Date.new(2025, 12, 1) },
                  :on_or_before => lambda { Date.current },
                  :on_or_after => :from_date
 end
