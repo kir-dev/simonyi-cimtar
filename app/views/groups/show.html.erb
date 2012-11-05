@@ -1,6 +1,6 @@
 <%- model_class = Group -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h2><%= @group.name %></h2>
 </div>
 
 <dl class="dl-horizontal">
@@ -14,16 +14,31 @@
   <dd><%= @group.mail_list %></dd>
   <dt><strong><%= model_class.human_attribute_name(:shortname) %>:</strong></dt>
   <dd><%= @group.shortname %></dd>
-</dl>
+  <% unless is_member_in_group(@group, @user) %>
+      <dt>Lehetőségek:</dt>
+      <dd>
+        <%= button_to 'Csatlakozás', {:action => 'join'},
+                      {:class => "btn btn-mini btn-success"} %>
+      </dd>
+      </dl>
+  <% end %>
+  <div>
+  </div>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              groups_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_group_path(@group), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              group_path(@group),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+  <%= render @group.get_active_memberships %>
+  <table class="table table-hover">
+    <tbody>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="form-actions">
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                groups_path, :class => 'btn' %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_group_path(@group), :class => 'btn' %>
+  </div>

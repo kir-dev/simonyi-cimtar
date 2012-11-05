@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  helper_method :is_member_in_group
 
   # GET /groups
   def index
@@ -56,5 +57,19 @@ class GroupsController < ApplicationController
         format.html { render action: "edit" }
       end
     end
+  end
+
+  def is_member_in_group(group, member)
+    0 < Membership.where(:group_id => group.id, :member_id => member.id).count
+  end
+
+  def join
+    @group = Group.find(params[:id])
+    Membership.new(:group_id => @group.id,
+                   :member_id => @user.id,
+                   :from => Date.current,
+                   :accepted => false).save
+
+    redirect_to @group
   end
 end

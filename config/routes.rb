@@ -5,7 +5,11 @@ SzkCimtar::Application.routes.draw do
     resources :job_positions, :only => [:create, :update, :destroy]
   end
 
-  resources :groups, :except => [:destroy]
+  resources :groups, :except => [:destroy] do
+    member do
+      post 'join'
+    end
+  end
 
   get 'home/index'
 
