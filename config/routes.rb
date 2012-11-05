@@ -1,7 +1,10 @@
 SzkCimtar::Application.routes.draw do
+  match '/members/reg' => 'members#reg_with_sso'
+
   resources :members, :except => [:edit, :destroy] do
     resources :job_positions, :only => [:create, :update, :destroy]
   end
+
   resources :groups, :except => [:destroy]
 
   get 'home/index'

@@ -99,3 +99,7 @@
 .delete-link :hover {
     text-decoration: none;
 }
+
+select.year {
+    width: 70px;
+}

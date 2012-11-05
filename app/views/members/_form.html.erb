@@ -1,80 +1,61 @@
-<%= form_for @member, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :full_name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :full_name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :phone, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :phone, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :room, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :room, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :address, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :address, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :intro, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :intro, :class => 'text_area' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :univ_year, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :univ_year, :class => 'number_field' %>
-    </div>
-  </div>
-    <div class="control-group">
-    <%= f.label :enrollment_year, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :enrollment_year, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :hobby, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :hobby, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :deleted, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :deleted, :class => 'check_box' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :login, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :login, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :nick, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :nick, :class => 'text_field' %>
-    </div>
-  </div>
+<% years_array = (1950..Date.current.year).to_a.reverse.each { |y| [y, y] } %>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                members_path, :class => 'btn' %>
-  </div>
+<%= form_for @member, :html => {:class => 'form-horizontal'} do |f| %>
+    <div>
+      <% if @member.errors.any? %>
+          <div class="alert alert-error">
+            <%= t('error_in_form_html') %>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :login, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :login, :disabled => true, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group <%= form_input_feedback_css(@member, :full_name, 'error') %>">
+      <%= f.label :full_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :full_name, :class => 'text_field' %>
+        <%= form_input_feedback_text(@member, :full_name) %>
+      </div>
+    </div>
+    <div class="control-group <%= form_input_feedback_css(@member, :nick, 'error') %>">
+      <%= f.label :nick, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :nick, :class => 'text_field' %>
+        <%= form_input_feedback_text(@member, :nick) %>
+      </div>
+    </div>
+    <div class="control-group <%= form_input_feedback_css(@member, :email, 'error') %>">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'text_field' %>
+        <%= form_input_feedback_text(@member, :email) %>
+      </div>
+    </div>
+    <div class="control-group <%= form_input_feedback_css(@member, :univ_year, 'error') %>">
+      <%= f.label :univ_year, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :univ_year, options_for_select(years_array, @member.univ_year),
+                     {}, {:class => 'year'} %>
+        <%= form_input_feedback_text(@member, :univ_year) %>
+      </div>
+    </div>
+    <div class="control-group <%= form_input_feedback_css(@member, :enrollment_year, 'error') %>">
+      <%= f.label :enrollment_year, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :enrollment_year, options_for_select(years_array, @member.enrollment_year),
+                     {}, {:class => 'year'} %>
+        <%= form_input_feedback_text(@member, :enrollment_year) %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit t('save'), :class => 'btn btn-primary' %>
+      <%= link_to t('cancel'),
+                  members_path, :class => 'btn' %>
+    </div>
 <% end %>

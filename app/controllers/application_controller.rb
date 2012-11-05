@@ -21,22 +21,14 @@ class ApplicationController < ActionController::Base
       when :ok
         # nothing for now
       when :reg
-        new_member
+        unless request.fullpath == '/members/reg' || # prevent redirect loop
+            # make possible to save
+            (request.method_symbol == :post && request.fullpath == '/members')
+          redirect_to '/members/reg'
+        end
       else
         redirect_to '/403'
         return false
-    end
-  end
-
-  private
-  def new_member
-    @user = Member.new
-    set_attributes @user
-
-    if @user.save
-      redirect_to member_url(@user), notice: 'reg successful, blabla'
-    else
-      redirect_to '/500'
     end
   end
 

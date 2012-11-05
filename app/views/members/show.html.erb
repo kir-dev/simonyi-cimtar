@@ -59,7 +59,9 @@
       </tr>
       <tr>
         <td><label>SSO Login:</label></td>
-        <td><a href="https://profile.sch.bme.hu/profile/show/uid/<%= @member.login %>"><%= @member.login %></a></td>
+        <td>
+          <a href="https://profile.sch.bme.hu/profile/show/uid/<%= @member.login %>"><%= @member.login %></a>
+        </td>
         <td></td>
       </tr>
       <tr class="joblist">
@@ -80,7 +82,8 @@
 
           <ul id="member_jobs_list">
             <%=
-                render :partial => 'job_positions/list', :locals => {:jobs => @member.job_positions}
+                render :partial => 'job_positions/list',
+                       :locals => {:jobs => @member.job_positions}
             %>
           </ul>
 

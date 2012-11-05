@@ -28,13 +28,25 @@ class MembersController < ApplicationController
     end
   end
 
+  # GET /members/reg
+  def reg_with_sso
+    @member = Member.new
+    set_attributes @member
+
+    respond_to do |format|
+      format.html { render action: "new" }
+    end
+  end
+
   # POST /members
   def create
-    @member = Member.new(params[:member])
+    #TODO: unless :admin
+    @member = Member.new(params[:member].except(:login))
+    @member.set_login_attr(get_attribute_value(:login))
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
+        format.html { redirect_to @member, notice: t('reg_success') }
       else
         format.html { render action: "new" }
       end
