@@ -9,6 +9,7 @@ gem 'pg'
 gem 'sqlite3'
 #gem 'factory_girl_rails'
 #gem 'cucumber'
+gem 'quiet_assets', :group => :development
 
 gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
