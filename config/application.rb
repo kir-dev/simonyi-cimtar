@@ -31,7 +31,7 @@ module SzkCimtar
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.default_locale = :hu
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -58,6 +58,11 @@ module SzkCimtar
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Turn off wrapping input fields contains incorrect value because ruins
+    # our nice bootstrap design
+    config.action_view.field_error_proc =
+        Proc.new { |html_tag, instance| html_tag }
 
     # Custom urls - just dummy values, not really used in dev/test environment
     config.login_url = 'http://bender:8080/idp'

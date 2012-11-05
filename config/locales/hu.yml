@@ -1,0 +1,181 @@
+
+hu:
+  #general
+  cancel: 'Mégsem'
+  save: 'Mentés'
+  error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
+
+  attributes:
+    created_at: 'Létrehozva: '
+    updated_at: 'Frissítve: '
+
+  errors:
+    messages:
+      taken: 'foglalt'
+      blank: 'A(z) "%{attribute}" megadása kötelező'
+      not_a_number: 'A(z) "%{attribute}" nem szám'
+      too_short: 'A(z) "%{attribute}" túl rövid (minimum %{count} karakter)'
+      too_long: 'A(z) "%{attribute}" túl hosszú (maximum %{count} karakter)'
+
+  #profile messages
+  reg_success: Regisztráció sikeres :)
+
+  #activerecord
+  activerecord:
+    models:
+      member: 'Tag'
+    attributes:
+      member:
+        login: 'VIR login'
+        email: 'E-mail'
+        full_name: 'Teljes név'
+        nick: 'Becenév'
+        univ_year: 'Egyetem kezdési éve'
+        enrollment_year: 'Felvétel éve'
+    errors:
+      messages:
+        record_invalid: 'Érvénytelen adat: %{errors}'
+#        restrict_dependent_destroy:
+#          one: "Cannot delete record because a dependent %{record} exists"
+#          many: "Cannot delete record because dependent %{record} exist"
+      models:
+        member:
+          attributes:
+            univ_year:
+              less_than: 'Az "%{attribute}" nem lehet "Felvétel éve" után'
+            enrollment_year:
+              greater_than: 'Az "%{attribute}" nem lehet "Egyetem kezdési éve" előtt'
+
+  # active_support config
+  date:
+#    formats:
+#      # Use the strftime parameters for formats.
+#      # When no format has been given, it uses default.
+#      # You can provide other formats here if you like!
+#      default: "%Y-%m-%d"
+#      short: "%b %d"
+#      long: "%Y %B %d"
+#
+    day_names: [Vasárnap, Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat]
+    abbr_day_names: [Vas, Hé, Ke, Sze, Csüt, Pé, Szo]
+#
+#    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, Január, Február, Március, Április, Május, Június, Július, Augusztus, Szeptember, Október, November, December]
+    abbr_month_names: [~, Jan, Feb, Márc, Ápr, Máj, Jún, Júl, Aug, Szept, Okt, Nov, Dec]
+#    # Used in date_select and datetime_select.
+    order:
+      - :year
+      - :month
+      - :day
+#
+#  time:
+#    formats:
+#      default: "%a, %d %b %Y %H:%M:%S %z"
+#      short: "%d %b %H:%M"
+#      long: "%B %d, %Y %H:%M"
+#    am: "am"
+#    pm: "pm"
+#
+## Used in array.to_sentence.
+#  support:
+#    array:
+#      words_connector: ", "
+#      two_words_connector: " and "
+#      last_word_connector: ", and "
+#  number:
+#    # Used in NumberHelper.number_to_delimited()
+#    # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
+#    format:
+#      # Sets the separator between the units, for more precision (e.g. 1.0 / 2.0 == 0.5)
+#      separator: "."
+#      # Delimits thousands (e.g. 1,000,000 is a million) (always in groups of three)
+#      delimiter: ","
+#      # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
+#      precision: 3
+#      # If set to true, precision will mean the number of significant digits instead
+#      # of the number of decimal digits (1234 with precision 2 becomes 1200, 1.23543 becomes 1.2)
+#      significant: false
+#      # If set, the zeros after the decimal separator will always be stripped (eg.: 1.200 will be 1.2)
+#      strip_insignificant_zeros: false
+#
+#    # Used in NumberHelper.number_to_currency()
+#    currency:
+#      format:
+#        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+#        format: "%u%n"
+#        unit: "$"
+#        # These five are to override number.format and are optional
+#        separator: "."
+#        delimiter: ","
+#        precision: 2
+#        significant: false
+#        strip_insignificant_zeros: false
+#
+#    # Used in NumberHelper.number_to_percentage()
+#    percentage:
+#      format:
+#        # These five are to override number.format and are optional
+#        # separator:
+#        delimiter: ""
+#        # precision:
+#        # significant: false
+#        # strip_insignificant_zeros: false
+#        format: "%n%"
+#
+#    # Used in NumberHelper.number_to_rounded()
+#    precision:
+#      format:
+#        # These five are to override number.format and are optional
+#        # separator:
+#        delimiter: ""
+#        # precision:
+#        # significant: false
+#        # strip_insignificant_zeros: false
+#
+#    # Used in NumberHelper.number_to_human_size() and NumberHelper.number_to_human()
+#    human:
+#      format:
+#        # These five are to override number.format and are optional
+#        # separator:
+#        delimiter: ""
+#        precision: 3
+#        significant: true
+#        strip_insignificant_zeros: true
+#      # Used in number_to_human_size()
+#      storage_units:
+#        # Storage units output formatting.
+#        # %u is the storage unit, %n is the number (default: 2 MB)
+#        format: "%n %u"
+#        units:
+#          byte:
+#            one:   "Byte"
+#            other: "Bytes"
+#          kb: "KB"
+#          mb: "MB"
+#          gb: "GB"
+#          tb: "TB"
+#      # Used in NumberHelper.number_to_human()
+#      decimal_units:
+#        format: "%n %u"
+#        # Decimal units output formatting
+#        # By default we will only quantify some of the exponents
+#        # but the commented ones might be defined or overridden
+#        # by the user.
+#        units:
+#          # femto: Quadrillionth
+#          # pico: Trillionth
+#          # nano: Billionth
+#          # micro: Millionth
+#          # mili: Thousandth
+#          # centi: Hundredth
+#          # deci: Tenth
+#          unit: ""
+#          # ten:
+#          #   one: Ten
+#          #   other: Tens
+#          # hundred: Hundred
+#          thousand: Thousand
+#          million: Million
+#          billion: Billion
+#          trillion: Trillion
+#          quadrillion: Quadrillion
