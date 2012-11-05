@@ -9,7 +9,11 @@ class Member < ActiveRecord::Base
                   :phone, :univ_year, :enrollment_year, :room
 
   #
-  has_many :memberships, class_name: 'Membership', foreign_key: :member_id
+  has_many :memberships,
+           class_name: 'Membership',
+           foreign_key: :member_id
+
+  #has_many :groups, :through => :memberships
   has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
   has_many :job_positions,
            class_name: 'JobPosition',
