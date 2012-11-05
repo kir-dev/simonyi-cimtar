@@ -3,11 +3,14 @@ hu:
   #general
   cancel: 'Mégsem'
   save: 'Mentés'
+  edit: 'Szerkesztés'
+  new: 'Új'
   error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
 
   attributes:
-    created_at: 'Létrehozva: '
-    updated_at: 'Frissítve: '
+    id: 'Azonosító'
+    created_at: 'Létrehozva'
+    updated_at: 'Frissítve'
 
   errors:
     messages:
@@ -24,6 +27,7 @@ hu:
   activerecord:
     models:
       member: 'Tag'
+      group: 'Szervezeti egység'
     attributes:
       member:
         login: 'VIR login'
@@ -32,6 +36,12 @@ hu:
         nick: 'Becenév'
         univ_year: 'Egyetem kezdési éve'
         enrollment_year: 'Felvétel éve'
+      group:
+        name: 'Név'
+        shortname: 'Rövidítés'
+        url: 'URL'
+        founded: 'Alapítva'
+        mail_list: 'Levelezőlista'
     errors:
       messages:
         record_invalid: 'Érvénytelen adat: %{errors}'
@@ -68,9 +78,9 @@ hu:
       - :month
       - :day
 #
-#  time:
-#    formats:
-#      default: "%a, %d %b %Y %H:%M:%S %z"
+  time:
+    formats:
+      default: "%Y. %m. %d. %H:%M"
 #      short: "%d %b %H:%M"
 #      long: "%B %d, %Y %H:%M"
 #    am: "am"
