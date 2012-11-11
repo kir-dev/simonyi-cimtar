@@ -1,13 +1,13 @@
 class Membership < ActiveRecord::Base
-  attr_accessible :group_id, :member_id, :from, :to, :accepted
+  attr_accessible :group_id, :member_id, :from_date, :to_date, :accepted
 
   belongs_to :group, :class_name => 'Group'
   belongs_to :member, :class_name => 'Member'
 
-  validates_date :from,
+  validates_date :from_date,
                  :on_or_before => lambda { Date.current }
 
-  validates_date :to,
+  validates_date :to_date,
                  :allow_nil => true,
                  :after => :to
 end
