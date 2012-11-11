@@ -1,4 +1,9 @@
 <%- model_class = Group -%>
+
+<% if flash[:notice] %>
+    <div class="alert alert-info"><%= flash[:notice] %></div>
+<% end %>
+
 <div class="page-header">
   <h2><%= @group.name %></h2>
 </div>

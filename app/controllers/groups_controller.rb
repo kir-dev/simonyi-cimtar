@@ -70,6 +70,7 @@ class GroupsController < ApplicationController
                    :from => Date.current,
                    :accepted => false).save
 
+    flash[:notice] = t('join_group_msg')
     redirect_to @group
   end
 end

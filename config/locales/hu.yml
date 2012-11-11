@@ -6,6 +6,7 @@ hu:
   edit: 'Szerkesztés'
   new: 'Új'
   error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
+  join_group_msg: 'A körvezetőnek jóvá kell hagynia a kérelmed'
 
   attributes:
     id: 'Azonosító'
