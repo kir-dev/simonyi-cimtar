@@ -4,6 +4,14 @@
     <div class="alert alert-info"><%= flash[:notice] %></div>
 <% end %>
 
+<% if flash[:success] %>
+    <div class="alert alert-success"><%= flash[:success] %></div>
+<% end %>
+
+<% if flash[:error] %>
+    <div class="alert alert-error"><%= flash[:error] %></div>
+<% end %>
+
 <div class="page-header">
   <h2><%= @group.name %></h2>
 </div>
@@ -19,31 +27,50 @@
   <dd><%= @group.mail_list %></dd>
   <dt><strong><%= model_class.human_attribute_name(:shortname) %>:</strong></dt>
   <dd><%= @group.shortname %></dd>
-  <% unless is_member_in_group(@group, @user) %>
-      <dt>Lehetőségek:</dt>
+  <% if is_member_in_group(@group, @user, true) %>
+      <dt><%= t('operations') %>:</dt>
       <dd>
-        <%= button_to 'Csatlakozás', {:action => 'join'},
-                      {:class => "btn btn-mini btn-success"} %>
+        <%= button_to t('group_leave'), {:action => 'leave'},
+                      {:class => "btn btn-mini btn-danger"} %>
       </dd>
-      </dl>
+  <% else
+       unless is_member_in_group(@group, @user, nil) %>
+          <dt><%= t('operations') %>:</dt>
+          <dd>
+            <%= button_to t('group_join'), {:action => 'join'},
+                          {:class => "btn btn-mini btn-success"} %>
+          </dd>
+      <% end %>
   <% end %>
-  <div>
-  </div>
 
+</dl>
+
+<ul class="nav nav-tabs">
+  <li class="active">
+    <a href="#"><%= t('memberships_current_members') %></a>
+  </li>
+  <li class="disabled"><a href="#"><%= t('memberships_old_members') %></a></li>
+  <li class="disabled">
+    <a href="#"><%= t('memberships_await_acceptance') %> (0)</a></li>
+</ul>
+
+<table class="table table-condensed table-hover">
+  <thead>
+  <tr>
+    <th><%= Member.human_attribute_name :full_name %></th>
+    <th><%= Member.human_attribute_name :nick %></th>
+    <th><%= Member.human_attribute_name :posts %></th>
+    <th><%= t('operations') %></th>
+  </tr>
+  </thead>
+  <tbody>
   <%= render @group.get_active_memberships %>
-  <table class="table table-hover">
-    <tbody>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </tbody>
-  </table>
+  </tbody>
+</table>
 
-  <div class="form-actions">
-    <%= link_to t('.back', :default => t("helpers.links.back")),
-                groups_path, :class => 'btn' %>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_group_path(@group), :class => 'btn' %>
-  </div>
+<div class="form-actions">
+  <%= link_to t('back'),
+              groups_path, :class => 'btn' %>
+  <%= link_to t('edit'),
+              edit_group_path(@group), :class => 'btn' %>
+</div>

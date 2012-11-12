@@ -1,12 +1,13 @@
 
 hu:
   #general
+  back: 'Vissza'
   cancel: 'Mégsem'
   save: 'Mentés'
   edit: 'Szerkesztés'
   new: 'Új'
+  operations: 'Műveletek'
   error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
-  join_group_msg: 'A körvezetőnek jóvá kell hagynia a kérelmed'
 
   attributes:
     id: 'Azonosító'
@@ -24,6 +25,18 @@ hu:
   #profile messages
   reg_success: Regisztráció sikeres :)
 
+  #groups
+  group_join: 'Csatlakozás'
+  group_join_msg: 'A körvezetőnek jóvá kell hagynia a kérelmed'
+  group_leave: 'Kilépés'
+  group_leave_msg: 'Sikeresen kiléptél a körből'
+  group_leave_msg_failed: 'Kilépés sikertelen. Kérlek jelezd a hibát a fejlesztőknek!'
+
+  #memberships
+  memberships_current_members: 'Jelenlegi tagok'
+  memberships_old_members: 'Öregtagok'
+  memberships_await_acceptance: 'Elfogadásra vár'
+
   #activerecord
   activerecord:
     models:
@@ -37,6 +50,7 @@ hu:
         nick: 'Becenév'
         univ_year: 'Egyetem kezdési éve'
         enrollment_year: 'Felvétel éve'
+        posts: 'Posztok'
       group:
         name: 'Név'
         shortname: 'Rövidítés'

@@ -59,18 +59,53 @@ class GroupsController < ApplicationController
     end
   end
 
-  def is_member_in_group(group, member)
-    0 < Membership.where(:group_id => group.id, :member_id => member.id).count
+  def is_member_in_group(group, member, accepted)
+    if accepted.nil?
+      0 < Membership.where(:group_id => group.id,
+                           :member_id => member.id,
+                           :to_date => nil).count
+    else
+      0 < Membership.where(:group_id => group.id,
+                           :member_id => member.id,
+                           :to_date => nil,
+                           :accepted => accepted).count
+    end
   end
 
+  # POST /groups/1/join
   def join
     @group = Group.find(params[:id])
-    Membership.new(:group_id => @group.id,
-                   :member_id => @user.id,
-                   :from => Date.current,
-                   :accepted => false).save
+    unless is_member_in_group(@group, @user, nil)
+      Membership.new(:group_id => @group.id,
+                     :member_id => @user.id,
+                     :from_date => Date.current,
+                     :accepted => false).save
 
-    flash[:notice] = t('join_group_msg')
+      flash[:notice] = t('group_join_msg')
+    end
+
+    redirect_to @group
+  end
+
+  # POST /groups/1/leave
+  def leave
+    @group = Group.find(params[:id])
+    if is_member_in_group(@group, @user, true)
+      ms = Membership.where(:group_id => @group.id,
+                            :member_id => @user.id,
+                            :accepted => true).order('from_date DESC').limit(1).first
+
+      ms.to_date = Date.current
+
+      p ms.inspect
+
+      if ms.save
+        flash[:success] = t('group_leave_msg')
+      else
+        flash[:error] = t('group_leave_msg_failed')
+      end
+    end
+
     redirect_to @group
   end
 end

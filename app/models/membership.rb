@@ -9,5 +9,5 @@ class Membership < ActiveRecord::Base
 
   validates_date :to_date,
                  :allow_nil => true,
-                 :after => :to
+                 :on_or_after => :from_date
 end

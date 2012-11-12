@@ -8,6 +8,7 @@ SzkCimtar::Application.routes.draw do
   resources :groups, :except => [:destroy] do
     member do
       post 'join'
+      post 'leave'
     end
   end
 
