@@ -55,27 +55,32 @@
 </dl>
 
 <ul class="nav nav-tabs">
-  <li class="active">
-    <a href="#"><%= t('memberships_current_members') %></a>
+  <li id="tab-members-present" class="active">
+    <%= link_to t('memberships_current_members'),
+                {:controller => 'groups',
+                 :action => 'get_memberships_tab_content',
+                 :tab => 'present'},
+                :remote => true %>
   </li>
-  <li class="disabled"><a href="#"><%= t('memberships_old_members') %></a></li>
-  <li class="disabled">
-    <a href="#"><%= t('memberships_await_acceptance') %> (0)</a></li>
+  <li id="tab-members-old">
+    <%= link_to t('memberships_old_members'),
+                {:controller => 'groups',
+                 :action => 'get_memberships_tab_content',
+                 :tab => 'old'},
+                :remote => true %>
+  </li>
+  <li id="tab-members-pending">
+    <%= link_to t('memberships_pending', :count => @group.get_pending_memberships.count),
+                {:controller => 'groups',
+                 :action => 'get_memberships_tab_content',
+                 :tab => 'pending'},
+                :remote => true %>
+  </li>
 </ul>
 
-<table class="table table-condensed table-hover">
-  <thead>
-  <tr>
-    <th><%= Member.human_attribute_name :full_name %></th>
-    <th><%= Member.human_attribute_name :nick %></th>
-    <th><%= Member.human_attribute_name :posts %></th>
-    <th><%= t('operations') %></th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= render @group.get_active_memberships %>
-  </tbody>
-</table>
+<div id="content-memberships">
+  <%= render 'memberships/active_memberships' %>
+</div>
 
 <div class="form-actions">
   <%= link_to t('back'),

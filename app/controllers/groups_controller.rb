@@ -108,4 +108,30 @@ class GroupsController < ApplicationController
 
     redirect_to @group
   end
+
+  def get_memberships_tab_content
+    @group = Group.find(params[:id])
+    tab = params[:tab]
+    case
+      when tab == 'old'
+        partial_name = 'old_memberships'
+        memberships = @group.get_old_memberships
+      when tab == 'pending'
+        partial_name = 'pending_memberships'
+        memberships = @group.get_pending_memberships
+      else
+        partial_name = 'active_memberships'
+        memberships = @group.get_active_memberships
+    end
+
+    respond_to do |format|
+      format.js { render :partial => 'memberships_tab_change',
+                         :locals => {
+                             :partial_name => partial_name,
+                             :memberships => memberships,
+                             :tab => tab}
+      }
+    end
+
+  end
 end

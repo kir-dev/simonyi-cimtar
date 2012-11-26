@@ -35,7 +35,7 @@ hu:
   #memberships
   memberships_current_members: 'Jelenlegi tagok'
   memberships_old_members: 'Öregtagok'
-  memberships_await_acceptance: 'Elfogadásra vár'
+  memberships_pending: 'Elfogadásra vár (%{count})'
 
   #activerecord
   activerecord:

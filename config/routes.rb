@@ -9,6 +9,7 @@ SzkCimtar::Application.routes.draw do
     member do
       post 'join'
       post 'leave'
+      get 'get_memberships_tab_content'
     end
   end
 

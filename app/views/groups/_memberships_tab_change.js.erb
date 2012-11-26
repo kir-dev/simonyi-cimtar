@@ -1,0 +1,7 @@
+$('#content-memberships').html('<%=
+        escape_javascript(render :partial => 'memberships/' + partial_name,
+                                 :locals => {:memberships => memberships})
+    %>');
+
+$('li[id^="tab-members-"]').removeClass('active');
+$('#tab-members-<%= tab %>').addClass('active');
