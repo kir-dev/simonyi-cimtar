@@ -1,5 +1,14 @@
 <%- model_class = Group -%>
 
+<% content_for :operations do %>
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header">Műveletek</li>
+        <li><%= link_to "Link1", "/path1" %></li>
+      </ul>
+    </div>
+<% end %>
+
 <% if flash[:notice] %>
     <div class="alert alert-info"><%= flash[:notice] %></div>
 <% end %>
