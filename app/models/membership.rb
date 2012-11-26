@@ -1,5 +1,5 @@
 class Membership < ActiveRecord::Base
-  attr_accessible :group_id, :member_id, :from_date, :to_date, :accepted
+  attr_accessible :group_id, :member_id, :from_date, :to_date, :accepted, :deleted
 
   belongs_to :group, :class_name => 'Group'
   belongs_to :member, :class_name => 'Member'
