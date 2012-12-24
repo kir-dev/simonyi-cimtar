@@ -55,25 +55,25 @@
 </dl>
 
 <ul class="nav nav-tabs">
-  <li id="tab-members-present" class="active">
+  <li id="tab-members-active_memberships" class="active">
     <%= link_to t('memberships_current_members'),
                 {:controller => 'groups',
                  :action => 'get_memberships_tab_content',
-                 :tab => 'present'},
+                 :tab => 'active_memberships'},
                 :remote => true %>
   </li>
-  <li id="tab-members-old">
+  <li id="tab-members-old_memberships">
     <%= link_to t('memberships_old_members'),
                 {:controller => 'groups',
                  :action => 'get_memberships_tab_content',
-                 :tab => 'old'},
+                 :tab => 'old_memberships'},
                 :remote => true %>
   </li>
-  <li id="tab-members-pending">
+  <li id="tab-members-pending_memberships">
     <%= link_to t('memberships_pending', :count => @group.get_pending_memberships.count),
                 {:controller => 'groups',
                  :action => 'get_memberships_tab_content',
-                 :tab => 'pending'},
+                 :tab => 'pending_memberships'},
                 :remote => true %>
   </li>
 </ul>
