@@ -20,7 +20,7 @@ class Group < ActiveRecord::Base
   end
 
   def get_pending_memberships
-    Membership.where(:accepted => false)
+    Membership.where(:accepted => false).order(:created_at)
   end
 
 end

@@ -79,5 +79,6 @@
 </ul>
 
 <div id="content-memberships">
-  <%= render 'memberships/active_memberships' %>
+  <%= render :partial => 'memberships/active_memberships',
+             :locals => {:memberships => @group.get_active_memberships} %>
 </div>

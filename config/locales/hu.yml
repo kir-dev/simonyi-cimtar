@@ -57,6 +57,8 @@ hu:
         url: 'URL'
         founded: 'Alapítva'
         mail_list: 'Levelezőlista'
+      membership:
+        created_at: 'Jelentkezett'
     errors:
       messages:
         record_invalid: 'Érvénytelen adat: %{errors}'

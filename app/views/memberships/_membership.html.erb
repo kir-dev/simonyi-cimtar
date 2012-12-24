@@ -1,8 +1,0 @@
-<% @group.get_active_memberships.each do |ms| %>
-    <tr>
-      <td><%= link_to ms.member.full_name, ms.member %></td>
-      <td><%= ms.member.nick %></td>
-      <td></td>
-      <td></td>
-    </tr>
-<% end %>

@@ -1,1 +1,22 @@
-<b>elfogadásra vár</b>
+<table class="table table-condensed table-hover">
+  <thead>
+  <tr>
+    <th><%= Member.human_attribute_name :full_name %></th>
+    <th><%= Member.human_attribute_name :nick %></th>
+    <th><%= Member.human_attribute_name :login %></th>
+    <th><%= Membership.human_attribute_name :created_at %></th>
+    <th><%= t('operations') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% memberships.each do |ms| %>
+      <tr>
+        <td><%= link_to ms.member.full_name, ms.member %></td>
+        <td><%= ms.member.nick %></td>
+        <td><%= ms.member.login %></td>
+        <td><%= ms.created_at.strftime "%Y.%m.%d. %H:%M" %></td>
+        <td></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
