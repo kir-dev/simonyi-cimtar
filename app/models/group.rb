@@ -12,15 +12,22 @@ class Group < ActiveRecord::Base
                               :less_than_or_equal_to => Date.current.year}
 
   def get_active_memberships
-    Membership.where(:to_date => nil, :accepted => true, :deleted => false)
+    Membership.where(:to_date => nil,
+                     :group_id => self.id,
+                     :accepted => true,
+                     :deleted => false)
   end
 
   def get_old_memberships
-    Membership.where(:to_date => !nil, :accepted => true, :deleted => false)
+    Membership.where(:to_date => !nil,
+                     :group_id => self.id,
+                     :accepted => true,
+                     :deleted => false)
   end
 
   def get_pending_memberships
-    Membership.where(:accepted => false).order(:created_at)
+    Membership.where(:accepted => false,
+                     :group_id => self.id).order(:created_at)
   end
 
 end
