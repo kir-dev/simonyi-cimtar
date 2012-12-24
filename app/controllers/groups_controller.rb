@@ -136,4 +136,17 @@ class GroupsController < ApplicationController
 
     update_memberships_tab_content(memberships, partial_name)
   end
+
+
+  def deny_pending_membership
+    #todo permission check
+    membership = Membership.find(params[:id])
+    group = membership.group
+    #todo notification
+    membership.delete
+
+    update_memberships_tab_content(group.get_pending_memberships,
+                                   'pending_memberships')
+  end
+
 end

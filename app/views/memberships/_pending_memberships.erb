@@ -15,7 +15,15 @@
         <td><%= ms.member.nick %></td>
         <td><%= ms.member.login %></td>
         <td><%= ms.created_at.strftime "%Y.%m.%d. %H:%M" %></td>
-        <td></td>
+        <td>
+          <%= link_to '',
+                      deny_membership_url(:id => ms.id),
+                      :class => 'icon-remove',
+                      :title => t('memberships_deny'),
+                      :confirm => t('memberships_deny_confirm'),
+                      :remote => true
+          %>
+        </td>
       </tr>
   <% end %>
   </tbody>

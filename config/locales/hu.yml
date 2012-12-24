@@ -36,6 +36,9 @@ hu:
   memberships_current_members: 'Jelenlegi tagok'
   memberships_old_members: 'Öregtagok'
   memberships_pending: 'Elfogadásra vár (%{count})'
+  memberships_accept: 'Elfogad'
+  memberships_deny: 'Elutasít'
+  memberships_deny_confirm: 'Biztos, hogy elutasítod a tagot?'
 
   #activerecord
   activerecord:

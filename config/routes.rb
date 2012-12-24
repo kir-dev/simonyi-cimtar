@@ -13,6 +13,11 @@ SzkCimtar::Application.routes.draw do
     end
   end
 
+  match '/memberships/:id/deny' => 'groups#deny_pending_membership',
+        :as => :deny_membership
+  match '/memberships/:id/accept' => 'groups#accept_pending_membership',
+        :as => :accept_membership
+
   get 'home/index'
 
   match '/logout' => 'members#logout'
