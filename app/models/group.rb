@@ -15,7 +15,7 @@ class Group < ActiveRecord::Base
     Membership.where(:to_date => nil,
                      :group_id => self.id,
                      :accepted => true,
-                     :deleted => false)
+                     :deleted => false).joins(:member).order('members.full_name')
   end
 
   def get_old_memberships
