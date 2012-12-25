@@ -97,8 +97,6 @@ class GroupsController < ApplicationController
 
       ms.to_date = Date.current
 
-      p ms.inspect
-
       if ms.save
         flash[:success] = t('group_leave_msg')
       else
