@@ -79,7 +79,8 @@ class GroupsController < ApplicationController
       Membership.new(:group_id => @group.id,
                      :member_id => @user.id,
                      :from_date => Date.current,
-                     :accepted => false).save
+                     :accepted => false,
+                     :deleted => false).save
 
       flash[:notice] = t('group_join_msg')
     end
