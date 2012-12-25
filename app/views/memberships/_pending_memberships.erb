@@ -16,9 +16,16 @@
         <td><%= ms.member.login %></td>
         <td><%= ms.created_at.strftime "%Y.%m.%d. %H:%M" %></td>
         <td>
-          <%= link_to '',
+          <%= link_to t('memberships_accept'),
+                      accept_membership_url(:id => ms.id),
+                      :class => 'btn btn-small btn-success',
+                      :title => t('memberships_accept'),
+                      :remote => true
+          %>
+
+          <%= link_to t('memberships_deny'),
                       deny_membership_url(:id => ms.id),
-                      :class => 'icon-remove',
+                      :class => 'btn btn-small btn-danger',
                       :title => t('memberships_deny'),
                       :confirm => t('memberships_deny_confirm'),
                       :remote => true
