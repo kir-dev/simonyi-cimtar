@@ -78,7 +78,7 @@ class GroupsController < ApplicationController
     unless is_member_in_group(@group, @user, nil)
       Membership.new(:group_id => @group.id,
                      :member_id => @user.id,
-                     :from_date => Date.current,
+                     :from_date => Time.now,
                      :accepted => false,
                      :deleted => false).save
 
@@ -96,7 +96,7 @@ class GroupsController < ApplicationController
                             :member_id => @user.id,
                             :accepted => true).order('from_date DESC').limit(1).first
 
-      ms.to_date = Date.current
+      ms.to_date = Time.now
 
       if ms.save
         flash[:success] = t('group_leave_msg')

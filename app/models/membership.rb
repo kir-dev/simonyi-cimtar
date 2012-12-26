@@ -5,7 +5,7 @@ class Membership < ActiveRecord::Base
   belongs_to :member, :class_name => 'Member'
 
   validates_date :from_date,
-                 :on_or_before => lambda { Date.current }
+                 :on_or_before => lambda { Time.now }
 
   validates_date :to_date,
                  :allow_nil => true,
