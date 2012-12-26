@@ -1,1 +1,28 @@
-<b>öregtagok</b>
+<table class="table table-condensed table-hover">
+  <thead>
+  <tr>
+    <th><%= Member.human_attribute_name :full_name %></th>
+    <th><%= Member.human_attribute_name :nick %></th>
+    <th><%= Member.human_attribute_name :posts %></th>
+    <th><%= Member.human_attribute_name :membership_time %></th>
+    <th><%= t('operations') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% memberships.each do |ms| %>
+      <tr>
+        <td><%= link_to ms.member.full_name, ms.member %></td>
+        <td><%= ms.member.nick %></td>
+        <td></td>
+        <td>
+          <%= ms.from_date.strftime "%Y %b." %>
+          -
+          <%= ms.to_date.strftime "%Y %b." %>
+        </td>
+        <td>
+          <!-- 'delete' membership -->
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

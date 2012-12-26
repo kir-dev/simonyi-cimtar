@@ -54,6 +54,7 @@ hu:
         univ_year: 'Egyetem kezdési éve'
         enrollment_year: 'Felvétel éve'
         posts: 'Posztok'
+        membership_time: 'Tagság'
       group:
         name: 'Név'
         shortname: 'Rövidítés'

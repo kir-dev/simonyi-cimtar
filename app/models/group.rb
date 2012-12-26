@@ -19,10 +19,9 @@ class Group < ActiveRecord::Base
   end
 
   def get_old_memberships
-    Membership.where(:to_date => !nil,
-                     :group_id => self.id,
+    Membership.where(:group_id => self.id,
                      :accepted => true,
-                     :deleted => false)
+                     :deleted => false).where('to_date IS NOT NULL').joins(:member).order('members.full_name')
   end
 
   def get_pending_memberships
