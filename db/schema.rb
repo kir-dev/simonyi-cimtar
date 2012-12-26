@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126170250) do
+ActiveRecord::Schema.define(:version => 20121226160652) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -70,9 +70,18 @@ ActiveRecord::Schema.define(:version => 20121126170250) do
     t.datetime "from_date"
     t.datetime "to_date"
     t.boolean  "accepted"
-    t.boolean  "deleted"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "deleted"
   end
 
+  create_table "semesters", :force => true do |t|
+    t.string   "semester"
+    t.datetime "valuation_date_from"
+    t.datetime "valuation_date_to"
+    t.float    "min_scolarship_index"
+    t.integer  "created_by_member"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 end

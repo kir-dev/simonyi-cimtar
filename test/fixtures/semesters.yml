@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  semester: MyString
+  valuation_date_from: 2012-12-26 17:06:52
+  valuation_date_to: 2012-12-26 17:06:52
+  min_scolarship_index: 1.5
+  created_by_member: 1
+
+two:
+  semester: MyString
+  valuation_date_from: 2012-12-26 17:06:52
+  valuation_date_to: 2012-12-26 17:06:52
+  min_scolarship_index: 1.5
+  created_by_member: 1
