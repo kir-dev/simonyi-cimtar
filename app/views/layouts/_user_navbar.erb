@@ -18,6 +18,11 @@
         <form class="navbar-search pull-left" action="">
           <input type="text" class="search-query span2" placeholder="Keresés">
         </form>
+
+        <%= link_to(admin_pages_url, {:class => 'app-admin-icon'}) do %>
+          <span class="icon-cog icon-large">&nbsp;</span>
+        <% end %>
+
         <ul class="nav pull-right">
           <% unless @user.nil? %>
               <li>

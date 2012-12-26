@@ -18,6 +18,8 @@ SzkCimtar::Application.routes.draw do
   match '/memberships/:id/accept' => 'groups#accept_pending_membership',
         :as => :accept_membership
 
+  resources :admin_pages, :only => [:index]
+
   get 'home/index'
 
   match '/logout' => 'members#logout'

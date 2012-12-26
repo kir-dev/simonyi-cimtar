@@ -103,3 +103,11 @@
 select.year {
     width: 70px;
 }
+
+a.app-admin-icon, a.app-admin-icon:hover {
+    font-size: 18px;
+    text-decoration: none;
+    color: gray;
+    line-height: 38px;
+    margin-left: 10px;
+}
