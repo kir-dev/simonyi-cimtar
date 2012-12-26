@@ -36,22 +36,32 @@
   <dd><%= @group.mail_list %></dd>
   <dt><strong><%= model_class.human_attribute_name(:shortname) %>:</strong></dt>
   <dd><%= @group.shortname %></dd>
-  <% if is_member_in_group(@group, @user, true) %>
-      <dt><%= t('operations') %>:</dt>
-      <dd>
-        <%= button_to t('group_leave'), {:action => 'leave'},
-                      {:class => "btn btn-mini btn-danger"} %>
-      </dd>
-  <% else
-       unless is_member_in_group(@group, @user, nil) %>
-          <dt><%= t('operations') %>:</dt>
-          <dd>
-            <%= button_to t('group_join'), {:action => 'join'},
-                          {:class => "btn btn-mini btn-success"} %>
-          </dd>
-      <% end %>
-  <% end %>
-
+  <dt><%= t('operations') %>:</dt>
+  <dd>
+    <div>
+      <%=
+          #todo permission check
+          link_to t('edit'),
+                  edit_group_path(@group),
+                  :class => 'btn btn-mini btn-info',
+                  :title => t('edit')
+      %>
+      &nbsp;
+      <%=
+          if is_member_in_group(@group, @user, true)
+            link_to t('group_leave'), {:action => 'leave'},
+                    :method => :post,
+                    :class => "btn btn-mini btn-danger"
+          else
+            unless is_member_in_group(@group, @user, nil) # hide if the membership is in pending status
+              link_to t('group_join'), {:action => 'join'},
+                      :method => :post,
+                      :class => "btn btn-mini btn-success"
+            end
+          end
+      %>
+    </div>
+  </dd>
 </dl>
 
 <ul class="nav nav-tabs">
