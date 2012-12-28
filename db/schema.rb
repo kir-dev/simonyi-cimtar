@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226160652) do
+ActiveRecord::Schema.define(:version => 20121228135319) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(:version => 20121226160652) do
     t.integer  "univ_year"
     t.integer  "enrollment_year"
     t.string   "hobby"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
     t.boolean  "deleted"
     t.string   "login"
     t.string   "nick"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "memberships", :force => true do |t|
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20121226160652) do
     t.datetime "from_date"
     t.datetime "to_date"
     t.boolean  "accepted"
+    t.boolean  "deleted"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.boolean  "deleted"
   end
 
   create_table "semesters", :force => true do |t|
@@ -84,4 +84,5 @@ ActiveRecord::Schema.define(:version => 20121226160652) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
 end
