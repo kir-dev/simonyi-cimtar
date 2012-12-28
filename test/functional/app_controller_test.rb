@@ -39,7 +39,8 @@ class AppControllerTest < ActionController::TestCase
     assert_equal :deleted, @controller.send(:authenticate_logic)
   end
 
-  private
+private
+
   def set_test_data(sso_user)
     member_attributes.each do |attr|
       @controller.request.env[attribute_mapping[attr.to_sym]] = sso_user[attr]
@@ -47,7 +48,6 @@ class AppControllerTest < ActionController::TestCase
     @controller.request.env[attribute_mapping[:entitlement]] = sso_user['entitlement']
   end
 
-  private
   def clear_test_data()
     member_attributes.each do |attr|
       @controller.request.env[attribute_mapping[attr.to_sym]] = nil

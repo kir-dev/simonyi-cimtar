@@ -10,4 +10,18 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  MAPPING = {
+    login: 'HTTP_UID',
+    email: 'HTTP_EMAIL',
+    full_name: 'HTTP_COMMON_NAME',
+    nick: 'HTTP_NICKNAME',
+    entitlement: 'HTTP_EDUPERSONENTITLEMENT'
+  }
+
+  def set_sso_request_values(request, opts = {})
+    opts.each do |k, v|
+      request.env[MAPPING[k]] = v
+    end
+  end
 end

@@ -1,30 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  full_name: MyString
-  login: one
-  email: a0@b0.cc
-  nick: a0
-  phone: MyString
-  room: MyString
-  address: MyString
-  intro: MyText
-  univ_year: 2005
-  hobby: MyString
-  deleted: false
-
-two:
-  full_name: MyString
-  login: two
-  email: a1@b1.cc
-  nick: a1
-  phone: MyString
-  room: MyString
-  address: MyString
-  intro: MyText
-  univ_year: 2005
-  hobby: MyString
-  deleted: false
+bela:
+   full_name: Kiss Bela
+   login: one
+   email: a0@b0.cc
+   nick: a0
+   phone: MyString
+   room: MyString
+   address: MyString
+   intro: MyText
+   univ_year: 2005
+   enrollment_year: 2007
+   hobby: MyString
+   deleted: false
 
 registered_and_member_on_vir:
   full_name: T. Reg. Árvíztükörfúrógép
@@ -46,4 +32,4 @@ registered_deleted:
   login: login_test_deleted
   nick: login troll pista
   univ_year: 2005
-  deleted: true
+  deleted: true   

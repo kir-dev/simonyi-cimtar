@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
+private
+
   def authenticate
     case authenticate_logic
       when :goto_login
@@ -32,14 +33,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
   def authenticate_logic
-    if remote_user.nil? or remote_user.empty?
+    if remote_user.blank?
       :goto_login
     else
       @user = Member.find_by_login(remote_user)
       if @user.nil?
-        if is_member_on_vir
+        if member_on_vir?
           :reg
         else
           :access_denied
@@ -54,7 +54,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
   def render_404(exception = nil)
     if exception
       logger.info "Rendering 404: #{exception.message}"
@@ -63,7 +62,6 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
   end
 
-  private
   def set_account
     if Rails.env.development?
       request.env[attribute_mapping[:login]] = 'test'

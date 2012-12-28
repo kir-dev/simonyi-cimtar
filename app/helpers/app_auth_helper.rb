@@ -28,9 +28,9 @@ module AppAuthHelper
     get_attribute_value :login
   end
 
-  def is_member_on_vir
+  def member_on_vir?
     entitlement = get_attribute_value :entitlement
-    if !entitlement.nil? and entitlement.include? ENTITLEMENT_SZK
+    if entitlement and entitlement.include? ENTITLEMENT_SZK
       true
     else
       false
