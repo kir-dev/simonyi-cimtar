@@ -1,32 +1,32 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'pg'
-gem 'sqlite3'
-#gem 'factory_girl_rails'
-#gem 'cucumber'
-gem 'quiet_assets', :group => :development
+gem 'rails', '3.2.9'
 
 gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
-gem 'therubyracer'
+
+group :production do
+  gem 'pg'
+end
+
+group :development do
+  gem 'sqlite3'
+  gem 'quiet_assets', :group => :development
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-rails', '~> 3.2.2'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'libv8', '~> 3.11.8'
+  gem 'therubyracer', '~> 0.11.0', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails', '~> 2.1.3'
+  gem 'twitter-bootstrap-rails', '~> 2.1.9'
   # gem 'jquery-ui-rails'
 end
 
