@@ -1,5 +1,5 @@
 # == Schema Information
-#
+# 
 # Table name: groups
 #
 #  id         :integer          not null, primary key
@@ -11,7 +11,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
 class Group < ActiveRecord::Base
   attr_accessible :founded, :mail_list, :name, :shortname, :url
 
@@ -29,7 +28,8 @@ class Group < ActiveRecord::Base
 
   # Checks if the given member is in the group.
   # @param [Member] member to look for
-  # @param [true, false] include_old indicates whether the query should take old members into account
+  # @param [true, false] include_old indicates whether the query should take 
+  #   old members into account
   def has_member?(member, include_old = false)
     is_member = members.include? member
     if is_member && !include_old

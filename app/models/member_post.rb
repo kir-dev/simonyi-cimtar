@@ -13,7 +13,7 @@
 class MemberPost < ActiveRecord::Base
   attr_accessible :title, :from_date, :to_date
 
-  belongs_to :membership
+  has_many :memberships
 
   validates :title, :from_date, :presence => true
 
