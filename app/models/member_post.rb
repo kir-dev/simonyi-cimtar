@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: member_posts
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  from_date  :datetime
+#  to_date    :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class MemberPost < ActiveRecord::Base
   attr_accessible :title, :from_date, :to_date
 

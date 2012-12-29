@@ -43,7 +43,7 @@ class InitialMigration < ActiveRecord::Migration
       t.integer  :univ_year
       t.integer  :enrollment_year
       t.string   :hobby
-      t.boolean  :deleted
+      t.boolean  :deleted, default: false
       t.string   :login
       t.string   :nick
 
@@ -56,8 +56,8 @@ class InitialMigration < ActiveRecord::Migration
       t.references  :post
       t.datetime    :from_date
       t.datetime    :to_date
-      t.boolean     :accepted
-      t.boolean     :deleted
+      t.boolean     :accepted, default: false
+      t.boolean     :deleted, default: false
 
       t.timestamps
     end

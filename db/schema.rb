@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
     t.integer  "univ_year"
     t.integer  "enrollment_year"
     t.string   "hobby"
-    t.boolean  "deleted"
+    t.boolean  "deleted",         :default => false
     t.string   "login"
     t.string   "nick"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "memberships", :force => true do |t|
@@ -68,10 +68,10 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
     t.integer  "post_id"
     t.datetime "from_date"
     t.datetime "to_date"
-    t.boolean  "accepted"
-    t.boolean  "deleted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "accepted",   :default => false
+    t.boolean  "deleted",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"

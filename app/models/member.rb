@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id              :integer          not null, primary key
+#  full_name       :string(255)
+#  email           :string(255)
+#  phone           :string(255)
+#  room            :string(255)
+#  address         :string(255)
+#  intro           :text
+#  univ_year       :integer
+#  enrollment_year :integer
+#  hobby           :string(255)
+#  deleted         :boolean          default(FALSE)
+#  login           :string(255)
+#  nick            :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class Member < ActiveRecord::Base
   include Gravtastic
   gravtastic :secure => true,
@@ -38,6 +59,9 @@ class Member < ActiveRecord::Base
 
   validates :enrollment_year,
             :numericality => {:greater_than_or_equal_to => :univ_year}
+
+  # validate deleted to be a boolean
+  validates :deleted, :inclusion => { :in => [true, false] }
 
   validates :address, :hobby, :length => {:maximum => 250}
   validates :intro, :length => {:maximum => 1000}

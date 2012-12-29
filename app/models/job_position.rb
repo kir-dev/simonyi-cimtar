@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: job_positions
+#
+#  id          :integer          not null, primary key
+#  company     :string(255)
+#  title       :string(255)
+#  location    :string(255)
+#  from_date   :date
+#  to_date     :date
+#  present_job :boolean
+#  member_id   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class JobPosition < ActiveRecord::Base
   attr_accessible :company, :location, :title, :from_date, :to_date, :present_job
 
