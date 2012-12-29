@@ -41,7 +41,7 @@
                                              :start_year => 1990,
                                              :end_year => Date.current.year,
                                              :use_short_month => true},
-                                {:class => 'job_date'}
+                                :class => 'job_date'
               %>
             </div>
 
@@ -50,8 +50,9 @@
                   f.date_select :to_date, {:discard_day => true,
                                            :start_year => 1990,
                                            :end_year => Date.current.year,
-                                           :use_short_month => true},
-                                {:class => 'job_date'}
+                                           :use_short_month => true,
+                                           :include_blank => true },
+                                :class => 'job_date'
               %>
             </div>
           </div>
