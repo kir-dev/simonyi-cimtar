@@ -27,21 +27,6 @@ class Group < ActiveRecord::Base
                               :greater_than => 1950,
                               :less_than_or_equal_to => Date.today.year}
 
-  # TODO: remove this
-  def get_active_memberships
-    memberships.active.order_by_member_name
-  end
-
-  # TODO: remove this
-  def get_old_memberships
-    memberships.old.order_by_member_name
-  end
-
-  # TODO: remove this
-  def get_pending_memberships
-    memberships.pending.order(:created_at)
-  end
-
   # Checks if the given member is in the group.
   # @param [Member] member to look for
   # @param [true, false] indicates whether the query should take old members into account

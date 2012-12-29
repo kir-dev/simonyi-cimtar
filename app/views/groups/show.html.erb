@@ -80,7 +80,7 @@
                 :remote => true %>
   </li>
   <li id="tab-members-pending_memberships">
-    <%= link_to t('memberships_pending', :count => @group.get_pending_memberships.count),
+    <%= link_to t('memberships_pending', :count => @group.memberships.pending.count),
                 {:controller => 'groups',
                  :action => 'get_memberships_tab_content',
                  :tab => 'pending_memberships'},
@@ -90,5 +90,5 @@
 
 <div id="content-memberships">
   <%= render :partial => 'memberships/active_memberships',
-             :locals => {:memberships => @group.get_active_memberships} %>
+             :locals => {:memberships => @group.memberships.active} %>
 </div>

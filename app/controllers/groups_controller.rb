@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
-    @group = Group.find(params[:id])
+    @group = Group.includes(:memberships).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -122,18 +122,18 @@ class GroupsController < ApplicationController
   end
 
   def get_memberships_tab_content
-    @group = Group.find(params[:id])
+    @group = Group.includes(:memberships).find(params[:id])
     tab = params[:tab]
     case
       when tab == 'old_memberships'
         partial_name = tab
-        memberships = @group.get_old_memberships
+        memberships = @group.memberships.old
       when tab == 'pending_memberships'
         partial_name = tab
-        memberships = @group.get_pending_memberships
+        memberships = @group.memberships.pending
       else
         partial_name = 'active_memberships'
-        memberships = @group.get_active_memberships
+        memberships = @group.memberships.active
     end
 
     update_memberships_tab_content(memberships, partial_name)
@@ -146,7 +146,7 @@ class GroupsController < ApplicationController
     #todo notification
     membership.delete
 
-    update_memberships_tab_content(group.get_pending_memberships,
+    update_memberships_tab_content(group.memberships.pending,
                                    'pending_memberships')
   end
 
@@ -158,7 +158,7 @@ class GroupsController < ApplicationController
     membership.accepted = true
     membership.save
 
-    update_memberships_tab_content(group.get_pending_memberships,
+    update_memberships_tab_content(group.memberships.pending,
                                    'pending_memberships')
   end
 
