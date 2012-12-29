@@ -17,7 +17,8 @@ class InitialMigration < ActiveRecord::Migration
       t.date     :from_date
       t.date     :to_date
       t.boolean  :present_job
-      t.integer  :member_id
+      
+      t.references  :member
 
       t.timestamps
     end
@@ -25,9 +26,7 @@ class InitialMigration < ActiveRecord::Migration
     add_index :job_positions, :member_id
 
     create_table :member_posts do |t|
-      t.integer  :member_id
-      t.integer  :group_id
-      t.integer  :post_id
+      t.string   :title
       t.datetime :from_date
       t.datetime :to_date
 
@@ -52,24 +51,33 @@ class InitialMigration < ActiveRecord::Migration
     end
 
     create_table :memberships do |t|
-      t.integer  :member_id
-      t.integer  :group_id
-      t.datetime :from_date
-      t.datetime :to_date
-      t.boolean  :accepted
-      t.boolean  :deleted
+      t.references  :member
+      t.references  :group
+      t.references  :post
+      t.datetime    :from_date
+      t.datetime    :to_date
+      t.boolean     :accepted
+      t.boolean     :deleted
 
       t.timestamps
     end
+
+    add_index :memberships, :member_id
+    add_index :memberships, :group_id
+    add_index :memberships, :post_id
 
     create_table :semesters do |t|
       t.string   :semester
       t.datetime :valuation_date_from
       t.datetime :valuation_date_to
       t.float    :min_scolarship_index
-      t.integer  :created_by_member
+      
+      # created by member relation
+      t.integer  :created_by
 
       t.timestamps
     end
+
+    add_index :semesters, :created_by
   end
 end

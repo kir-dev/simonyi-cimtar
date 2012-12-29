@@ -8,17 +8,13 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :full_name, :nick, :address, :hobby, :intro,
                   :phone, :univ_year, :enrollment_year, :room
 
-  #
-  has_many :memberships,
-           class_name: 'Membership',
-           foreign_key: :member_id
+  has_many :memberships
 
-  #has_many :groups, :through => :memberships
-  has_many :posts, class_name: 'MemberPost', foreign_key: :member_id
-  has_many :job_positions,
-           class_name: 'JobPosition',
-           foreign_key: :member_id,
-           order: 'from_date DESC'
+  # shortcuts
+  has_many :groups, :through => :memberships
+  has_many :posts, :through => :memberships
+
+  has_many :job_positions, order: 'from_date DESC'
 
   # mandatory fields
   validates :full_name,
@@ -38,7 +34,7 @@ class Member < ActiveRecord::Base
   validates :univ_year, :enrollment_year,
             :numericality => {:only_integer => true,
                               :greater_than => 1950,
-                              :less_than_or_equal_to => Date.current.year}
+                              :less_than_or_equal_to => Date.today.year}
 
   validates :enrollment_year,
             :numericality => {:greater_than_or_equal_to => :univ_year}

@@ -11,6 +11,11 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
+  # some syntactic sugar when expecting a false value
+  def assert_not(a)
+    assert !a
+  end
+
   MAPPING = {
     login: 'HTTP_UID',
     email: 'HTTP_EMAIL',
