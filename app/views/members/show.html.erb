@@ -91,10 +91,7 @@
           </div>
 
           <ul id="member_jobs_list">
-            <%=
-                render :partial => 'job_positions/list',
-                       :locals => {:jobs => @member.job_positions}
-            %>
+            <%= render @member.job_positions %>
           </ul>
 
         </td>
