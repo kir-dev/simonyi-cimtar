@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  helper_method :is_member_in_group
 
   # GET /groups
   def index
@@ -59,20 +58,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # obsolete use group#has_member? instead
-  def is_member_in_group(group, member, accepted)
-    if accepted.nil?
-      0 < Membership.where(:group_id => group.id,
-                           :member_id => member.id,
-                           :to_date => nil).count
-    else
-      0 < Membership.where(:group_id => group.id,
-                           :member_id => member.id,
-                           :to_date => nil,
-                           :accepted => accepted).count
-    end
-  end
-
   # POST /groups/1/join
   def join
     @group = Group.find(params[:id])
@@ -94,12 +79,14 @@ class GroupsController < ApplicationController
   # POST /groups/1/leave
   def leave
     @group = Group.find(params[:id])
-    if is_member_in_group(@group, @user, true)
-      ms = Membership.where(:group_id => @group.id,
-                            :member_id => @user.id,
-                            :accepted => true).order('from_date DESC').limit(1).first
+    if @group.has_member?(@user)
+      ms = @group.memberships
+                 .active
+                 .where(:member_id => @user)
+                 .order('from_date DESC')
+                 .first
 
-      ms.to_date = Time.now
+      ms.to_date = Date.today
 
       if ms.save
         flash[:success] = t('group_leave_msg')

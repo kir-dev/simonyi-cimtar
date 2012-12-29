@@ -40,24 +40,25 @@
   <dd>
     <div>
       <%=
-          #todo permission check
+          # TODO: permission check
           link_to t('edit'),
                   edit_group_path(@group),
                   :class => 'btn btn-mini btn-info',
                   :title => t('edit')
       %>
-      &nbsp;
       <%=
-          if is_member_in_group(@group, @user, true)
+          if @group.has_member?(@user) # if active member
             link_to t('group_leave'), {:action => 'leave'},
                     :method => :post,
                     :class => "btn btn-mini btn-danger"
-          else
-            unless is_member_in_group(@group, @user, nil) # hide if the membership is in pending status
+          else 
+            # hide if pending
+            unless @group.memberships.pending.where(:member_id => @user).any?
               link_to t('group_join'), {:action => 'join'},
                       :method => :post,
                       :class => "btn btn-mini btn-success"
             end
+
           end
       %>
     </div>

@@ -29,12 +29,12 @@ class Group < ActiveRecord::Base
 
   # Checks if the given member is in the group.
   # @param [Member] member to look for
-  # @param [true, false] indicates whether the query should take old members into account
+  # @param [true, false] include_old indicates whether the query should take old members into account
   def has_member?(member, include_old = false)
     is_member = members.include? member
     if is_member && !include_old
       # account for only active members
-      is_member && memberships.active.include?(member)
+      is_member && memberships.active.where(:member_id => member).any?
     else
       is_member    
     end

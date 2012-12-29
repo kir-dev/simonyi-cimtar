@@ -40,13 +40,12 @@ class Membership < ActiveRecord::Base
   # gets the pending memberships
   scope :pending, where(:accepted => false)
 
-  # gets the active memberships
+  # gets the active memberships, implies accepted as well
   scope :active, accepted.where(:to_date => nil)
 
-  #gets the old memberships
+  #gets the old memberships, implies accepted as well
   scope :old, accepted.where('to_date IS NOT NULL')
 
   scope :order_by_member_name, joins(:member).order('members.full_name')
-
 
 end
