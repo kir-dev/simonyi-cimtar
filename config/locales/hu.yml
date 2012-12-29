@@ -32,6 +32,9 @@ hu:
   group_leave_msg: 'Sikeresen kiléptél a körből'
   group_leave_msg_failed: 'Kilépés sikertelen. Kérlek jelezd a hibát a fejlesztőknek!'
 
+  group:
+    already_member: "Már tag vagy."
+
   #memberships
   memberships_current_members: 'Jelenlegi tagok'
   memberships_old_members: 'Öregtagok'

@@ -59,6 +59,7 @@ class GroupsController < ApplicationController
     end
   end
 
+  # obsolete use group#has_member? instead
   def is_member_in_group(group, member, accepted)
     if accepted.nil?
       0 < Membership.where(:group_id => group.id,
@@ -75,14 +76,16 @@ class GroupsController < ApplicationController
   # POST /groups/1/join
   def join
     @group = Group.find(params[:id])
-    unless is_member_in_group(@group, @user, nil)
-      Membership.new(:group_id => @group.id,
-                     :member_id => @user.id,
-                     :from_date => Time.now,
-                     :accepted => false,
-                     :deleted => false).save
+    if @group.has_member?(@user)
+      flash[:notice] = t 'group.already_member'
+    else
+      m = Membership.new :from_date => Date.today
+      m.group = @group
+      m.member = @user
 
-      flash[:notice] = t('group_join_msg')
+      if m.save
+        flash[:notice] = t('group_join_msg')
+      end
     end
 
     redirect_to @group
