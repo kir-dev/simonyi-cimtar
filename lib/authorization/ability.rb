@@ -13,6 +13,7 @@ class Ability
     can :read, :all
 
     setup_group_abilities
+    setup_member_abilities
 
     # admin is god
     can :manage, :all if user.admin?
@@ -21,6 +22,12 @@ class Ability
   # sets up all the abilities corresponding to groups
   def setup_group_abilities
     ABILITIES.each { |a| set_group_ability a }
+  end
+
+  # sets up all the abilities corresponding to members
+  def setup_member_abilities
+    can :update, Member, :id => @user.id
+    can :manage, JobPosition, :member_id => @user.id
   end
 
 private
