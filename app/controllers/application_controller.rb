@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    @user
+  end
+
 private
 
   def authenticate

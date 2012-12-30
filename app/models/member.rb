@@ -72,4 +72,17 @@ class Member < ActiveRecord::Base
   def set_login_attr(attr)
     self.login = attr
   end
+
+  def posts_in_group(group)
+    if groups.include?(group)
+      memberships.where(:group_id => group).first.posts
+    else
+      []
+    end
+  end
+
+  # TODO: create attribute in db
+  def admin?
+    Rails.env.development? ? true : false
+  end
 end
