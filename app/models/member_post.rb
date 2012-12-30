@@ -13,7 +13,8 @@
 class MemberPost < ActiveRecord::Base
   attr_accessible :title, :from_date, :to_date
 
-  belongs_to :membership
+  has_and_belongs_to_many :memberships
+  has_many :permissions, :foreign_key => "post_id"
 
   validates :title, :from_date, :presence => true
 
@@ -23,5 +24,6 @@ class MemberPost < ActiveRecord::Base
 
   validates_date :to_date,
                  :on_or_before => lambda { Date.today },
-                 :on_or_after => :from_date
+                 :on_or_after => :from_date,
+                 :allow_nil => true
 end

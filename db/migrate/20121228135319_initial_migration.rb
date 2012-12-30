@@ -53,7 +53,6 @@ class InitialMigration < ActiveRecord::Migration
     create_table :memberships do |t|
       t.references  :member
       t.references  :group
-      t.references  :post
       t.datetime    :from_date
       t.datetime    :to_date
       t.boolean     :accepted, default: false
@@ -64,7 +63,6 @@ class InitialMigration < ActiveRecord::Migration
 
     add_index :memberships, :member_id
     add_index :memberships, :group_id
-    add_index :memberships, :post_id
 
     create_table :semesters do |t|
       t.string   :semester

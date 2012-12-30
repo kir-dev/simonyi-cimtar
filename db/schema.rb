@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228135319) do
+ActiveRecord::Schema.define(:version => 20121230185325) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "member_posts_memberships", :id => false, :force => true do |t|
+    t.integer "membership_id"
+    t.integer "member_post_id"
+  end
+
+  add_index "member_posts_memberships", ["member_post_id"], :name => "index_member_posts_memberships_on_member_post_id"
+  add_index "member_posts_memberships", ["membership_id"], :name => "index_member_posts_memberships_on_membership_id"
+
   create_table "members", :force => true do |t|
     t.string   "full_name"
     t.string   "email"
@@ -65,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
   create_table "memberships", :force => true do |t|
     t.integer  "member_id"
     t.integer  "group_id"
-    t.integer  "post_id"
     t.datetime "from_date"
     t.datetime "to_date"
     t.boolean  "accepted",   :default => false
@@ -76,7 +83,16 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
-  add_index "memberships", ["post_id"], :name => "index_memberships_on_post_id"
+
+  create_table "permissions", :force => true do |t|
+    t.string   "ability"
+    t.string   "resource"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "permissions", ["post_id"], :name => "index_permissions_on_post_id"
 
   create_table "semesters", :force => true do |t|
     t.string   "semester"
