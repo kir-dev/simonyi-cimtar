@@ -19,6 +19,7 @@ end
 
 group :test do
   gem 'factory_girl', '~> 4.0'
+  gem 'spork-testunit'
 end
 
 gem 'debugger', :group => [ :development, :test ]
