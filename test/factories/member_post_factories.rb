@@ -5,8 +5,8 @@ FactoryGirl.define do
     from_date { 1.year.ago }
 
     after :create do |post, _|
-      # Permission.create ability: "manage", resource: "group"
       post.permissions.create ability: "manage", resource: "group"
+      post.save
     end
   end
 

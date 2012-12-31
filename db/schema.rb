@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230185325) do
+ActiveRecord::Schema.define(:version => 20121230163713) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -41,17 +41,12 @@ ActiveRecord::Schema.define(:version => 20121230185325) do
     t.string   "title"
     t.datetime "from_date"
     t.datetime "to_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "membership_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  create_table "member_posts_memberships", :id => false, :force => true do |t|
-    t.integer "membership_id"
-    t.integer "member_post_id"
-  end
-
-  add_index "member_posts_memberships", ["member_post_id"], :name => "index_member_posts_memberships_on_member_post_id"
-  add_index "member_posts_memberships", ["membership_id"], :name => "index_member_posts_memberships_on_membership_id"
+  add_index "member_posts", ["membership_id"], :name => "index_member_posts_on_membership_id"
 
   create_table "members", :force => true do |t|
     t.string   "full_name"

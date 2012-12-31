@@ -30,8 +30,12 @@ class InitialMigration < ActiveRecord::Migration
       t.datetime :from_date
       t.datetime :to_date
 
+      t.references :membership
+
       t.timestamps
     end
+
+    add_index :member_posts, :membership_id
 
     create_table :members do |t|
       t.string   :full_name

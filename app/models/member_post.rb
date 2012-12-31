@@ -13,7 +13,7 @@
 class MemberPost < ActiveRecord::Base
   attr_accessible :title, :from_date, :to_date
 
-  has_and_belongs_to_many :memberships
+  belongs_to :membership
   has_many :permissions, :foreign_key => "post_id"
 
   validates :title, :from_date, :presence => true
