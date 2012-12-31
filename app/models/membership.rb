@@ -5,7 +5,6 @@
 #  id         :integer          not null, primary key
 #  member_id  :integer
 #  group_id   :integer
-#  post_id    :integer
 #  from_date  :datetime
 #  to_date    :datetime
 #  accepted   :boolean          default(FALSE)

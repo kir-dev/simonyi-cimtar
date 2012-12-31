@@ -2,12 +2,13 @@
 #
 # Table name: member_posts
 #
-#  id         :integer          not null, primary key
-#  title      :string(255)
-#  from_date  :datetime
-#  to_date    :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  title         :string(255)
+#  from_date     :datetime
+#  to_date       :datetime
+#  membership_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 class MemberPost < ActiveRecord::Base
