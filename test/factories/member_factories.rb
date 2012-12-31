@@ -23,6 +23,13 @@ FactoryGirl.define do
       end
     end
 
+    factory :user_with_job do
+      after :create do |user, _|
+        user.job_positions << FactoryGirl.create(:ms)
+        user.save
+      end
+    end
+
   end
 
 end
