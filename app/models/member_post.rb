@@ -60,6 +60,7 @@ class MemberPost < ActiveRecord::Base
           perm.abilities.each { |a| permissions << Permission.new(:resource => perm.resource, :ability => a) }
         end
         MemberPost.uniq_perm(post, permissions).each do |p|
+          p.post = post
           post.permissions << p
         end
       end

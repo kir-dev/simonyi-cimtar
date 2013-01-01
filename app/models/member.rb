@@ -73,9 +73,10 @@ class Member < ActiveRecord::Base
     self.login = attr
   end
 
+  # gets the post for the given group
   def posts_in_group(group)
     if groups.include?(group)
-      memberships.where(:group_id => group).first.posts
+      memberships.active.where(:group_id => group).first.posts
     else
       []
     end
