@@ -5,6 +5,9 @@ class MemberAbilitiesTest < ActiveSupport::TestCase
   test "user can manage groups when he is the group leader" do
     user, ability = create_user_and_ability :user_as_group_leader
 
+    assert_equal 1, user.memberships.size, "should have 1 membership"
+    assert_equal 1, user.memberships.active.size, "should have 1 active membership"
+
     assert ability.can?(:manage, user.groups.first), "should be able to manage that group"
     
   end

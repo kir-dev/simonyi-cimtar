@@ -39,7 +39,8 @@ class MemberPostTest < ActiveSupport::TestCase
 
   post = MemberPost.create_from_params hash
   assert_equal 4, post.permissions.size
-  post.permissions.each { |e| assert post == e.post }
+  post.permissions.each { |e| assert_not_nil e.post }
+  post.permissions.each { |e| assert e.valid? }
 
   end
 

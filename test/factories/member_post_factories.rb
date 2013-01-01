@@ -6,6 +6,8 @@ FactoryGirl.define do
 
     after :create do |post, _|
       post.permissions.create ability: "manage", resource: "group"
+      post.permissions.create ability: "update", resource: "membership"
+      post.permissions.create ability: "create", resource: "member_post"
       post.save
     end
   end

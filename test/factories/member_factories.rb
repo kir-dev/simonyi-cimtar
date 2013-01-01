@@ -18,6 +18,7 @@ FactoryGirl.define do
       after :create do |user, e|
         ms = user.memberships.build :from_date => 2.days.ago, :to_date => nil
         ms.group = FactoryGirl.create :group
+        ms.accepted = true
         p = FactoryGirl.create :group_leader
         ms.posts << p
         ms.save
