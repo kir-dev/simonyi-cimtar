@@ -6,6 +6,7 @@ gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
 gem 'cancan'
+gem 'nested_form'
 
 group :production do
   gem 'pg'
@@ -14,7 +15,6 @@ end
 group :development do
   gem 'sqlite3'
   gem 'quiet_assets'
-
 end
 
 group :test do

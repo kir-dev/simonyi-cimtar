@@ -21,6 +21,25 @@ hu:
       not_a_number: 'A(z) "%{attribute}" nem szám'
       too_short: 'A(z) "%{attribute}" túl rövid (minimum %{count} karakter)'
       too_long: 'A(z) "%{attribute}" túl hosszú (maximum %{count} karakter)'
+  
+  helpers:
+    submit:
+      create: "Mentés" # %{model} could be used to refer to the model class
+      update: "Módosít"  
+
+  # abilities    
+  ability:
+    # types
+    read: Olvas
+    create: Létrehoz
+    update: Módosít
+    destroy: Töröl
+    manage: Mind
+
+    # labels
+    label:
+      new: "Új jogosultság"
+      remove: "Jogosultság törlése"
 
   #profile messages
   reg_success: Regisztráció sikeres :)
@@ -66,6 +85,15 @@ hu:
         mail_list: 'Levelezőlista'
       membership:
         created_at: 'Jelentkezett'
+      member_post:
+        title: Megnevezés
+        from_date: "Kezdete"
+        permissions: Jogosultságok
+      permission:
+        ability: Képesség
+        abilities: Képességek
+        resource: Erőforrás
+
     errors:
       messages:
         record_invalid: 'Érvénytelen adat: %{errors}'

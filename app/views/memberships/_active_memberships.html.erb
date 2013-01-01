@@ -13,7 +13,7 @@
         <td><%= link_to ms.member.full_name, ms.member %></td>
         <td><%= ms.member.nick %></td>
         <td></td>
-        <td></td>
+        <td><%= link_to "Grant rights", new_group_admin_member_post_path(:membership_id => ms) %></td>
       </tr>
   <% end %>
   </tbody>

@@ -1,0 +1,21 @@
+<div class="control-group">
+  <%= f.label :resource, :class => "control-label" %>
+  <div class="controls">
+    <!-- TODO: specify all the selectable resources for permissions -->
+    <%= f.select :resource, ["groups", "members"] %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :abilities, :class => "control-label" %>
+  <div class="controls">
+    <%= ability_selector f %>
+    <%= f.label :manage, :class => "checkbox" do %>
+      <%= f.check_box :manage %><%= t "ability.manage" %>
+    <% end -%>
+  </div>
+</div>
+<div class="control-group">
+  <div class="controls">
+    <%= f.link_to_remove t("ability.label.remove") %>
+  </div>
+</div>

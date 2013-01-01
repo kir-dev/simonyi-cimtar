@@ -1,0 +1,30 @@
+<h1>Kör admin</h1>
+
+<h2>Új poszt</h2>
+
+<p>TODO: ide majd lesznek előre definiált posztok, egy kattintásra hozzáadható</p>
+
+<%= nested_form_for @post, :url => group_admin_member_posts_path, :html => {:class => "form-horizontal"} do |f| %>
+  <%= hidden_field_tag "membership_id", params[:membership_id] %>
+  <div class="control-group">
+    <%= f.label :title, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :from_date, :class => "control-label" %>
+    <div class="controls">
+      <%= f.date_select :from_date, :start_year => 1990,
+                                    :end_year => Date.today.year %>
+    </div>
+  </div>
+
+  <h3>Josultságok</h3>
+  <%= f.fields_for :permissions %>
+  <div class="control-group"></div>
+  <%= f.link_to_add t("ability.label.new"), :permissions %>
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end -%>
