@@ -31,13 +31,15 @@ A [spork](https://github.com/sporkrb/spork) gemet használjuk,
 hogy a tesztelés során felgyorsítsuk az alkalmazás betöltődését.
 A spork szervert indítsuk el a `$ spork` paranccsal.
 
-unit testek futtatása:
+A tesztek futtatásához használjuk a `testdrb` parancsot:
 
+    # unit tesztek futtatása
+    $ testdrb -Itest test/unit/*.rb
+
+A sporkot megkerülni a `rake test` és társai segítségével lehet. Például
+
+    # unit tesztek futtatása spork nélkül
     $ rake test:units
-
-unit testek futtatása a spork megkerülésével
-
-    $ rake test:units withoutspork=true
 
 **FONTOS**: nem minden fájl töltődik újra a teszt futtatások között.
 pl a test_helper.rb változtatása esetén újra kell indítani a spork szervert.
