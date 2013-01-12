@@ -2,40 +2,64 @@
 #
 # Table name: permissions
 #
-#  id         :integer          not null, primary key
-#  ability    :string(255)
-#  resource   :string(255)
-#  post_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  can_create  :boolean
+#  can_read    :boolean
+#  can_update  :boolean
+#  can_destroy :boolean
+#  resource    :string(255)
+#  post_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class Permission < ActiveRecord::Base
-  VALID_ABILITIES = %w( read create update destroy manage ).map(&:to_sym).freeze
+  ABILITIES = [:create, :read, :update, :destroy].freeze
+
 
   belongs_to :post, :class_name => "MemberPost"
-  attr_accessible :ability, :resource, :manage, :abilities
+  attr_accessible :can_create, :can_read, :can_update, :can_destroy, :resource
 
-  validates :ability, :resource, :presence => true
-  validates :ability, :inclusion => { :in => VALID_ABILITIES }
+  validates :resource, :presence => true
+  validates :can_create, :can_read, :can_update, :can_destroy, :inclusion => { :in => [true, false] }
 
-  # @!attribute manage
-  #   @return [true, false] a field to indicate whether the permission has all the abilities possible
-  # @note it is temporary and only plays a role in the creation of the record
-  attr_accessor :manage
-
-  # @attribute abilities
-  #   @return [Array] the array of abilities
-  # @note it is temporary and only plays a role in the creation of the record
-  attr_accessor :abilities
-
-  def ability
-    super.try :to_sym
+  # returns an array containing all the abilities that the permission has
+  def abilities
+    abilities = []
+    abilities << :create if can_create?
+    abilities << :read if can_read?
+    abilities << :update if can_update?
+    abilities << :destroy if can_destroy?
+    abilities << :manage if manage?
+    abilities
   end
 
-  def ability=(value)
-    super(value.to_sym)
-    ability
+  # convinience method for setting all the abilities at once
+  # 
+  # @param value [Array] the array containing the abilities to set
+  def abilities=(value)
+    value = value.dup
+    self.can_create  = !!value.delete(:create)
+    self.can_read    = !!value.delete(:read)
+    self.can_update  = !!value.delete(:update)
+    self.can_destroy = !!value.delete(:destroy)
+    nil
   end
 
+  # returns true if the permission has all the available abilities
+  def manage?
+    can_create? && can_read? && can_update? && can_destroy?
+  end
+
+  alias_method :manage, :manage?
+
+  def manage=(value)
+    value_as_int = value.respond_to?(:to_i) ? value.to_i : 0 
+    if value == true || !value_as_int.zero?
+      self.abilities = ABILITIES
+    else
+      self.abilities = []
+    end
+    nil
+  end
 end

@@ -14,15 +14,17 @@
 class MemberPost < ActiveRecord::Base
   RESOURCES = %w(group member membership).freeze
 
-  attr_accessible :title, :from_date, :to_date
+  attr_accessible :title, :from_date, :to_date, :permissions_attributes
 
   belongs_to :membership
   has_many :permissions, :foreign_key => "post_id", :dependent => :destroy
 
-  accepts_nested_attributes_for :permissions
+  accepts_nested_attributes_for :permissions, :allow_destroy => true
 
   validates :title, :from_date, :presence => true
   validates_associated :permissions
+
+  validate :one_permission_for_on_resource
 
   validates_date :from_date,
                  :on_or_after => lambda { Date.new(1990, 1, 1) },
@@ -33,52 +35,13 @@ class MemberPost < ActiveRecord::Base
                  :on_or_after => :from_date,
                  :allow_nil => true
 
-  # Creates a new MemberPost object from the given params hash.
-  # It might create more than one permission for the post. 
-  # 
-  # *WARNING*: it does not persist the created object.
-  # 
-  # @param [Hash] attr_hash the hash that contains the new MemberPost's values
-  # @return [MemberPost] the created post object
-  def self.create_from_params(attr_hash)
-    post = MemberPost.new attr_hash.except("permissions_attributes")
-    if attr_hash["permissions_attributes"]
-      attr_hash["permissions_attributes"].each do |key, value|
-        next if value["_destroy"] == true
-        permissions = []
-        perm = Permission.new value.except("_destroy")
-        perm.abilities.reject! { |e| e.empty? }
-        
-        # skip permissions where there is no ability specified
-        next if perm.abilities.size < 1
-
-        if perm.manage.to_i != 0
-          perm.ability = :manage
-          permissions << perm
-        elsif perm.abilities.size == 1
-          perm.ability = perm.abilities[0]
-          permissions << perm
-        else
-          perm.abilities.each { |a| permissions << Permission.new(:resource => perm.resource, :ability => a) }
-        end
-        MemberPost.uniq_perm(post, permissions).each do |p|
-          p.post = post
-          post.permissions << p
-        end
-      end
-    end
-
-    post
-  end
-
 private
-  
-  # selects the unique permissions for the given MemberPost
-  def self.uniq_perm(post, permissions)
-    uniq = []
-    permissions.each do |p|
-      uniq << p if not post.permissions.any? { |pe| (p.resource == pe.resource && pe.ability == :manage) || ((p.resource == pe.resource) && (p.ability == pe.ability)) }
+  # permission's resource has to be unique for the memberpost
+  def one_permission_for_on_resource
+    by_res = self.permissions.group_by { |p| p.resource }
+    if by_res.any? { |_, v| v.size > 1 }
+      errors.add :unique_resource, "permission's resource has to be unique for the post"
     end
-    uniq
   end
+
 end

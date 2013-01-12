@@ -1,10 +1,7 @@
 <h2><%= @membership.member.full_name %> posztjai a 
   <%= @membership.group.shortname %> körben</h2>
 
-
-<% if @membership.posts.empty? %>
-  <p>Ennek a tagnak nincsenek posztjai a körön belül</p>
-<% end -%>
+<%= link_to "Új poszt", new_group_admin_membership_post_path(@membership) %>
 
 <table class="table">
   <thead>
@@ -15,15 +12,19 @@
     </tr>
   </thead>
   <tbody>
+    <% if @membership.posts.empty? %>
+      <p>Ennek a tagnak nincsenek posztjai a körön belül</p>
+    <% end -%>
+
     <% @membership.posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
         <td>
           <ul>
-            <% post.permissions.group_by { |p| p.resource }.each do |r, perms| %>
+            <% post.permissions.each do |perm| %>
               <li>
-                <span><%= t("resources." + r) %></span>
-                <span>(<%= perms.map { |p| t("ability." + p.ability.to_s)}.join(', ') %>)</span>
+                <span><%= t("resources." + perm.resource) %></span>
+                <span>(<%= ability_list(perm) %>)</span>
               </li>
             <% end -%>
           </ul>

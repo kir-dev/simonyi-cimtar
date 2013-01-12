@@ -9,14 +9,15 @@ class MembershipAbilitiesTest < ActiveSupport::TestCase
   end
 
   test "memberships can only be updated by group leaders" do
-    user, ablility = create_user_and_ability :user_as_group_leader
+    user, ability = create_user_and_ability :user_as_group_leader
     other_user = FactoryGirl.create :user, :email => "a@b.com", :login => "test-new"
     membership = Membership.new
     membership.group = user.groups.first
     membership.member = other_user
     membership.from_date = Date.today
 
-    assert ablility.can?(:update, membership, membership.group)
+    assert ability.can?(:update, membership, membership.group)
+    assert Ability.new(other_user).cannot?(:update, membership, membership.group)
     
   end
   

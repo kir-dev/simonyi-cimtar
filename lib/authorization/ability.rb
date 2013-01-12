@@ -101,7 +101,7 @@ class Ability
   # @param group [Group] the that we check the ability for
   def has_permission?(ability, resource, group)
     posts = @user.posts_in_group group
-    posts.map(&:permissions).flatten.any? { |perm| perm.resource == resource && perm.ability == ability }
+    posts.map(&:permissions).flatten.any? { |perm| perm.resource == resource && perm.abilities.include?(ability) }
   end
 
   # returns a resource name for a given subject

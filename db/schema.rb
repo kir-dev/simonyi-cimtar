@@ -80,11 +80,14 @@ ActiveRecord::Schema.define(:version => 20121230163713) do
   add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
 
   create_table "permissions", :force => true do |t|
-    t.string   "ability"
+    t.boolean  "can_create",  :default => false
+    t.boolean  "can_read",    :default => false
+    t.boolean  "can_update",  :default => false
+    t.boolean  "can_destroy", :default => false
     t.string   "resource"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "permissions", ["post_id"], :name => "index_permissions_on_post_id"

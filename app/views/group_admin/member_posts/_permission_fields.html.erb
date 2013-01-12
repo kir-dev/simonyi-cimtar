@@ -6,13 +6,11 @@
   </div>
 </div>
 <div class="control-group">
-  <%= f.label :abilities, :class => "control-label" %>
+  <label><% t "abilities" %></label>
   <div class="controls">
     <%= ability_selector f %>
-    <%= f.label :manage, :class => "checkbox" do %>
-      <%= f.check_box :manage %><%= t "ability.manage" %>
-    <% end -%>
-  </div>
+    <a href="javascript:void(0)" name="manage_link"><%= t "ability.manage" %></a>
+   </div>
 </div>
 <div class="control-group">
   <div class="controls">

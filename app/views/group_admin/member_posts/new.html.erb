@@ -4,6 +4,17 @@
 
 <p>TODO: ide majd lesznek előre definiált posztok, egy kattintásra hozzáadható</p>
 
+<% unless @post.errors.empty? %>
+<div class="error">
+  <p>Hibásak a magadott adatok</p>
+  <ul>
+    <% @post.errors.full_messages.each do |m| %>
+      <li><%= m %></li>
+    <% end -%>
+  </ul>
+</div>
+<% end -%>
+
 <%= nested_form_for @post, :url => group_admin_membership_posts_path(@post.membership), :html => {:class => "form-horizontal"} do |f| %>
   <div class="control-group">
     <%= f.label :title, :class => "control-label" %>

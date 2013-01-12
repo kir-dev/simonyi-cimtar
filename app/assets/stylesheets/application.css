@@ -112,3 +112,7 @@ a.app-admin-icon, a.app-admin-icon:hover {
     line-height: 38px;
     margin-left: 10px;
 }
+
+.error {
+    color: red;
+}

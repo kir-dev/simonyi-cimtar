@@ -22,8 +22,8 @@ class GroupAdmin::MemberPostsController < ApplicationController
     @membership = Membership.find params[:membership_id]
 
     authorize! :create, MemberPost, @membership.group
-    authorize! :update, @membership
-    @post = MemberPost.create_from_params params[:member_post]
+    authorize! :update, @membership, @membership.group
+    @post = MemberPost.new params[:member_post]
     @post.membership = @membership
 
     if @post.save
