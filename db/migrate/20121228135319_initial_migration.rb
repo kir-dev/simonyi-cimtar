@@ -52,6 +52,7 @@ class InitialMigration < ActiveRecord::Migration
       t.boolean  :deleted, default: false
       t.string   :login
       t.string   :nick
+      t.boolean  :admin, default: false
 
       t.timestamps
     end

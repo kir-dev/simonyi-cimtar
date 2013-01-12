@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20121230163713) do
     t.boolean  "deleted",         :default => false
     t.string   "login"
     t.string   "nick"
+    t.boolean  "admin",           :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end

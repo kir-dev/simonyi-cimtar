@@ -81,9 +81,4 @@ class Member < ActiveRecord::Base
       []
     end
   end
-
-  # TODO: create attribute in db
-  def admin?
-    Rails.env.development? ? true : false
-  end
 end
