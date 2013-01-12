@@ -30,6 +30,8 @@ class InitialMigration < ActiveRecord::Migration
       t.datetime :from_date
       t.datetime :to_date
 
+      t.boolean :deleted, default: false
+
       t.references :membership
 
       t.timestamps

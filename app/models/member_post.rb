@@ -23,6 +23,7 @@ class MemberPost < ActiveRecord::Base
 
   validates :title, :from_date, :presence => true
   validates_associated :permissions
+  validates :deleted, :inclusion => { :in => [ true, false ] }
 
   validate :one_permission_for_on_resource
 
@@ -34,6 +35,8 @@ class MemberPost < ActiveRecord::Base
                  :on_or_before => lambda { Date.today },
                  :on_or_after => :from_date,
                  :allow_nil => true
+
+  default_scope where( :deleted => false )
 
 private
   # permission's resource has to be unique for the memberpost

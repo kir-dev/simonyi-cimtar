@@ -6,8 +6,13 @@ hu:
   save: 'Mentés'
   edit: 'Szerkesztés'
   new: 'Új'
+  destroy: Törlés
   operations: 'Műveletek'
   error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
+
+  messages:
+    are_you_sure: "Biztos vagy benne?"
+
 
   attributes:
     id: 'Azonosító'

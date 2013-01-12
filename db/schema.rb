@@ -41,9 +41,10 @@ ActiveRecord::Schema.define(:version => 20121230163713) do
     t.string   "title"
     t.datetime "from_date"
     t.datetime "to_date"
+    t.boolean  "deleted",       :default => false
     t.integer  "membership_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "member_posts", ["membership_id"], :name => "index_member_posts_on_membership_id"
