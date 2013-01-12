@@ -1,8 +1,6 @@
 <h2><%= @membership.member.full_name %> posztjai a 
   <%= @membership.group.shortname %> körben</h2>
 
-<%= link_to "Új poszt", new_group_admin_membership_post_path(@membership) %>
-
 <table class="table">
   <thead>
     <tr>
@@ -37,3 +35,11 @@
   </tbody>
 </table>
 
+<%= content_for :operations do %>
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header"><%= t "operations" %></li>
+      <li><%= link_to "Új poszt", new_group_admin_membership_post_path(@membership) %></li>
+    </ul>
+  </div>
+<% end -%>
