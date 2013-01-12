@@ -1,0 +1,38 @@
+<h2><%= @membership.member.full_name %> posztjai a 
+  <%= @membership.group.shortname %> körben</h2>
+
+
+<% if @membership.posts.empty? %>
+  <p>Ennek a tagnak nincsenek posztjai a körön belül</p>
+<% end -%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Megnevezés</th>
+      <th>Jogosultságok</th>
+      <th><%= t "operations" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @membership.posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td>
+          <ul>
+            <% post.permissions.group_by { |p| p.resource }.each do |r, perms| %>
+              <li>
+                <span><%= t("resources." + r) %></span>
+                <span>(<%= perms.map { |p| t("ability." + p.ability.to_s)}.join(', ') %>)</span>
+              </li>
+            <% end -%>
+          </ul>
+        </td>
+        <td>
+          <%= link_to t("edit"), edit_group_admin_membership_post_path(@membership, post) %>
+        </td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+

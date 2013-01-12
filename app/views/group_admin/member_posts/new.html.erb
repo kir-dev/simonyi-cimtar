@@ -4,8 +4,7 @@
 
 <p>TODO: ide majd lesznek előre definiált posztok, egy kattintásra hozzáadható</p>
 
-<%= nested_form_for @post, :url => group_admin_member_posts_path, :html => {:class => "form-horizontal"} do |f| %>
-  <%= hidden_field_tag "membership_id", params[:membership_id] %>
+<%= nested_form_for @post, :url => group_admin_membership_posts_path(@post.membership), :html => {:class => "form-horizontal"} do |f| %>
   <div class="control-group">
     <%= f.label :title, :class => "control-label" %>
     <div class="controls">

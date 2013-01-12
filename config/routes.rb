@@ -14,7 +14,9 @@ SzkCimtar::Application.routes.draw do
   end
 
   namespace :group_admin do
-    resources :member_posts, :path => "posts"
+    resources :memberships do
+      resources :member_posts, :path => "posts", :as => "posts"
+    end
   end
 
   match '/memberships/:id/deny' => 'groups#deny_pending_membership',

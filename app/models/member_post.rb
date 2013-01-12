@@ -12,6 +12,8 @@
 #
 
 class MemberPost < ActiveRecord::Base
+  RESOURCES = %w(group member membership).freeze
+
   attr_accessible :title, :from_date, :to_date
 
   belongs_to :membership

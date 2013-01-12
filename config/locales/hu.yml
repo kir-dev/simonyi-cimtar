@@ -41,6 +41,12 @@ hu:
       new: "Új jogosultság"
       remove: "Jogosultság törlése"
 
+  # resources
+  resources:
+    group: Kör
+    membership: Tagság
+    member: Tag
+
   #profile messages
   reg_success: Regisztráció sikeres :)
 

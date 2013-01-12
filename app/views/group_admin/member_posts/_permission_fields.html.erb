@@ -1,8 +1,8 @@
 <div class="control-group">
   <%= f.label :resource, :class => "control-label" %>
   <div class="controls">
-    <!-- TODO: specify all the selectable resources for permissions -->
-    <%= f.select :resource, ["groups", "members"] %>
+    <%# resources are located in MemberPost model %>
+    <%= f.select :resource, @resources %>
   </div>
 </div>
 <div class="control-group">
