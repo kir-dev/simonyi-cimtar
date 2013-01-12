@@ -13,6 +13,20 @@ class AbilityTest < ActiveSupport::TestCase
     assert_raise(CanCan::AccessDenied){ ability.authorize! :create, Member }
   end
 
+  test "admins can do anything" do
+    user = FactoryGirl.create :user
+    # make it admin
+    user.stubs(:admin?).returns(true)
+
+    assert user.admin?
+
+    ability = Ability.new user
+    # does not need to specify group, because admins can do anything
+    # regardless of memberships and group affiliation
+    assert_nothing_raised { ability.authorize! :create, MemberPost }
+    assert_nothing_raised { ability.authorize! :create, Membership }
+  end
+
   test "authorized ability with a given group" do
     user, ability = create_user_and_ability :user_as_group_leader
 

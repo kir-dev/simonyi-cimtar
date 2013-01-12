@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 
 gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
@@ -18,8 +18,9 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl', '~> 4.0'
-  gem 'spork-testunit'
+  gem 'factory_girl', '~> 4.0', :require => false
+  gem 'spork-testunit', :require => false
+  gem 'mocha', :require => false
 end
 
 gem 'debugger', :group => [ :development, :test ]

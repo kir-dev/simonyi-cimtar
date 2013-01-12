@@ -1,5 +1,9 @@
 require 'rubygems'
 require 'spork'
+require 'test/unit'
+require 'mocha/setup'
+require 'factory_girl'
+
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 

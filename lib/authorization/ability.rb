@@ -58,12 +58,20 @@ class Ability
   # 
   # @note overrides the default
   def authorize!(action, subject, group = nil, *args)
-    begin
-      super(action, subject, *args)
-    rescue CanCan::AccessDenied => e
-      raise e if group.nil?
+    message = nil
+    if args.last.kind_of?(Hash) && args.last.has_key?(:message)
+      message = args.pop[:message]
     end
-    authorize_with_group! action, subject, group if group
+
+    # check cancan rules first -> cancan rules have priorty over user defined rules
+    if cannot?(action, subject, *args)
+      # check user defined rules
+      ability, resource = transform_action_and_subject action, subject
+      if group.nil? || !has_permission?(ability, resource, group)
+        message ||= unauthorized_message(action, subject)
+        raise CanCan::AccessDenied.new(message, action, subject)
+      end
+    end
     subject
   end
 
@@ -129,23 +137,6 @@ class Ability
     raise "there is no matching resource for #{subject}" if resource.blank?
 
     return ability, resource
-  end
-
-private
-
-  # authorize against the given group
-  def authorize_with_group!(action, subject, group)
-    ability, resource = transform_action_and_subject action, subject
-    if not has_permission?(ability, resource, group)
-      raise_authorization_error(action, subject)
-    end
-    subject
-  end
-
-  # stole it from: {https://github.com/ryanb/cancan/blob/master/lib/cancan/ability.rb#L207}
-  def raise_authorization_error(action, subject, message = nil)
-    message ||= unauthorized_message(action, subject)
-    raise CanCan::AccessDenied.new(message, action, subject)
   end
 
 end
