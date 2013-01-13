@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228135319) do
+ActiveRecord::Schema.define(:version => 20121230163713) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -41,9 +41,13 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
     t.string   "title"
     t.datetime "from_date"
     t.datetime "to_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "deleted",       :default => false
+    t.integer  "membership_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
+
+  add_index "member_posts", ["membership_id"], :name => "index_member_posts_on_membership_id"
 
   create_table "members", :force => true do |t|
     t.string   "full_name"
@@ -58,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
     t.boolean  "deleted",         :default => false
     t.string   "login"
     t.string   "nick"
+    t.boolean  "admin",           :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end
@@ -65,7 +70,6 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
   create_table "memberships", :force => true do |t|
     t.integer  "member_id"
     t.integer  "group_id"
-    t.integer  "post_id"
     t.datetime "from_date"
     t.datetime "to_date"
     t.boolean  "accepted",   :default => false
@@ -76,7 +80,19 @@ ActiveRecord::Schema.define(:version => 20121228135319) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
-  add_index "memberships", ["post_id"], :name => "index_memberships_on_post_id"
+
+  create_table "permissions", :force => true do |t|
+    t.boolean  "can_create",  :default => false
+    t.boolean  "can_read",    :default => false
+    t.boolean  "can_update",  :default => false
+    t.boolean  "can_destroy", :default => false
+    t.string   "resource"
+    t.integer  "post_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "permissions", ["post_id"], :name => "index_permissions_on_post_id"
 
   create_table "semesters", :force => true do |t|
     t.string   "semester"

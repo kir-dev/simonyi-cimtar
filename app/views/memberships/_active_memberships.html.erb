@@ -12,8 +12,8 @@
       <tr>
         <td><%= link_to ms.member.full_name, ms.member %></td>
         <td><%= ms.member.nick %></td>
-        <td></td>
-        <td></td>
+        <td><%= ms.posts.map(&:title).join ", " %></td>
+        <td><%= link_to t("edit"), group_admin_membership_posts_path(ms) %></td>
       </tr>
   <% end %>
   </tbody>

@@ -30,8 +30,14 @@ class InitialMigration < ActiveRecord::Migration
       t.datetime :from_date
       t.datetime :to_date
 
+      t.boolean :deleted, default: false
+
+      t.references :membership
+
       t.timestamps
     end
+
+    add_index :member_posts, :membership_id
 
     create_table :members do |t|
       t.string   :full_name
@@ -46,6 +52,7 @@ class InitialMigration < ActiveRecord::Migration
       t.boolean  :deleted, default: false
       t.string   :login
       t.string   :nick
+      t.boolean  :admin, default: false
 
       t.timestamps
     end
@@ -53,7 +60,6 @@ class InitialMigration < ActiveRecord::Migration
     create_table :memberships do |t|
       t.references  :member
       t.references  :group
-      t.references  :post
       t.datetime    :from_date
       t.datetime    :to_date
       t.boolean     :accepted, default: false
@@ -64,7 +70,6 @@ class InitialMigration < ActiveRecord::Migration
 
     add_index :memberships, :member_id
     add_index :memberships, :group_id
-    add_index :memberships, :post_id
 
     create_table :semesters do |t|
       t.string   :semester

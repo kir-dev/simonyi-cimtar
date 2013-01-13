@@ -5,7 +5,6 @@
 #  id         :integer          not null, primary key
 #  member_id  :integer
 #  group_id   :integer
-#  post_id    :integer
 #  from_date  :datetime
 #  to_date    :datetime
 #  accepted   :boolean          default(FALSE)
@@ -19,7 +18,7 @@ class Membership < ActiveRecord::Base
 
   belongs_to :group
   belongs_to :member
-  belongs_to :post, :class_name => "MemberPost"
+  has_many :posts, :class_name => "MemberPost", :include => :permissions
 
   validates_date :from_date,
                  :on_or_before => lambda { Date.today }

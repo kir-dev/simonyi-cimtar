@@ -6,21 +6,67 @@ hu:
   save: 'Mentés'
   edit: 'Szerkesztés'
   new: 'Új'
+  destroy: Törlés
   operations: 'Műveletek'
   error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
+
+  messages:
+    are_you_sure: "Biztos vagy benne?"
+
 
   attributes:
     id: 'Azonosító'
     created_at: 'Létrehozva'
     updated_at: 'Frissítve'
 
-  errors:
+  errors: &errors
     messages:
-      taken: 'foglalt'
-      blank: 'A(z) "%{attribute}" megadása kötelező'
-      not_a_number: 'A(z) "%{attribute}" nem szám'
-      too_short: 'A(z) "%{attribute}" túl rövid (minimum %{count} karakter)'
-      too_long: 'A(z) "%{attribute}" túl hosszú (maximum %{count} karakter)'
+      accepted: nincs elfogadva
+      blank: nincs megadva
+      confirmation: nem egyezik
+      empty: nincs megadva
+      equal_to: pontosan %{count} kell legyen
+      even: páros kell legyen
+      exclusion: nem elérhető
+      greater_than: nagyobb kell legyen, mint %{count}
+      greater_than_or_equal_to: legalább %{count} kell legyen
+      inclusion: nincs a listában
+      invalid: nem megfelelő
+      less_than: kevesebb, mint %{count} kell legyen
+      less_than_or_equal_to: legfeljebb %{count} lehet
+      not_a_number: nem szám
+      not_an_integer: egész számnak kell lennie
+      odd: páratlan kell legyen
+      record_invalid: Sikertelen validálás %{errors}
+      taken: már foglalt
+      too_long: túl hosszú (nem lehet több %{count} karakternél)
+      too_short: túl rövid (legalább %{count} karakter kell legyen)
+      wrong_length: nem megfelelő hosszúságú (%{count} karakter szükséges)
+  
+  helpers:
+    submit:
+      create: "Mentés" # %{model} could be used to refer to the model class
+      update: "Módosít"  
+
+  # abilities    
+  ability:
+    # types
+    read: Olvas
+    create: Létrehoz
+    update: Módosít
+    destroy: Töröl
+    manage: Mind
+
+    # labels
+    label:
+      new: "Új jogosultság"
+      remove: "Jogosultság törlése"
+
+  # resources
+  resources:
+    group: Kör
+    membership: Tagság
+    member: Tag
 
   #profile messages
   reg_success: Regisztráció sikeres :)
@@ -66,6 +112,15 @@ hu:
         mail_list: 'Levelezőlista'
       membership:
         created_at: 'Jelentkezett'
+      member_post:
+        title: Megnevezés
+        from_date: "Kezdete"
+        permissions: Jogosultságok
+      permission:
+        ability: Képesség
+        abilities: Képességek
+        resource: Erőforrás
+
     errors:
       messages:
         record_invalid: 'Érvénytelen adat: %{errors}'

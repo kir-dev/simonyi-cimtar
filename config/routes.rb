@@ -13,6 +13,13 @@ SzkCimtar::Application.routes.draw do
     end
   end
 
+  namespace :group_admin do
+    # we dont have any routes for memberships at the moment
+    resources :memberships, :only => [] do
+      resources :member_posts, :path => "posts", :as => "posts", :except => :show
+    end
+  end
+
   match '/memberships/:id/deny' => 'groups#deny_pending_membership',
         :as => :deny_membership
   match '/memberships/:id/accept' => 'groups#accept_pending_membership',

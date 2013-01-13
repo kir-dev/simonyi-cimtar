@@ -72,4 +72,13 @@ class Member < ActiveRecord::Base
   def set_login_attr(attr)
     self.login = attr
   end
+
+  # gets the post for the given group
+  def posts_in_group(group)
+    if groups.include?(group)
+      memberships.active.where(:group_id => group).first.posts
+    else
+      []
+    end
+  end
 end

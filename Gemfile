@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 
 gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
+gem 'cancan'
+gem 'nested_form'
 
 group :production do
   gem 'pg'
@@ -12,14 +14,23 @@ end
 
 group :development do
   gem 'sqlite3'
-  gem 'quiet_assets', :group => :development
+  gem 'quiet_assets'
 end
+
+group :test do
+  gem 'factory_girl', '~> 4.0', :require => false
+  gem 'spork-testunit', :require => false
+  gem 'mocha', :require => false
+end
+
+gem 'debugger', :group => [ :development, :test ]
+
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.2'
+  #gem 'coffee-rails', '~> 3.2.2'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'libv8', '~> 3.11.8'
@@ -44,6 +55,3 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
