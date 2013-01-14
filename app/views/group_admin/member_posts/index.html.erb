@@ -32,6 +32,9 @@
         <td>
           <%= link_to t("edit"), edit_group_admin_membership_post_path(@membership, post) %>
           <%= link_to t("destroy"), group_admin_membership_post_path(@membership, post), confirm: t("messages.are_you_sure"), method: :delete %>
+          <%= link_to "Érvénytelenít", terminate_group_admin_membership_post_path(@membership, post),
+                confirm: t("messages.are_you_sure"), method: :put, 
+                title: "A felhatalmazás véget ért a mai nappal." %>
         </td>
       </tr>
     <% end -%>

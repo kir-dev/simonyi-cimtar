@@ -62,8 +62,21 @@ class GroupAdmin::MemberPostsController < ApplicationController
     else
       notice = t("messages.unsuccessfull_delete")
     end
-      redirect_to group_admin_membership_posts_path(@post.membership), notice: notice
+    redirect_to group_admin_membership_posts_path(@post.membership), notice: notice
+  end
 
+  # PUT /group_admin/memberships/1/posts/1/terminate
+  # 
+  # egy posztra szolo megbizas ervenytelenitese
+  def terminate
+    post = MemberPost.find params[:id]
+    post.to_date = Date.today
+
+    if post.save
+      redirect_to group_admin_membership_posts_path(post.membership), notice: t("messages.posts.successfully_terminate")
+    else
+      redirect_to group_admin_membership_posts_path(post.membership), notice: t("messages.posts.unsuccessfully_terminate")
+    end
   end
 
 private 
