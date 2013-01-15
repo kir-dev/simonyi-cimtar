@@ -1,0 +1,38 @@
+<%= render "shared/form_error", :model => @semester %>
+
+<%= form_for [:admin, @semester], :html => { :class => "form-horizontal"} do |f| %>
+
+  <div class="control-group">
+    <%= f.label :semester, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :semester, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :min_scholarship_index, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :min_scholarship_index, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :valuation_date_from, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :valuation_date_from, 
+                        :start_year => Date.today.year - 1 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :valuation_date_to, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :valuation_date_to, 
+                        :start_year => Date.today.year - 1 %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+  </div>
+<% end -%>

@@ -12,7 +12,9 @@ hu:
 
   messages:
     are_you_sure: "Biztos vagy benne?"
-
+    semester:
+      successfully_created: "Félévi követelmény sikeres felvitele"
+      successfully_updated: "Félévi követelmény sikeresen módosítva"
 
   attributes:
     id: 'Azonosító'
@@ -120,6 +122,11 @@ hu:
         ability: Képesség
         abilities: Képességek
         resource: Erőforrás
+      semester:
+        semester: Félév
+        valuation_date_from: "Értékelési időszak kezdete"
+        valuation_date_to: "Értékelési időszak vége"
+        min_scholarship_index: "Minimális ösztöndíj index"
 
     errors:
       messages:
@@ -137,20 +144,33 @@ hu:
 
   # active_support config
   date:
-#    formats:
-#      # Use the strftime parameters for formats.
-#      # When no format has been given, it uses default.
-#      # You can provide other formats here if you like!
-#      default: "%Y-%m-%d"
-#      short: "%b %d"
-#      long: "%Y %B %d"
-#
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%Y %B %d"
+
     day_names: [Vasárnap, Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat]
     abbr_day_names: [Vas, Hé, Ke, Sze, Csüt, Pé, Szo]
 #
 #    # Don't forget the nil at the beginning; there's no such thing as a 0th month
     month_names: [~, Január, Február, Március, Április, Május, Június, Július, Augusztus, Szeptember, Október, November, December]
-    abbr_month_names: [~, Jan, Feb, Márc, Ápr, Máj, Jún, Júl, Aug, Szept, Okt, Nov, Dec]
+    abbr_month_names:
+    - 
+    - jan.
+    - febr.
+    - márc.
+    - ápr.
+    - máj.
+    - jún.
+    - júl.
+    - aug.
+    - szept.
+    - okt.
+    - nov.
+    - dec.
 #    # Used in date_select and datetime_select.
     order:
       - :year
@@ -159,7 +179,8 @@ hu:
 #
   time:
     formats:
-      default: "%Y. %m. %d. %H:%M"
+      default: "%Y.%m.%d. %H:%M"
+      date_only: "%Y. %b %e."
 #      short: "%d %b %H:%M"
 #      long: "%B %d, %Y %H:%M"
 #    am: "am"

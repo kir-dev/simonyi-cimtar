@@ -22,12 +22,17 @@ SzkCimtar::Application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :semesters, :except => [:show, :destroy]
+  end
+
+  # for the time being it redirected to semesters admin page
+  get "admin" => "admin/semesters#index"
+
   match '/memberships/:id/deny' => 'groups#deny_pending_membership',
         :as => :deny_membership
   match '/memberships/:id/accept' => 'groups#accept_pending_membership',
         :as => :accept_membership
-
-  resources :admin_pages, :only => [:index]
 
   get 'home/index'
 

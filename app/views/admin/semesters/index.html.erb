@@ -1,0 +1,32 @@
+<h2>Féléves követelmények</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Félév</th>
+      <th>Értékelés kezdete</th>
+      <th>Értékelés vége</th>
+      <th>Minimális ösztöndíj index</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @semesters.each do |sem| %>
+      <tr>
+        <td><%= sem.semester %></td>
+        <td><%= l sem.valuation_date_from, :format => :date_only %></td>
+        <td><%= l sem.valuation_date_to, :format => :date_only %></td>
+        <td><%= sem.min_scholarship_index %></td>
+        <td><%= link_to t("edit"), edit_admin_semester_path(sem) %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+
+<% content_for :operations do %>
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header"><%= t "operations" %></li>
+      <li><%= link_to "Új félév", new_admin_semester_path %></li>
+    </ul>
+  </div>
+<% end -%>

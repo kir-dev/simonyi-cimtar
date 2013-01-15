@@ -1,15 +1,6 @@
 <% url = params[:action] == "edit" ? group_admin_membership_post_path(@post.membership, @post) : group_admin_membership_posts_path(@post.membership) -%>
 
-<% unless @post.errors.empty? %>
-<div class="error">
-  <p>Hibásak a magadott adatok</p>
-  <ul>
-    <% @post.errors.full_messages.each do |m| %>
-      <li><%= m %></li>
-    <% end -%>
-  </ul>
-</div>
-<% end -%>
+<%= render "shared/form_error", :model => @post %>
 
 <%= nested_form_for @post, :url => url, :html => {:class => "form-horizontal"} do |f| %>
   <div class="control-group">

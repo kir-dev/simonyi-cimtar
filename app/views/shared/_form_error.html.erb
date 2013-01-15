@@ -1,0 +1,10 @@
+<% unless model.errors.empty? %>
+  <div class="error">
+    <p>Hibásak a magadott adatok</p>
+    <ul>
+      <% model.errors.full_messages.each do |m| %>
+        <li><%= m %></li>
+      <% end -%>
+    </ul>
+  </div>
+<% end -%>
