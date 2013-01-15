@@ -98,10 +98,10 @@ ActiveRecord::Schema.define(:version => 20121230163713) do
     t.string   "semester"
     t.datetime "valuation_date_from"
     t.datetime "valuation_date_to"
-    t.float    "min_scolarship_index"
+    t.float    "min_scholarship_index"
     t.integer  "created_by"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   add_index "semesters", ["created_by"], :name => "index_semesters_on_created_by"

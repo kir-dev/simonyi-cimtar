@@ -75,7 +75,7 @@ class InitialMigration < ActiveRecord::Migration
       t.string   :semester
       t.datetime :valuation_date_from
       t.datetime :valuation_date_to
-      t.float    :min_scolarship_index
+      t.float    :min_scholarship_index
       
       # created by member relation
       t.integer  :created_by
