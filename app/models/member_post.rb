@@ -26,7 +26,7 @@ class MemberPost < ActiveRecord::Base
   validates_associated :permissions
   validates :deleted, :inclusion => { :in => [ true, false ] }
 
-  validate :one_permission_for_on_resource
+  validate :one_permission_for_one_resource
 
   validates_date :from_date,
                  :on_or_after => lambda { Date.new(1990, 1, 1) },
@@ -41,7 +41,7 @@ class MemberPost < ActiveRecord::Base
 
 private
   # permission's resource has to be unique for the memberpost
-  def one_permission_for_on_resource
+  def one_permission_for_one_resource
     by_res = self.permissions.group_by { |p| p.resource }
     if by_res.any? { |_, v| v.size > 1 }
       errors.add :unique_resource, "permission's resource has to be unique for the post"
