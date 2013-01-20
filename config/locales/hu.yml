@@ -12,9 +12,12 @@ hu:
 
   messages:
     are_you_sure: "Biztos vagy benne?"
+    not_valuation_period: "Nincs értékelési időszak"
     semester:
       successfully_created: "Félévi követelmény sikeres felvitele"
       successfully_updated: "Félévi követelmény sikeresen módosítva"
+    valuation:
+      successfully_updated: "Félévi értékelés sikeresen módosítva"
 
   attributes:
     id: 'Azonosító'
@@ -127,6 +130,8 @@ hu:
         valuation_date_from: "Értékelési időszak kezdete"
         valuation_date_to: "Értékelési időszak vége"
         min_scholarship_index: "Minimális ösztöndíj index"
+      valuation:
+        scholarship_index: "Ösztöndíj index"
 
     errors:
       messages:

@@ -1,6 +1,6 @@
-<% [:notice, :alert, :error].each do |f| %>
+<% [:notice, :error, :success, :warning].each do |f| %>
   <% if flash[f] %>
-      <div class="alert alert-<%= f.to_s %>">
+      <div class="alert alert-<%= "#{map_flash_message(f) }" %>">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <%= flash[f] %>
       </div>

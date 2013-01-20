@@ -45,6 +45,9 @@ class Ability
     can :manage, JobPosition, :member_id => @user.id
     can :create, Membership # anybody can join any group
 
+    can :create, Valuation, :member_id => @user.id
+    can :update, Valuation, :member_id => @user.id
+
     # admin is god
     can :manage, :all if user.admin?
   end

@@ -2,6 +2,8 @@
 class ApplicationController < ActionController::Base
   include AppAuthHelper
 
+  helper_method :valuation_period?
+
   protect_from_forgery
 
   if Rails.env.production?
@@ -77,5 +79,10 @@ private
           urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:KIR fejlesztők és Üzemeltetők:106;
           urn:geant:niif.hu:sch.bme.hu:entitlement:tag:KIR fejlesztők és Üzemeltetők:106'
     end
+  end
+
+  # determines if we are in a valuation period or not
+  def valuation_period?
+    Semester.current_valuation_period.present?
   end
 end

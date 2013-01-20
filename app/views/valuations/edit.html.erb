@@ -1,0 +1,38 @@
+<h1>Félévi értékelés</h1>
+
+<%= render "shared/form_error", :model => @valuation %>
+
+<!-- render -->
+<% if @valuation.passed? %>
+  <div class="alert alert-success %>">
+    Már teljesítetted a félévi követelményeket.
+  </div>
+<% else %>
+  <div class="alert">
+    Még nem teljesítetted a félévi követelményeket.
+  </div>
+<% end -%>
+
+<%= form_for [@user, @valuation] do |f| %>
+  <%= f.label :scholarship_index %>
+  <%= f.text_field :scholarship_index %>
+
+  <p class="submit">
+    <%= f.submit :class => "btn btn-primary" %>
+  </p>
+
+  <p>
+    Az alábbi mezők azt mutatják, hogy elfogadták-e már a közösségi vagy
+    szakmai tevékenységed ebben a félévben.
+  </p>
+
+  <%= f.label :community, :class => "checkbox" do %>
+    <%= f.check_box :community, :disabled => true %> Közösségi tevékenység
+  <% end -%>
+  
+  <%= f.label :professional, :class => "checkbox" do %>
+    <%= f.check_box :professional, :disabled => true %> Szakmai tevékenység
+  <% end -%>  
+
+
+<% end -%>

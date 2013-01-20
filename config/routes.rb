@@ -3,6 +3,9 @@ SzkCimtar::Application.routes.draw do
 
   resources :members, :except => [:edit, :destroy] do
     resources :job_positions, :only => [:create, :update, :destroy]
+
+    # new action creates a new valuation if not exsits and redericest to edit
+    resources :valuations, :except => [:show, :index, :destroy, :create]
   end
 
   resources :groups, :except => [:destroy] do
