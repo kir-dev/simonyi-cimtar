@@ -19,6 +19,13 @@ class ApplicationController < ActionController::Base
     @user
   end
 
+protected
+
+  # determines if we are in a valuation period or not
+  def valuation_period?
+    @is_valuation_period ||= Semester.current_valuation_period.present?
+  end
+
 private
 
   def authenticate
@@ -79,10 +86,5 @@ private
           urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:KIR fejlesztők és Üzemeltetők:106;
           urn:geant:niif.hu:sch.bme.hu:entitlement:tag:KIR fejlesztők és Üzemeltetők:106'
     end
-  end
-
-  # determines if we are in a valuation period or not
-  def valuation_period?
-    @is_valuation_period ||= Semester.current_valuation_period.present?
   end
 end

@@ -2,7 +2,7 @@
 class ValuationsController < ApplicationController
 
   before_filter :load_semester
-  before_filter :load_member_and_valuations, :only => [:edit, :update]
+  before_filter :load_valuation, :only => [:edit, :update]
 
   # GET /member/1/valuation/new
   # new action creates a new valuation if not exsits and redericest to edit
@@ -40,11 +40,10 @@ class ValuationsController < ApplicationController
 private
   def load_semester
     @semester = Semester.current_valuation_period
-    # TODO show error page
-    render text: t("messages.not_valuation_period") if @semester.blank?
+    render "shared/not_valuation_period" if @semester.blank?
   end
 
-  def load_member_and_valuations
+  def load_valuation
     # @member = Member.find params[:member_id]
     @valuation = Valuation.find params[:id]
   end

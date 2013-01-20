@@ -24,7 +24,7 @@ SzkCimtar::Application.routes.draw do
       end
     end
 
-    resources :valuations, :only => [] do
+    resources :valuations, :only => [:index] do
       put "update_multiple", :on => :collection
     end
   end
