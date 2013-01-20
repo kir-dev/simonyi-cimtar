@@ -15,6 +15,7 @@ end
 group :development do
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'webrick', '1.3.1'
 end
 
 group :test do
