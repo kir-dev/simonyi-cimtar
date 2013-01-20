@@ -6,6 +6,7 @@
 #  title         :string(255)
 #  from_date     :datetime
 #  to_date       :datetime
+#  deleted       :boolean          default(FALSE)
 #  membership_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

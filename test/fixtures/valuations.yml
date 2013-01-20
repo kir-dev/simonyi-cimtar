@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  semester: 
+  member: 
+  scholarship_index: 1.5
+  community: false
+  professional: false
+
+two:
+  semester: 
+  member: 
+  scholarship_index: 1.5
+  community: false
+  professional: false

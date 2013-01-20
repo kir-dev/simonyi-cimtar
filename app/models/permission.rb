@@ -3,10 +3,10 @@
 # Table name: permissions
 #
 #  id          :integer          not null, primary key
-#  can_create  :boolean
-#  can_read    :boolean
-#  can_update  :boolean
-#  can_destroy :boolean
+#  can_create  :boolean          default(FALSE)
+#  can_read    :boolean          default(FALSE)
+#  can_update  :boolean          default(FALSE)
+#  can_destroy :boolean          default(FALSE)
 #  resource    :string(255)
 #  post_id     :integer
 #  created_at  :datetime         not null
