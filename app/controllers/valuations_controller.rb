@@ -1,3 +1,4 @@
+# for members to edit their scholarship index
 class ValuationsController < ApplicationController
 
   before_filter :load_semester

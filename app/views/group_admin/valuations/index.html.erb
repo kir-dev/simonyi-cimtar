@@ -1,0 +1,42 @@
+<h1>Félévi értékelések</h1>
+<h3><%= @group.name %></h3>
+
+<p>
+  Ha már valaki már teljesítette a közösségi vagy szakmai követelményeket,
+  akkor csak nyomós indokkal vedd el tőle.
+</p>
+
+<%= form_tag update_multiple_group_admin_valuations_path, :method => :put do %>
+  <%= hidden_field_tag "group_id", params[:group_id] %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Név</th>
+        <th>Közösségi követelmény</th>
+        <th>Szakami követelmény</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @valuations.each do |valuation| %>
+        <%= fields_for "valuations[]", valuation do |valuation_fields|  %>
+        <tr>
+          <td><%= valuation.member.name %></td>
+          <td>
+            <label class="checkbox">
+              <%= valuation_fields.check_box :community %>
+              OK
+            </label>
+          </td>
+          <td>
+            <label class="checkbox">
+              <%= valuation_fields.check_box :professional %>
+              OK
+            </label>
+            </td>
+        </tr>
+        <% end -%>
+      <% end -%>
+    </tbody>
+  </table>
+  <%= submit_tag "Mentés", :class => "btn btn-primary" %>
+<% end -%>

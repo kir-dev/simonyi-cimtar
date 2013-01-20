@@ -83,6 +83,6 @@ private
 
   # determines if we are in a valuation period or not
   def valuation_period?
-    Semester.current_valuation_period.present?
+    @is_valuation_period ||= Semester.current_valuation_period.present?
   end
 end

@@ -74,6 +74,10 @@ class Member < ActiveRecord::Base
     self.login = attr
   end
 
+  def name
+    full_name
+  end
+
   # gets the post for the given group
   def posts_in_group(group)
     if groups.include?(group)

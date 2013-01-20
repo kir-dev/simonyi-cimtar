@@ -23,6 +23,10 @@ SzkCimtar::Application.routes.draw do
         put "terminate", :on => :member
       end
     end
+
+    resources :valuations, :only => [] do
+      put "update_multiple", :on => :collection
+    end
   end
 
   namespace :admin do

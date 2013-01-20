@@ -15,7 +15,7 @@
 class Valuation < ActiveRecord::Base
   belongs_to :semester
   belongs_to :member
-  attr_accessible :community, :professional, :scholarship_index
+  attr_accessible :community, :professional
 
   validates :scholarship_index, :presence => true
   validates :professional, :community, :inclusion => { :in => [true, false] }

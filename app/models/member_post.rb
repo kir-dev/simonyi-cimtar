@@ -13,7 +13,7 @@
 #
 
 class MemberPost < ActiveRecord::Base
-  RESOURCES = %w(group member membership).freeze
+  RESOURCES = %w(group member membership valuation).freeze
 
   attr_accessible :title, :from_date, :to_date, :permissions_attributes
 
