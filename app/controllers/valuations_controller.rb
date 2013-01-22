@@ -13,7 +13,8 @@ class ValuationsController < ApplicationController
       authorize! :update, valuation
     else
       authorize! :create, Valuation
-      valuation = Valuation.new :scholarship_index => 0.0
+      valuation = Valuation.new
+      valuation.scholarship_index = 0.0
       valuation.member_id = params[:member_id]
       valuation.semester = @semester
       valuation.save
