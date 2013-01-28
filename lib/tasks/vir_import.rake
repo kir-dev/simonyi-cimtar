@@ -7,6 +7,19 @@ BASE_DN = 'ou=people,ou=sch,o=bme,c=hu'
 NEPTUN_URN = 'urn:mace:terena.org:schac:personalUniqueCode:hu:BME-NEPTUN:'
 VIRID_URN = 'urn:mace:terena.org:schac:personalUniqueID:hu:BME-SCH-VIR:person:'
 
+# virdb::grp_id, array index = APP DB group id
+GROUPS_VIR_IDS = [0, #dummy
+    16, #szk
+    106, #kirdev
+    57, #ac
+    38, #bss
+    44, #kafu
+    47, #kszk
+    353, #lego
+    402, #sds
+    342 #sem
+]
+
 # map groups: virdb<->APP db
 # iterate through the rows of the csv
 # -- member in the virdb? search (neptun || mail)
@@ -48,27 +61,44 @@ def migrate_members(ds_conn, db_conn)
         member.login = row['login']
         member.neptun = row['neptun']
 
-        if member.login.nil?
-            # try searching for member login in the ds
-            get_from_ds(ds_conn, member)
-        end
+        get_from_ds(ds_conn, member)
 
         if member.login.nil?
             p 'login name not found for=' + member.full_name
         else
             # got login, save member
+            begin
+                # member.save
+                p '--' + member.full_name
 
-            # iterate through groups
+                szk_ms_created = false;
+                unless member.vir_id.nil?
+                    db_conn.fetch('SELECT grp_id, membership_start
+                    FROM grp_membership
+                    WHERE usr_id = ' + member.vir_id + '
+                    AND grp_id IN (' + GROUPS_VIR_IDS.join(',') + ')
+                    AND membership_end IS NULL') do |vir_membership|
 
-            # save memberships
+                        group_virid = vir_membership[:grp_id]
+                        from_date = vir_membership[:membership_start]
+
+                        new_membership(GROUPS_VIR_IDS.index(group_virid), from_date, member)
+
+                        if group_virid == GROUPS_VIR_IDS[1]
+                            szk_ms_created = true
+                        end
+                    end
+                end
+
+                unless szk_ms_created
+                    new_membership(1, Date.today, member)
+                end
+            rescue Exception => e  # i know it's bad Pokemon exception handling...
+                p 'sg went wrong on member=' + member.full_name + '; msg=' + e.message
+                p e.backtrace
+            end
         end
 
-        # DB.fetch("
-        #   SELECT usr_email, usr_neptun, membership_start FROM users
-        #   INNER JOIN grp_membership ON (users.usr_id = grp_membership.usr_id)
-        #   WHERE grp_membership.grp_id=16 AND grp_membership.membership_end IS NULL") do |row|
-        #   puts row[:usr_id]
-        # end
     end
 end
 
@@ -98,4 +128,13 @@ def get_from_ds(ds_conn, member)
             member.nick = entry_nick.first
         end
     }
+end
+
+def new_membership(group_id, from_date, member)
+    ms = Group.find(group_id).memberships.build from_date: from_date
+    ms.accepted = true
+    ms.member = member
+    #ms.save
+
+    p '-- -- membership: ' + group_id.to_s + '; ('+ms.from_date.to_s+')'
 end
