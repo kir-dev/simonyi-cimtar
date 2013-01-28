@@ -7,7 +7,6 @@ BASE_DN = 'ou=people,ou=sch,o=bme,c=hu'
 NEPTUN_URN = 'urn:mace:terena.org:schac:personalUniqueCode:hu:BME-NEPTUN:'
 VIRID_URN = 'urn:mace:terena.org:schac:personalUniqueID:hu:BME-SCH-VIR:person:'
 
-
 # map groups: virdb<->APP db
 # iterate through the rows of the csv
 # -- member in the virdb? search (neptun || mail)
@@ -51,12 +50,12 @@ def migrate_members(ds_conn, db_conn)
 
         if member.login.nil?
             # try searching for member login in the ds
-            p 'login is nil on: ' + member.full_name
             get_from_ds(ds_conn, member)
-            p 'after get_from_ds, login=' + member.login.inspect
         end
 
-        unless member.login.nil?
+        if member.login.nil?
+            p 'login name not found for=' + member.full_name
+        else
             # got login, save member
 
             # iterate through groups
@@ -76,34 +75,27 @@ end
 def get_from_ds(ds_conn, member)
     attrs = ['schacPersonalUniqueID', 'uid', 'mail', 'schacPersonalUniqueCode', 'displayName']
 
-    filter = '(|(mail=' + member.email + ')'
+    filter = '(mail=' + member.email + ')'
     unless member.neptun.nil?
-        filter += '(schacPersonalUniqueCode=' + NEPTUN_URN + member.neptun + ')'
+        filter = '(|' + filter + '(schacPersonalUniqueCode=' + NEPTUN_URN + member.neptun + '))'
     end
-    filter += ')'
 
-    p filter.inspect
     ds_conn.search(BASE_DN, LDAP::LDAP_SCOPE_SUBTREE, filter, attrs) { |entry|
-        p 'found: '
-        p '--- dn=' + entry.dn
 
         entry_uid = entry.vals('uid')
         unless entry_uid.nil?
             member.login = entry_uid.first
-            p '--- login=' + member.login
         end
 
         entry_vir_id = entry.vals('schacPersonalUniqueID')
         unless entry_vir_id.nil?
             member.vir_id = entry_vir_id.first
             member.vir_id = member.vir_id.slice(VIRID_URN.size, entry_vir_id.first.size)
-            p '--- member.vir_id=' + member.vir_id
         end
 
         entry_nick = entry.vals('displayName')
         unless entry_nick.nil?
             member.nick = entry_nick.first
-            p '--- nick=' + member.nick
         end
     }
 end
