@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rubygems'
 require 'sequel'
 require 'ldap'
@@ -64,12 +66,16 @@ def migrate_members(ds_conn, db_conn)
         get_from_ds(ds_conn, member)
 
         if member.login.nil?
-            p 'login name not found for=' + member.full_name
+            p 'login name not found for=' + member.name
         else
             # got login, save member
             begin
-                # member.save
-                p '--' + member.full_name
+                p '--' + member.name
+                member.univ_year = 0
+                if member.enrollment_year.blank?
+                    member.enrollment_year = 0
+                end
+                member.save(:validate => false)
 
                 szk_ms_created = false;
                 unless member.vir_id.nil?
@@ -95,6 +101,7 @@ def migrate_members(ds_conn, db_conn)
                 end
             rescue Exception => e  # i know it's bad Pokemon exception handling...
                 p 'sg went wrong on member=' + member.full_name + '; msg=' + e.message
+                p member.inspect
                 p e.backtrace
             end
         end
@@ -125,7 +132,7 @@ def get_from_ds(ds_conn, member)
 
         entry_nick = entry.vals('displayName')
         unless entry_nick.nil?
-            member.nick = entry_nick.first
+            member.nick = entry_nick.first.force_encoding('utf-8')
         end
     }
 end
@@ -134,7 +141,7 @@ def new_membership(group_id, from_date, member)
     ms = Group.find(group_id).memberships.build from_date: from_date
     ms.accepted = true
     ms.member = member
-    #ms.save
+    ms.save
 
     p '-- -- membership: ' + group_id.to_s + '; ('+ms.from_date.to_s+')'
 end
