@@ -19,12 +19,28 @@ registered_and_member_on_vir:
   nick: reg jani
   univ_year: 2005
 
+registered_and_member_on_vir_not_the_first_time:
+  full_name: T. Reg. Árvíztükörfúrógép Nem Első Login
+  email: test6@test.cc
+  login: reg_virmember_2
+  nick: reg jani
+  univ_year: 2005
+  last_login: 2012-08-15
+
 registered_not_member_on_vir:
   full_name: T. Öregtag Pityu
   email: test4@test.cc
   login: reg_test_not_virmember
   nick: reg not virmember öregtag pityu
   univ_year: 2005
+
+registered_not_member_on_vir_not_the_first_time:
+  full_name: T. Öregtag Pityu
+  email: test7@test.cc
+  login: reg_test_not_virmember_2
+  nick: reg not virmember öregtag pityu
+  univ_year: 2005
+  last_login: 2012-08-15
 
 registered_deleted:
   full_name: T. Troll Pista
