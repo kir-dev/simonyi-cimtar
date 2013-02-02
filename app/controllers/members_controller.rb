@@ -46,12 +46,14 @@ class MembersController < ApplicationController
 
   # POST /members
   def create
-    if current_user.admin?
-      @member = Member.new(params[:member])
-    else # registration with sso, or first login
+    if @user.nil? # registration with sso, or first login
       @member = Member.new(params[:member].except(:login))
       @member.set_login_attr(get_attribute_value(:login))
       @member.last_login = Time.now
+    else
+      if @user.admin?
+        @member = Member.new(params[:member])
+      end
     end
 
     respond_to do |format|
