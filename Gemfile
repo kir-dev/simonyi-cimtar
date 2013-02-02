@@ -13,7 +13,6 @@ group :production do
 end
 
 group :development do
-  gem 'sqlite3'
   gem 'quiet_assets'
   gem 'webrick', '1.3.1'
   gem 'sequel'
@@ -24,8 +23,9 @@ group :test do
   gem 'factory_girl', '~> 4.0', :require => false
   gem 'spork-testunit', :require => false
   gem 'mocha', :require => false
-  gem "sqlite3", :platform => [:ruby, :mswin, :mingw]
 end
+
+gem 'sqlite3', :group => [ :development, :test ]
 
 if ENV['CI'] != "true"
   gem 'debugger', :group => [ :development, :test ]

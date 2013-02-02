@@ -9,4 +9,3 @@ script:
   - bundle exec rake
 before_script:
   - cp config/database.travis.yml config/database.yml
-bundler_args: --without development
