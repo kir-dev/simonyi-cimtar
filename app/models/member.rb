@@ -28,7 +28,7 @@ class Member < ActiveRecord::Base
 
   attr_readonly :login, :deleted
   attr_accessible :email, :full_name, :nick, :address, :hobby, :intro,
-                  :phone, :univ_year, :enrollment_year, :room
+                  :phone, :univ_year, :enrollment_year, :room, :last_login
 
   has_many :memberships
 

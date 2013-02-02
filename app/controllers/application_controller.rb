@@ -30,19 +30,24 @@ private
 
   def authenticate
     case authenticate_logic
-      when :goto_login
-        redirect_to Rails.application.config.login_url
-      when :ok
-        # nothing for now
-      when :reg
-        unless request.fullpath == '/members/reg' || # prevent redirect loop
-            # make possible to save
-            (request.method_symbol == :post && request.fullpath == '/members')
-          redirect_to '/members/reg'
-        end
-      else
-        redirect_to '/403'
-        return false
+    when :goto_login
+      redirect_to Rails.application.config.login_url
+    when :ok
+      # nothing for now
+      @user.last_login = Time.now
+      @user.save
+    when :reg
+
+      # prevent redirect loop and make possible to save
+      unless request.fullpath == '/members/reg' ||
+        (request.method_symbol == :post &&
+        (request.fullpath == '/members' || request.fullpath[/\A\/members\/(\d+)\Z/]))
+
+        redirect_to '/members/reg'
+      end
+    else
+      redirect_to '/403'
+      return false
     end
   end
 
@@ -61,10 +66,15 @@ private
         if @user.deleted?
           :deleted
         else
-          :ok
-        end
-      end
-    end
+          if @user.last_login.blank?
+            :reg
+          else
+            :ok
+          end # last_login check
+
+        end # deleted check
+      end # user nil check
+    end # remote_user blank check
   end
 
   def render_404(exception = nil)
@@ -82,9 +92,9 @@ private
       request.env[attribute_mapping[:full_name]] = 'Teszt Janos'
       request.env[attribute_mapping[:nick]] = 'jani'
       request.env[attribute_mapping[:entitlement]] =
-          'urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16;
-          urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:KIR fejlesztők és Üzemeltetők:106;
-          urn:geant:niif.hu:sch.bme.hu:entitlement:tag:KIR fejlesztők és Üzemeltetők:106'
+      'urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16;
+      urn:geant:niif.hu:sch.bme.hu:entitlement:körvezető:KIR fejlesztők és Üzemeltetők:106;
+      urn:geant:niif.hu:sch.bme.hu:entitlement:tag:KIR fejlesztők és Üzemeltetők:106'
     end
   end
 end

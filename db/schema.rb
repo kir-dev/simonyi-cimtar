@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130120123517) do
+ActiveRecord::Schema.define(:version => 20130201234719) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130120123517) do
     t.boolean  "admin",           :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+    t.datetime "last_login"
   end
 
   create_table "memberships", :force => true do |t|
@@ -110,10 +111,10 @@ ActiveRecord::Schema.define(:version => 20130120123517) do
     t.integer  "semester_id"
     t.integer  "member_id"
     t.float    "scholarship_index"
-    t.boolean  "community"
-    t.boolean  "professional"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.boolean  "community",         :default => false
+    t.boolean  "professional",      :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   add_index "valuations", ["member_id"], :name => "index_valuations_on_member_id"
