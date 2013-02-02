@@ -24,10 +24,12 @@ group :test do
   gem 'factory_girl', '~> 4.0', :require => false
   gem 'spork-testunit', :require => false
   gem 'mocha', :require => false
+  gem "sqlite3", :platform => [:ruby, :mswin, :mingw]
 end
 
-gem 'debugger', :group => [ :development, :test ]
-
+if ENV['CI'] != "true"
+  gem 'debugger', :group => [ :development, :test ]
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
