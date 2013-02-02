@@ -30,8 +30,14 @@ class MembersController < ApplicationController
 
   # GET /members/reg
   def reg_with_sso
-    @member = Member.new
-    set_attributes @member
+    @member = Member.find_by_login(remote_user)
+
+    if @member.nil? # reg with sso, not saved / imported yet
+      @member = Member.new
+      set_attributes @member
+    else
+      @member.last_login = Time.now
+    end
 
     respond_to do |format|
       format.html { render action: "new" }
@@ -40,9 +46,13 @@ class MembersController < ApplicationController
 
   # POST /members
   def create
-    #TODO: unless :admin
-    @member = Member.new(params[:member].except(:login))
-    @member.set_login_attr(get_attribute_value(:login))
+    if current_user.admin?
+      @member = Member.new(params[:member])
+    else # registration with sso, or first login
+      @member = Member.new(params[:member].except(:login))
+      @member.set_login_attr(get_attribute_value(:login))
+      @member.last_login = Time.now
+    end
 
     respond_to do |format|
       if @member.save

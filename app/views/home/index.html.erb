@@ -15,11 +15,13 @@
 
   <div class="span2">&nbsp;</div>
   <div class="span6">
-  <h3 style="text-align: center;">Egységek</h3>
-    <%=
-        @groups = Group.all
-        render @groups
-    %>
+    <h3 style="text-align: center;">Egységek</h3>
+    <div class="well">
+      <%=
+          @groups = Group.order(:name)
+          render @groups
+      %>
+    </div>
   </div>
   <div class="span1">&nbsp;</div>
 </div>

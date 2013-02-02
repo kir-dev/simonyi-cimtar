@@ -1,11 +1,9 @@
 <%- model_class = Group -%>
 
-<% @groups.each do |group| %>
-    <div class="well">
-      <i class="icon-th-list"></i>
-      <%= link_to(group) do %>
-          <span><%= group.name %></span>
-          <span>(<%= group.shortname %>)</span>
-      <% end %>
-    </div>
-<% end %>
+<p>
+  <i class="icon-th-list"></i>
+  <%= link_to(group) do %>
+      <span><%= group.name %></span>
+      <span>(<%= group.shortname %>)</span>
+  <% end %>
+</p>

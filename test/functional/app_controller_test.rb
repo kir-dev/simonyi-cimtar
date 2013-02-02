@@ -19,8 +19,13 @@ class AppControllerTest < ActionController::TestCase
     assert_equal :reg, @controller.send(:authenticate_logic)
   end
 
-  test "login with a registered and member on vir user aka user" do
+  test "login with a registered and member on vir user aka user the first time" do
     set_test_data @users[1]
+    assert_equal :reg, @controller.send(:authenticate_logic)
+  end
+
+  test "login with a registered and member on vir user aka user not the first time" do
+    set_test_data @users[5]
     assert_equal :ok, @controller.send(:authenticate_logic)
   end
 
@@ -29,8 +34,13 @@ class AppControllerTest < ActionController::TestCase
     assert_equal :access_denied, @controller.send(:authenticate_logic)
   end
 
-  test "login with a registered and not member on vir user aka oldboy" do
+  test "login with a registered and not member on vir user aka oldboy the first time" do
     set_test_data @users[3]
+    assert_equal :reg, @controller.send(:authenticate_logic)
+  end
+
+  test "login with a registered and not member on vir user aka oldboy not the first time" do
+    set_test_data @users[6]
     assert_equal :ok, @controller.send(:authenticate_logic)
   end
 
