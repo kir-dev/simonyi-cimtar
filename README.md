@@ -3,6 +3,8 @@ Simonyi címtár
 
 Simonyi Károly Szakkollégium tagokat és beszámolókat nyilvántartó rendszere
 
+[![Build Status](https://travis-ci.org/kir-dev/simonyi-cimtar.png?branch=master)](https://travis-ci.org/kir-dev/simonyi-cimtar)
+
 Fejlesztői környezet összeállítása
 ----------------------------------
 
