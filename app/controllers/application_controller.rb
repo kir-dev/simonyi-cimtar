@@ -26,6 +26,16 @@ protected
     @is_valuation_period ||= Semester.current_valuation_period.present?
   end
 
+  def authorize!(action, resource, *args)
+    roles = current_user.get_acting_roles
+
+    roles.each do |r|
+      unless r.check(action, resource)
+        redirect_to '/403'
+      end
+    end
+  end
+
 private
 
   def authenticate

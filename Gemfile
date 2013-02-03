@@ -5,7 +5,6 @@ gem 'rails', '3.2.11'
 gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
-gem 'cancan'
 gem 'nested_form'
 
 group :production do
