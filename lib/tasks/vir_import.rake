@@ -1,10 +1,5 @@
 # encoding: utf-8
 
-require 'rubygems'
-require 'sequel'
-require 'ldap'
-require 'csv'
-
 BASE_DN = 'ou=people,ou=sch,o=bme,c=hu'
 NEPTUN_URN = 'urn:mace:terena.org:schac:personalUniqueCode:hu:BME-NEPTUN:'
 VIRID_URN = 'urn:mace:terena.org:schac:personalUniqueID:hu:BME-SCH-VIR:person:'
@@ -34,6 +29,11 @@ GROUPS_VIR_IDS = [0, #dummy
 
 desc "Import members from the crossreferenced VIRDb and csv"
 task :vir_import => :environment do
+    # require here so it wont interfere with or slow down other tasks
+    require 'rubygems'
+    require 'sequel'
+    require 'ldap'
+    require 'csv'
     require './lib/tasks/vir_member'
     time_begin = Time.now
     puts "begin"

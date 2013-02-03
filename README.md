@@ -19,12 +19,32 @@ Fejlesztői környezet összeállítása
 
 3. szükséges függőségek telepítése
 
-        # csak azokat telepítsd, amikre a fejlesztéshez szükség van
+        $ # csak azokat telepítsd, amikre a fejlesztéshez szükség van
+        $ bundle install --without production migration
+
+    TODO: virdb setuphoz utasítások. PÉK idevonatkozó doksiját linkelni
+
+    Ha virdb-ből is szeretnél usereket importálni, akkor telepítsd a
+    következő csomagokat és a migration csoportot is:
+
+        $ sudo apt-get install libldap2-dev libsasl2-dev
         $ bundle install --without production
 
-4. `$ rails server`
+4. hozzd létre az adatbázist
 
-5. profit
+        $ # legyen configurációs fájlod
+        $ cp config/database.yml.sqlite-example config/database.yml
+        $ rake db:migrate   # hozd letre az adatbazist
+        $ rake db:seed      # legyen par teszt adatod is
+
+5. futtasd le a teszteket
+    
+        $ rake db:test:prepare
+        $ rake test
+
+6. `$ rails server`
+
+7. profit
 
 Tesztek futtatása
 -----------------

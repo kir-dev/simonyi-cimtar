@@ -15,8 +15,13 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'webrick', '1.3.1'
-  gem 'sequel'
-  gem 'ruby-ldap', '~> 0.9.12' # apt-get install libldap2-dev libsasl2-dev
+end
+
+group :migration do
+  gem 'sequel', :require => false
+
+  # apt-get install libldap2-dev libsasl2-dev
+  gem 'ruby-ldap', '~> 0.9.12', :require => false
 end
 
 group :test do
