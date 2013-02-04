@@ -116,14 +116,6 @@ hu:
         mail_list: 'Levelezőlista'
       membership:
         created_at: 'Jelentkezett'
-      member_post:
-        title: Megnevezés
-        from_date: "Kezdete"
-        permissions: Jogosultságok
-      permission:
-        ability: Képesség
-        abilities: Képességek
-        resource: Erőforrás
       semester:
         semester: Félév
         valuation_date_from: "Értékelési időszak kezdete"
