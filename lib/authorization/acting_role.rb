@@ -1,6 +1,5 @@
 # Absztrakt ososztály a szerepeknek.
 class ActingRole
-
   # a csoport, amire a szerep vonatkozik
   # ha nil, akkor a szerepkor globalisnak tekintendo
   attr_accessor :group
@@ -10,6 +9,7 @@ class ActingRole
 
   def initialize(user, group)
     self.group = group
+    self.user = user
   end
 
   # a szerepkor neve
@@ -25,7 +25,7 @@ class ActingRole
   # @param  resources [Object] az az eroforras, amit ellenorzunk
   # 
   # @return [true, false] true-val ter vissza, ha az adott szerepkor
-  def check(action, resource); 
+  def check(action, resource)
     false
   end
 
@@ -36,19 +36,20 @@ class ActingRole
   end
 
   # egy uj szerepkort regisztral a kozponti tarba
-  def self.register_role(role, klass)
-    @roles ||= {}
-    @roles[role] = klass
+  def self.register_role(role, klass = self)
+    @@roles ||= {}
+    @@roles[role] = klass
     role
   end
 
-  # egy olyan role peldannyal 
+  # egy olyan role peldannyal ter vissza, ami mar kepes
+  # ellenorizni, hogy a usernek van-e jogosultsaga valamire vagy nincs
   def self.create_role(role, user, group = nil)
-    @roles ||= {}
+    @@roles ||= {}
 
     # if there's no registered role, instantiate self and 
     # therefore ignore all requests to every action/resource
-    role_class = @roles[role] || self
+    role_class = @@roles[role] || self
     role_class.new user, group
   end
 

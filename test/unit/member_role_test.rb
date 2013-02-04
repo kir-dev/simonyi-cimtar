@@ -11,6 +11,5 @@ class MemberRoleTest < ActiveSupport::TestCase
 
     assert_equal 1, role.members.size
     assert_equal 1, user.roles.size
-
   end
 end

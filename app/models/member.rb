@@ -90,4 +90,13 @@ class Member < ActiveRecord::Base
       []
     end
   end
+
+  # get all the roles that a user has
+  def get_acting_roles
+    acting_roles = []
+    roles.each do |role|
+      acting_roles << ActingRole.create_role(role.name.to_sym, self, role.group)
+    end
+    acting_roles
+  end
 end

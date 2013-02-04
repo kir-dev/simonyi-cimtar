@@ -40,14 +40,6 @@ Spork.prefork do
       end
     end
 
-    # creates a user with the given factory, and creates an
-    # ability for the user
-    def create_user_and_ability(factory)
-      user = FactoryGirl.create factory
-      ability = Ability.new user
-
-      return user, ability
-    end
   end
 
 end
