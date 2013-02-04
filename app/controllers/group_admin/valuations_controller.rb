@@ -8,6 +8,10 @@ class GroupAdmin::ValuationsController < ApplicationController
     @group = Group.find params[:group_id]
     @members = Membership.includes(:member).active.where(:group_id => params[:group_id]).map { |ms| ms.member }
     @valuations = Semester.current_valuation_period.valuations.where(:member_id => @members)
+
+    @valuations.concat generate_missing_valuations(@members, @valuations)
+
+    @valuations.sort! { |x,y| x.member.name <=> y.member.name }
   end
 
   def update_multiple
@@ -27,11 +31,36 @@ class GroupAdmin::ValuationsController < ApplicationController
     redirect_to group_admin_valuations_path(:group_id => params[:group_id])
   end
 
-private 
+  private
 
   def check_valuation_period
     unless valuation_period?
       render "shared/not_valuation_period"
     end
+  end
+
+  def generate_missing_valuations(members, valuations)
+    missing_valuations = [];
+
+    members.each { |member|
+      found = false
+      valuations.each { |val|
+        if val.member_id == member.id
+          found = true
+          break
+        end
+      }
+
+      unless found
+        new_valuation = Valuation.new
+        new_valuation.semester = Semester.current_valuation_period
+        new_valuation.member = member
+        new_valuation.scholarship_index = 0.0
+        new_valuation.save
+        missing_valuations.push(new_valuation)
+      end
+    }
+
+    missing_valuations
   end
 end
