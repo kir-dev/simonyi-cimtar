@@ -6,7 +6,7 @@ class GroupAdmin::ValuationsController < ApplicationController
   def index
     # TODO: authorization
     @group = Group.find params[:group_id]
-    @members = Membership.includes(:member).where(:group_id => params[:group_id]).map { |ms| ms.member }
+    @members = Membership.includes(:member).active.where(:group_id => params[:group_id]).map { |ms| ms.member }
     @valuations = Semester.current_valuation_period.valuations.where(:member_id => @members)
   end
 
