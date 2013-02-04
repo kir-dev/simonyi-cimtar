@@ -85,11 +85,3 @@ ms = kirdev.memberships.build from_date: 1.year.ago
 ms.member = m
 ms.accepted = true
 ms.save
-
-# member is a group leader in Kir-Dev
-post = ms.posts.build title: "Körvezető", from_date: 6.months.ago
-perm = post.permissions.build resource: "group"
-perm.manage = true
-
-post.save
-perm.save

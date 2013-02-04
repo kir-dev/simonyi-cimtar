@@ -17,9 +17,8 @@ class Group < ActiveRecord::Base
 
   has_many :memberships
   
-  # shortcuts to members and posts
+  # shortcuts to members
   has_many :members, :through => :memberships
-  has_many :posts, :through => :memberships
 
   validates :name, :shortname, :uniqueness => {:case_sensitive => false}
   validates :founded,

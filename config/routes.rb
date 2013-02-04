@@ -17,13 +17,6 @@ SzkCimtar::Application.routes.draw do
   end
 
   namespace :group_admin do
-    # we dont have any routes for memberships at the moment
-    resources :memberships, :only => [] do
-      resources :member_posts, :path => "posts", :as => "posts", :except => :show do
-        put "terminate", :on => :member
-      end
-    end
-
     resources :valuations, :only => [:index] do
       put "update_multiple", :on => :collection
     end

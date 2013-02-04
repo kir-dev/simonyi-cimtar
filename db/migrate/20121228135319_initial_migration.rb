@@ -25,20 +25,6 @@ class InitialMigration < ActiveRecord::Migration
 
     add_index :job_positions, :member_id
 
-    create_table :member_posts do |t|
-      t.string   :title
-      t.datetime :from_date
-      t.datetime :to_date
-
-      t.boolean :deleted, default: false
-
-      t.references :membership
-
-      t.timestamps
-    end
-
-    add_index :member_posts, :membership_id
-
     create_table :members do |t|
       t.string   :full_name
       t.string   :email

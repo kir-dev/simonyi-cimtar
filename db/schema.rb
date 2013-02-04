@@ -37,18 +37,6 @@ ActiveRecord::Schema.define(:version => 20130203134318) do
 
   add_index "job_positions", ["member_id"], :name => "index_job_positions_on_member_id"
 
-  create_table "member_posts", :force => true do |t|
-    t.string   "title"
-    t.datetime "from_date"
-    t.datetime "to_date"
-    t.boolean  "deleted",       :default => false
-    t.integer  "membership_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-  end
-
-  add_index "member_posts", ["membership_id"], :name => "index_member_posts_on_membership_id"
-
   create_table "member_roles", :force => true do |t|
     t.string   "name"
     t.integer  "group_id"

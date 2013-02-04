@@ -34,7 +34,6 @@ class Member < ActiveRecord::Base
 
   # shortcuts
   has_many :groups, :through => :memberships
-  has_many :posts, :through => :memberships
 
   has_many :job_positions, order: 'from_date DESC'
 
@@ -80,15 +79,6 @@ class Member < ActiveRecord::Base
 
   def name
     full_name
-  end
-
-  # gets the post for the given group
-  def posts_in_group(group)
-    if groups.include?(group)
-      memberships.active.where(:group_id => group).first.posts
-    else
-      []
-    end
   end
 
   # get all the roles that a user has
