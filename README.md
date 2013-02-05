@@ -21,10 +21,15 @@ Fejlesztői környezet összeállítása
 
         # csak azokat telepítsd, amikre a fejlesztéshez szükség van
         $ bundle install --without production
+        
+4. éles telepítéskor mindenképp
 
-4. `$ rails server`
+        # a config/initializers/secret_token.rb fájlban lévőt lecserélni ennek a kimenetére:
+        $ rake secret
 
-5. profit
+5. `$ rails server`
+
+6. profit
 
 Tesztek futtatása
 -----------------
