@@ -11,10 +11,11 @@
   <p>Nincsenek szerepkörei ennek a felhasználónak.</p>
 <% end -%>
 <ul>
-  <% @member.roles.each do |mr| %>
+  <% @member.roles.each do |role| %>
     <li>
-      <%= t "roles.#{mr.name}" %>
-      <%= link_to "Elvesz" %>
+      <%= translate_role(role) %>
+      (<%= role.group.name %>)
+      <a href="javascript:void(0)" class="remove-role-link" data-role-id="<%= role.id %>" data-member-id="<%= @member.id %>">Elvesz</a>
     </li>
   <% end -%>
 </ul>
@@ -24,7 +25,7 @@
   <%= hidden_field_tag :member_id, @member.id %>
   
   <%= label_tag "role_name", "Megnevezés" %>
-  <%= select "role", "name", options_for_select(ActingRole.empty_roles.map{ |r| [t("roles.#{r.name}"), r.name, { "data-global" => r.global? }]}), {:prompt => true}, :class => "span3" %>
+  <%= select "role", "name", options_for_select(ActingRole.empty_roles.map{ |r| [translate_role(r), r.name, { "data-global" => r.global? }]}), {:prompt => true}, :class => "span3" %>
 
   <%= label_tag "role_group_id" do %>
     Kör (csak bizonyos szerepkez tartozik)

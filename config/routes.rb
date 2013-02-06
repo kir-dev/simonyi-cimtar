@@ -6,6 +6,8 @@ SzkCimtar::Application.routes.draw do
 
     # new action creates a new valuation if not exsits and redericest to edit
     resources :valuations, :except => [:show, :index, :destroy, :create]
+
+
   end
 
   resources :groups, :except => [:destroy] do
@@ -24,8 +26,9 @@ SzkCimtar::Application.routes.draw do
 
   namespace :admin do
     resources :semesters, :except => [:show, :destroy]
-    resources :roles do
+    resources :roles, :only => [:destroy, :index, :create] do
       get "manage", :on => :collection
+      post "member_search", :on => :collection
     end
   end
 

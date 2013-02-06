@@ -1,0 +1,7 @@
+<% if @members.empty? %>
+  <p>Nincs találat.</p>
+<% end -%>
+
+<% @members.each do |member| %>
+  <%= render partial: "member", locals: { member: member } %>
+<% end -%>

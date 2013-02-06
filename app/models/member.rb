@@ -40,7 +40,8 @@ class Member < ActiveRecord::Base
 
   has_and_belongs_to_many :roles, 
                           :association_foreign_key => :member_role_id, 
-                          :class_name => "MemberRole"
+                          :class_name => "MemberRole",
+                          :include => :group
 
   # mandatory fields
   validates :full_name,

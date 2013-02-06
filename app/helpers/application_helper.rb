@@ -5,4 +5,13 @@ module ApplicationHelper
     sym
   end
 
+  def translate_role(role, downcase = false)
+    trans = t("roles.#{role.name}")
+    if downcase
+      trans.downcase
+    else
+      trans
+    end
+  end
+
 end

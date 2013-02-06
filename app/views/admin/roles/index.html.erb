@@ -1,8 +1,14 @@
 <h2>Szerepek szerkesztése</h2>
 
-<% @members.each do |member| %>
-  <div>
-    <%= member.full_name %>
-    <%= link_to "add role", manage_admin_roles_path(:member_id => member.id) %>
-  </div>
-<% end -%>
+<form class="form-search">
+  <h3>Felhasználó keresése</h3>
+  <input class="search-query input-large" type="text" id="member_name" />
+  <input type="submit" class="btn" value="Keresés" id="submit-search-member" />
+</form>
+
+<h3>Felhasználók</h3>
+<div id="members-contianer">
+  <% @members.each do |member| %>
+    <%= render :partial => "member", :locals => {:member => member } %>
+  <% end -%>
+</div>
