@@ -84,3 +84,12 @@ ms = kirdev.memberships.build from_date: 1.year.ago
 ms.member = m
 ms.accepted = true
 ms.save
+
+# group admin for KirDev
+role = MemberRole.new
+role.name = "group_admin"
+role.group_id = kirdev.id
+role.save
+
+# make test user group admin in KirDev
+m.roles << role

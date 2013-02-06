@@ -56,7 +56,9 @@ hu:
   helpers:
     submit:
       create: "Mentés" # %{model} could be used to refer to the model class
-      update: "Módosít"  
+      update: "Módosít"
+    select:
+      prompt: "Kérlek válassz!"
 
   # abilities    
   ability:
