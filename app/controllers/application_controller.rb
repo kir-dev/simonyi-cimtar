@@ -31,7 +31,7 @@ protected
 
     roles.each do |r|
       unless r.check(action, resource)
-        redirect_to '/403'
+        raise NotAuthorized
       end
     end
   end

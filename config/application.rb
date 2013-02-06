@@ -19,6 +19,8 @@ module SzkCimtar
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W( 
         #{config.root}/lib
+        #{config.root}/lib/authorization
+        #{config.root}/lib/authorization/roles
     )
 
     # Only load the plugins named here, in the order given (default is alphabetical).

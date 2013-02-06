@@ -1,0 +1,8 @@
+<h2>Szerepek szerkesztése</h2>
+
+<% @members.each do |member| %>
+  <div>
+    <%= member.full_name %>
+    <%= link_to "add role", manage_admin_roles_path(:member_id => member.id) %>
+  </div>
+<% end -%>

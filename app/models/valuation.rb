@@ -6,8 +6,8 @@
 #  semester_id       :integer
 #  member_id         :integer
 #  scholarship_index :float
-#  community         :boolean
-#  professional      :boolean
+#  community         :boolean          default(FALSE)
+#  professional      :boolean          default(FALSE)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

@@ -1,0 +1,38 @@
+<h2>Új szerep felhasználóhoz rendelése</h2>
+
+<p>
+  <strong>Felhasználó:</strong>
+  <%= @member.full_name %>
+  (<%= @member.email %>)
+</p>
+
+<p><b>Szerepkörei:</b></p>
+<% if @member.roles.empty? %>
+  <p>Nincsenek szerepkörei ennek a felhasználónak.</p>
+<% end -%>
+<ul>
+  <% @member.roles.each do |mr| %>
+    <li>
+      <%= t "roles.#{mr.name}" %>
+      <%= link_to "Elvesz" %>
+    </li>
+  <% end -%>
+</ul>
+
+<h3>További szerepkörök hozzárendelése</h3>
+<%= form_tag admin_roles_path do %>
+  <%= hidden_field_tag :member_id, @member.id %>
+  
+  <%= label_tag "role_name", "Megnevezés" %>
+  <%= select "role", "name", options_for_select(ActingRole.empty_roles.map{ |r| [t("roles.#{r.name}"), r.name, { "data-global" => r.global? }]}), {:prompt => true}, :class => "span3" %>
+
+  <%= label_tag "role_group_id" do %>
+    Kör (csak bizonyos szerepkez tartozik)
+  <% end -%>
+  <%= select "role", "group_id", Group.all.map{ |g| [g.name, g.id] }, {:include_blank => true}, :class => "span3", :disabled => true  %>
+
+  <div>
+    <input type="submit" class="btn" value="Hozzárendelés" />
+  </div>
+<% end -%>
+

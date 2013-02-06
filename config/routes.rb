@@ -24,6 +24,9 @@ SzkCimtar::Application.routes.draw do
 
   namespace :admin do
     resources :semesters, :except => [:show, :destroy]
+    resources :roles do
+      get "manage", :on => :collection
+    end
   end
 
   # for the time being it redirected to semesters admin page

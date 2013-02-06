@@ -29,11 +29,9 @@ class ActingRole
     false
   end
 
-  # eldonti, hogy az adott szerepkor csak egy korre, vagy a teljes
-  # alkalmazasra vonatozik-e
-  def global?
-    self.group.nil?
-  end
+  # fel kell definialni a leszarmazottakban. eldonti, hogy az adott
+  # szerepkor csak egy korre, vagy az teljes rendszerre vonatkozik
+  def global?; end
 
   # egy uj szerepkort regisztral a kozponti tarba
   def self.register_role(role, klass = self)
@@ -53,4 +51,19 @@ class ActingRole
     role_class.new user, group
   end
 
+  def self.roles
+    @@roles.keys
+  end
+
+  # visszaadja a regisztralt ures role peldanyokat
+  # ez azt jelenti, hogy olyan szerepeket, amikben nincs megadva a user es
+  # a group, tehat ezeket kesobb kell beallitani, ha szukseges
+  def self.empty_roles
+    roles = []
+    @@roles.each { |_,v| roles << v.new(nil, nil) }
+    roles
+  end
+
 end
+
+class NotAuthorized < StandardError; end
