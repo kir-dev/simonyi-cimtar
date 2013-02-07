@@ -10,7 +10,8 @@ class MemberTest < ActiveSupport::TestCase
     
     assert_not_nil roles
     assert_equal 1, roles.size
-    assert roles[0].is_a?(GroupAdmin), "user's role in not a GroupAdmin"
+    assert_not roles[0].class == ActingRole, "user's role is an ActingRole, but it should be that one"
+    assert roles[0].is_a?(Roles::GroupAdminRole), "user's role in not a GroupAdminRole"
 
   end
 end

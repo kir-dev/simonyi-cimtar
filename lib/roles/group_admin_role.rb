@@ -1,5 +1,6 @@
-class GroupAdmin < ActingRole
+require "acting_role"
 
+class Roles::GroupAdminRole < ActingRole
   register_role :group_admin
 
   def name
@@ -7,10 +8,6 @@ class GroupAdmin < ActingRole
   end
 
   def global?
-    false
-  end
-
-  def check(action, resource)
     false
   end
 

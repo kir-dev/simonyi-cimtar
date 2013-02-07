@@ -22,8 +22,8 @@ Spork.prefork do
     # Add more helper methods to be used by all tests here...
 
     # some syntactic sugar when expecting a false value
-    def assert_not(a)
-      assert !a
+    def assert_not(a, *args)
+      assert !a, *args
     end
 
     MAPPING = {
@@ -51,4 +51,7 @@ Spork.each_run do
   FactoryGirl.factories.clear
   FactoryGirl.find_definitions
 
+  # reloading role files every time to pick up changes
+  lib_path = File.expand_path "../../lib", __FILE__
+  require File.join(lib_path, "roles")
 end

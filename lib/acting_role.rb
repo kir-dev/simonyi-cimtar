@@ -1,4 +1,7 @@
 # Absztrakt ososztály a szerepeknek.
+# 
+# Az inner_check metodust kell felul irni, hogy megtortenjen a
+# szerepkor ellenorzese
 class ActingRole
   # a csoport, amire a szerep vonatkozik
   # ha nil, akkor a szerepkor globalisnak tekintendo
@@ -23,10 +26,12 @@ class ActingRole
   #
   # @param  action [Symbol] amit csinalni szeretnenk az eroforrssal
   # @param  resources [Object] az az eroforras, amit ellenorzunk
+  # @param  group [Group] a kor, amihez kapcsolodik az eroforras/akcio
   # 
   # @return [true, false] true-val ter vissza, ha az adott szerepkor
-  def check(action, resource)
-    false
+  def check(action, resource, group)
+    return false unless valid_group?(group)
+    inner_check(action, resource)
   end
 
   # fel kell definialni a leszarmazottakban. eldonti, hogy az adott
@@ -62,6 +67,25 @@ class ActingRole
     roles = []
     @@roles.each { |_,v| roles << v.new(nil, nil) }
     roles
+  end
+
+protected 
+
+  def valid_group?(group)
+    if !global?
+      self.group == group
+    else
+      # if it is a global role, group should not
+      # be taken into account
+      true
+    end
+  end
+
+  # ezt a metodust kell felul irni a leszarmazottakban
+  # eldonti, hogy az adott muvelet vegrehajthato-e az adott eroforrason
+  # true-t vagy false-t adjon vissza
+  def inner_check(action, resource)
+    false
   end
 
 end
