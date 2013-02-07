@@ -1,0 +1,4 @@
+AuthType shibboleth
+require shibboleth
+
+RewriteEngine On

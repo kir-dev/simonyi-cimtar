@@ -29,6 +29,7 @@ Fejlesztői környezet összeállítása
 
         $ sudo apt-get install libldap2-dev libsasl2-dev
         $ bundle install --without production
+        
 
 4. hozzd létre az adatbázist
 
@@ -45,6 +46,17 @@ Fejlesztői környezet összeállítása
 6. `$ rails server`
 
 7. profit
+
+Deploy
+------
+
+_TODO: utasitasok elesiteshez_
+
+Éles telepítéskor mindenképp:
+
+    # a config/initializers/secret_token.rb fájlban lévőt lecserélni ennek a kimenetére:
+    $ rake secret
+
 
 Tesztek futtatása
 -----------------
