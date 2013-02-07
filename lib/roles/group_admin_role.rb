@@ -11,4 +11,13 @@ class Roles::GroupAdminRole < ActingRole
     false
   end
 
+protected
+
+  def check_inner(action, resource)
+    false
+  end
+
+  def initialize_rules
+    has_permission_to :update, Group
+  end
 end

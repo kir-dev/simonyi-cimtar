@@ -13,6 +13,9 @@ class ActingRole
   def initialize(user, group)
     self.group = group
     self.user = user
+    @rules ||= []
+
+    initialize_rules
   end
 
   # a szerepkor neve
@@ -30,7 +33,11 @@ class ActingRole
   # 
   # @return [true, false] true-val ter vissza, ha az adott szerepkor
   def check(action, resource, group)
-    return false unless valid_group?(group)
+    return false unless valid_group? group
+
+    # rules precedence is bigger than inner_check
+    return true if check_rules action, resource
+
     inner_check(action, resource)
   end
 
@@ -71,6 +78,34 @@ class ActingRole
 
 protected 
 
+  def initialize_rules; end
+
+  # egy uj szabalyt regisztral. ezek egyszeru szabalyok a sok if-else kivaltasara
+  # hivjuk az {#initialize_rules} metodusbol.
+  #
+  # @note csak osztalyokat regisztaljunk be!
+  #
+  # @example egy szabaly leirasa
+  #   def initialize_rules
+  #     has_permission_to :create, Member
+  #     has_permission_to [:update, :read], Group
+  #   end
+  #
+  def has_permission_to(action, resource)
+    rules_to_add = []
+    if action.respond_to?(:each)
+      action.each { |a| rules_to_add << Rule.new(a, resource) }
+    else
+      rules_to_add << Rule.new(action, resource)
+    end
+
+    rules_to_add.each do |ra|
+      unless @rules.any? { |r| r == ra }
+        @rules << ra
+      end
+    end
+  end
+
   def valid_group?(group)
     if !global?
       self.group == group
@@ -88,6 +123,23 @@ protected
     false
   end
 
+private 
+
+  def check_rules(action, resource)
+    # ha nincsenek szabalyok ezen ne akadjunk fel
+    return false if @rules.empty?
+
+    if resource.is_a? Class
+      rule_check = Rule.new action, resource
+    else
+      rule_check = Rule.new action, resource.class
+    end
+
+    @rules.any? { |r| r == rule_check }
+  end
+
 end
 
 class NotAuthorized < StandardError; end
+
+Rule = Struct.new :action, :resource
