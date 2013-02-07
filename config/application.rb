@@ -12,8 +12,7 @@ end
 module SzkCimtar
   class Application < Rails::Application
 
-    require "roles"
-
+    require "roles" unless Rails.env.test?
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -25,7 +25,8 @@ end
 
 group :test do
   gem 'factory_girl', '~> 4.0', :require => false
-  gem 'spork-testunit', :require => false
+  # gem 'spork-testunit', :require => false
+  gem 'spork-rails', :require => false
   gem 'mocha', :require => false
 end
 
