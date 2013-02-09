@@ -87,4 +87,10 @@ class MembersController < ApplicationController
       redirect_to Rails.application.config.logout_url
     end
   end
+
+  def wait_for_accept
+    respond_to do |format|
+      format.html { render action: "wait_for_accept" }
+    end
+  end
 end

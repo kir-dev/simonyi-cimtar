@@ -2,6 +2,7 @@ SzkCimtar::Application.routes.draw do
   get "home/index"
 
   match '/members/reg' => 'members#reg_with_sso'
+  match '/members/wait_for_accept' => 'members#wait_for_accept'
 
   resources :members, :except => [:edit, :destroy] do
     resources :job_positions, :only => [:create, :update, :destroy]

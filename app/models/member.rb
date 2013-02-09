@@ -87,6 +87,10 @@ class Member < ActiveRecord::Base
     memberships.active.joins(:group).order('groups.name')
   end
 
+  def has_valid_membership?
+    memberships.accepted.count > 0
+  end
+
   # get all the roles that a user has
   def get_acting_roles
     acting_roles = []

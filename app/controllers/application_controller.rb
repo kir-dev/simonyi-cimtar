@@ -53,17 +53,19 @@ private
     when :goto_login
       redirect_to Rails.application.config.login_url
     when :ok
-      # nothing for now
       @user.last_active = Time.now
       @user.save
     when :reg
-
       # prevent redirect loop and make possible to save
       unless request.fullpath == '/members/reg' ||
         (request.method_symbol == :post &&
         (request.fullpath == '/members' || request.fullpath[/\A\/members\/(\d+)\Z/]))
 
         redirect_to '/members/reg'
+      end
+    when :wait
+      unless request.fullpath == '/members/wait_for_accept'
+        redirect_to '/members/wait_for_accept'
       end
     else
       redirect_to '/403'
@@ -86,11 +88,15 @@ private
         if @user.deleted?
           :deleted
         else
-          if @user.last_active.blank?
-            :reg
+          if @user.has_valid_membership?
+            if @user.last_active.blank?
+              :reg # imported member, show reg page first
+            else
+              :ok # ok, has valid membership, not the first login
+            end # last_active blank check
           else
-            :ok
-          end # last_active check
+            :wait # member is in the db, but don't have valid membership
+          end # valid membership check
 
         end # deleted check
       end # user nil check
