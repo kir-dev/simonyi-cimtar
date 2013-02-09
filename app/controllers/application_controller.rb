@@ -28,6 +28,7 @@ protected
 
   def authorize!(action, resource, group = nil, *args)
     authorization_check(action, resource, group) { raise NotAuthorized }
+    resource
   end
 
   def permitted_to?(action, resource, group = nil, *args)
@@ -40,12 +41,16 @@ private
 
   def authorization_check(action, resource, group)
     roles = current_user.get_acting_roles
+    permitted = false
 
     roles.each do |r|
-      unless r.check(action, resource, group)
-        yield
+      if r.check(action, resource, group)
+        permitted = true
       end
     end
+
+    yield if !permitted
+    nil
   end
 
   def authenticate
