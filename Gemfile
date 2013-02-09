@@ -25,7 +25,7 @@ end
 
 group :test do
   gem 'factory_girl', '~> 4.0', :require => false
-  # gem 'spork-testunit', :require => false
+  gem 'spork-testunit', :require => false
   gem 'spork-rails', :require => false
   gem 'mocha', :require => false
 end
@@ -52,7 +52,7 @@ group :assets do
   # gem 'jquery-ui-rails'
 end
 
-gem 'jquery-rails'
+gem "jquery-rails", "~> 2.1.4"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
