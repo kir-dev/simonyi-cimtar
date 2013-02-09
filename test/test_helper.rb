@@ -7,6 +7,16 @@ require 'factory_girl'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
+module ManagedObservers
+  def with_observer(*observers)
+    ActiveRecord::Base.observers.enable(*observers)
+    yield
+    ActiveRecord::Base.observers.disable(:all)
+  end
+
+  alias_method :with_observers, :with_observer
+end
+
 Spork.prefork do
   ENV["RAILS_ENV"] = "test"
   require File.expand_path('../../config/environment', __FILE__)
@@ -17,7 +27,8 @@ Spork.prefork do
     #
     # Note: You'll currently still have to declare fixtures explicitly in integration tests
     # -- they do not yet inherit this setting
-    fixtures :all
+
+    include ManagedObservers
 
     # Add more helper methods to be used by all tests here...
 
@@ -39,17 +50,21 @@ Spork.prefork do
         request.env[MAPPING[k]] = v
       end
     end
-
   end
-
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
 
+  # in prefork block it will load models and then spork with
+  # pick up changes to them
+  ActiveSupport::TestCase.fixtures :all
+
+  # disable all observers for speeding up test and to test observers in isolation
+  ActiveRecord::Base.observers.disable(:all)
+
   # load factories
-  FactoryGirl.factories.clear
-  FactoryGirl.find_definitions
+  FactoryGirl.reload
 
   # reloading role files every time to pick up changes
   lib_path = File.expand_path "../../lib", __FILE__
