@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203134318) do
+ActiveRecord::Schema.define(:version => 20130209133057) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -85,6 +85,17 @@ ActiveRecord::Schema.define(:version => 20130203134318) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
+
+  create_table "posts", :force => true do |t|
+    t.datetime "from"
+    t.datetime "to"
+    t.string   "title"
+    t.integer  "membership_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "posts", ["membership_id"], :name => "index_posts_on_membership_id"
 
   create_table "semesters", :force => true do |t|
     t.string   "semester"

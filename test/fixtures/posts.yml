@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  from: 2013-02-09 14:30:57
+  to: 2013-02-09 14:30:57
+  title: MyString
+  membership: 
+
+two:
+  from: 2013-02-09 14:30:57
+  to: 2013-02-09 14:30:57
+  title: MyString
+  membership: 
