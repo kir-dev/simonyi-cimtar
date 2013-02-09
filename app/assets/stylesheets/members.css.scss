@@ -32,11 +32,6 @@
   width: 150px;
 }
 
-#member-data td:last-child {
-  width: 40px;
-  text-align: center;
-}
-
 #member-data td {
   vertical-align: middle;
   padding: 8px;
@@ -63,4 +58,8 @@
 #member-data textarea {
   max-height: 15em;
   min-width: 40em;
+}
+
+.profile-memberships {
+  margin-top: 18px;
 }

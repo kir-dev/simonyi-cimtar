@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203134318) do
+ActiveRecord::Schema.define(:version => 20130209142921) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(:version => 20130203134318) do
   end
 
   add_index "job_positions", ["member_id"], :name => "index_job_positions_on_member_id"
+
+  create_table "member_posts", :force => true do |t|
+    t.string   "title"
+    t.datetime "from_date"
+    t.datetime "to_date"
+    t.boolean  "deleted",       :default => false
+    t.integer  "membership_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "member_posts", ["membership_id"], :name => "index_member_posts_on_membership_id"
 
   create_table "member_roles", :force => true do |t|
     t.string   "name"
@@ -69,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20130203134318) do
     t.boolean  "admin",           :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-    t.datetime "last_login"
+    t.datetime "last_active"
   end
 
   create_table "memberships", :force => true do |t|
@@ -85,6 +97,19 @@ ActiveRecord::Schema.define(:version => 20130203134318) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
+
+  create_table "permissions", :force => true do |t|
+    t.boolean  "can_create",  :default => false
+    t.boolean  "can_read",    :default => false
+    t.boolean  "can_update",  :default => false
+    t.boolean  "can_destroy", :default => false
+    t.string   "resource"
+    t.integer  "post_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "permissions", ["post_id"], :name => "index_permissions_on_post_id"
 
   create_table "semesters", :force => true do |t|
     t.string   "semester"

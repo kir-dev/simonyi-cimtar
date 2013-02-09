@@ -10,6 +10,11 @@
         <%= best_in_place @member, :nick, :type => :input %>
       </strong>
     </div>
+
+    <div class="profile-memberships well well-small">
+      <%= render @member.active_memberships %>
+    </div>
+
   </div>
   <div class="span6">
     <h2>
@@ -26,53 +31,44 @@
       <li class="disabled"><a href="#">PDF</a></li>
     </ul>
 
-    <table id="member-data" class="table table-bordered">
+    <table id="member-data" class="">
       <tr>
         <td><label>E-mail:</label></td>
         <td><%= best_in_place @member, :email, :type => :input %></td>
-        <td></td>
       </tr>
       <tr>
         <td><label>Telefonszám:</label></td>
         <td><%= best_in_place @member, :phone, :type => :input %></td>
-        <td></td>
       </tr>
       <tr>
         <td><label>Koliszoba:</label></td>
         <td><%= best_in_place @member, :room, :type => :input %></td>
-        <td></td>
       </tr>
       <tr>
         <td><label>Levelezési cím:</label></td>
         <td><%= best_in_place @member, :address, :type => :input %></td>
-        <td></td>
       </tr>
       <tr>
         <td><label>Egyetem kezdési éve:</label></td>
         <td><%= best_in_place @member, :univ_year, :type => :input %></td>
-        <td></td>
       </tr>
       <tr>
         <td><label>Felvétel éve:</label></td>
         <td><%= best_in_place @member, :enrollment_year, :type => :input %></td>
-        <td></td>
       </tr>
       <tr>
-        <td><label>Bemutatkozás:</label></td>
-        <td><%= best_in_place @member, :intro, :type => :textarea %></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><label>Hobby:</label></td>
-        <td><%= best_in_place @member, :hobby, :type => :input %></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><label>SSO Login:</label></td>
+        <td><label>VIR Profil:</label></td>
         <td>
           <a href="https://profile.sch.bme.hu/profile/show/uid/<%= @member.login %>"><%= @member.login %></a>
         </td>
-        <td></td>
+      </tr>
+      <tr>
+        <td><label>Tagline:</label></td>
+        <td><%= best_in_place @member, :hobby, :type => :input %></td>
+      </tr>
+      <tr>
+        <td><label>Magadról:</label></td>
+        <td><%= best_in_place @member, :intro, :type => :textarea %></td>
       </tr>
       <tr class="joblist">
         <td><label>Munkahelyek:</label></td>
@@ -95,27 +91,19 @@
           </ul>
 
         </td>
-        <td>
-        </td>
       </tr>
-      <tr>
+<!--       <tr>
         <td><label>Social:</label></td>
         <td></td>
-        <td></td>
-      </tr>
+      </tr> -->
     </table>
 
-    <div class="well" style="color: red">
+<!--     <div class="well" style="color: red">
       Archiválva: <%= best_in_place_if false, @member, :deleted,
                                        :type => :checkbox,
                                        :collection => %w(Nem Igen)
     %>
-    </div>
+    </div> -->
 
   </div>
-</div>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              members_path, :class => 'btn' %>
 </div>
