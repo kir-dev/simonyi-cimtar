@@ -44,6 +44,10 @@ SzkCimtar::Application.routes.draw do
         :as => :deny_membership
   match '/memberships/:id/accept' => 'groups#accept_pending_membership',
         :as => :accept_membership
+  match '/memberships/:id/old' => 'groups#change_to_old_membership',
+        :as => :change_to_old_membership
+  match '/memberships/:id/delete' => 'groups#delete_membership',
+        :as => :delete_membership
 
   match '/logout' => 'members#logout'
 

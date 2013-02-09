@@ -160,4 +160,26 @@ class GroupsController < ApplicationController
                                    'pending_memberships')
   end
 
+  def change_to_old_membership
+    #todo permission check
+    membership = Membership.find(params[:id])
+    group = membership.group
+    membership.to_date = Time.now
+    membership.save
+
+    update_memberships_tab_content(group.memberships.active,
+                                   'active_memberships')
+  end
+
+  def delete_membership
+    #todo permission check
+    membership = Membership.find(params[:id])
+    group = membership.group
+    membership.deleted = true
+    membership.save
+
+    update_memberships_tab_content(group.memberships.active,
+                                   'active_memberships')
+  end
+
 end

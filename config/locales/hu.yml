@@ -100,6 +100,9 @@ hu:
   memberships_accept: 'Elfogad'
   memberships_deny: 'Elutasít'
   memberships_deny_confirm: 'Biztos, hogy elutasítod a tagot?'
+  memberships_change_to_old: 'Öregtag'
+  memberships_change_to_old_confirm: 'Biztos, hogy öregtaggá teszed a tagot?'
+  memberships_delete_confirm: 'Biztos, hogy törlöd a tagságot? Figyelem: a tag nem fog megjelenni az öregtagok között!'
 
   #activerecord
   activerecord:

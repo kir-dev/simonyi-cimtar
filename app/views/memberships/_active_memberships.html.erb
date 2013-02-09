@@ -13,7 +13,22 @@
         <td><%= link_to ms.member.full_name, ms.member %></td>
         <td><%= ms.member.nick %></td>
         <td><%# ms.posts.map(&:title).join ", " %></td>
-        <td><%# link_to t("edit"), group_admin_membership_posts_path(ms) %></td>
+        <td>
+          <%= link_to t('memberships_change_to_old'),
+                change_to_old_membership_url(:id => ms.id),
+                :class => 'btn btn-mini btn-warning',
+                :title => t('memberships_change_to_old'),
+                :confirm => t('memberships_change_to_old_confirm'),
+                :remote => true
+          %>
+          <%= link_to t('destroy'),
+                delete_membership_url(:id => ms.id),
+                :class => 'btn btn-mini btn-danger',
+                :title => t('destroy'),
+                :confirm => t('memberships_delete_confirm'),
+                :remote => true
+          %>
+        </td>
       </tr>
   <% end %>
   </tbody>
