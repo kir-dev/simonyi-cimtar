@@ -13,6 +13,8 @@
 #
 
 class Group < ActiveRecord::Base
+  SZK_GRP_ID = 1
+
   attr_accessible :founded, :mail_list, :name, :shortname, :url
 
   has_many :memberships

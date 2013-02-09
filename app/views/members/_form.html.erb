@@ -55,6 +55,20 @@
       </div>
     </div>
 
+    <% unless @member.has_valid_membership? %>
+    <%
+        groups_array = Group.order('name').map! {|g| [g.name, g.id]}
+    %>
+      <div class="control-group <%= form_input_feedback_css(@member, :join_groups, 'error') %>">
+        <%= f.label :join_groups, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :join_groups, options_for_select(groups_array, @member.join_groups),
+                       {}, {:multiple => true, :'data-placeholder' => t('helpers.select.prompt')} %>
+          <div><%= form_input_feedback_text(@member, :join_groups) %></div>
+        </div>
+      </div>
+    <% end %>
+
     <div class="form-actions">
       <%= f.submit t('save'), :class => 'btn btn-primary' %>
       <%= link_to t('cancel'),

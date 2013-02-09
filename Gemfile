@@ -6,6 +6,7 @@ gem 'best_in_place'
 gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
 gem 'nested_form'
+gem 'chosen-rails'
 
 group :production do
   gem 'pg'

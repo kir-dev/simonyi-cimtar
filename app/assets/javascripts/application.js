@@ -15,9 +15,10 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require twitter/bootstrap
-//= require_tree .
+//= require chosen-jquery
 //= require best_in_place
 //= require best_in_place.purr
+//= require_tree .
 // require jquery.ui.datepicker
 // require jquery.ui.datepicker-hu
 

@@ -46,10 +46,25 @@ class MembersController < ApplicationController
 
   # POST /members
   def create
-    if @user.nil? # registration with sso, or first login
-      @member = Member.new(params[:member].except(:login))
+    if @user.nil? # not in the db
+      @member = Member.new(params[:member].except(:login).except(:join_groups))
       @member.set_login_attr(get_attribute_value(:login))
       @member.last_active = Time.now
+
+      params[:member][:join_groups].each { |group_id|
+        if !group_id.blank? and group_id.to_i > 0
+          group = Group.find(group_id)
+          unless group.nil?
+            ms = Membership.new
+            ms.group = group
+            ms.member = @member
+            ms.accepted = false
+            ms.from_date = Time.now
+
+            @member.memberships.push ms
+          end
+        end
+      }
     else
       if @user.admin?
         @member = Member.new(params[:member])
@@ -57,10 +72,15 @@ class MembersController < ApplicationController
     end
 
     respond_to do |format|
-      if @member.save
-        format.html { redirect_to @member, notice: t('reg_success') }
-      else
+      if @member.memberships.empty?
+        @member.errors.add(:join_groups, t('activerecord.errors.models.member.attributes.join_groups.empty'))
         format.html { render action: "new" }
+      else
+        if @member.save
+          format.html { redirect_to @member, notice: t('reg_success') }
+        else
+          format.html { render action: "new" }
+        end
       end
     end
   end

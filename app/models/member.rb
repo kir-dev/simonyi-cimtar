@@ -31,6 +31,8 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :full_name, :nick, :address, :hobby, :intro,
                   :phone, :univ_year, :enrollment_year, :room, :last_active
 
+  attr_accessor :join_groups # transient attribute, used in the registration process
+
   has_many :memberships
 
   # shortcuts
