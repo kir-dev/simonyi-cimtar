@@ -83,6 +83,10 @@ class Member < ActiveRecord::Base
     full_name
   end
 
+  def active_memberships
+    memberships.active.joins(:group).order('groups.name')
+  end
+
   # get all the roles that a user has
   def get_acting_roles
     acting_roles = []
