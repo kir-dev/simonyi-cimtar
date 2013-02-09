@@ -38,8 +38,8 @@ class Member < ActiveRecord::Base
 
   has_many :job_positions, order: 'from_date DESC'
 
-  has_and_belongs_to_many :roles,
-                          :include => :group
+  has_many :member_roles
+  has_many :roles, :through => :member_roles
 
   # mandatory fields
   validates :full_name,

@@ -13,5 +13,6 @@ class Role < ActiveRecord::Base
   belongs_to :group
   attr_accessible :name
 
-  has_and_belongs_to_many :members
+  has_many :member_roles
+  has_many :members, :through => :member_roles
 end

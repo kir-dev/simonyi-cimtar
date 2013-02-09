@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209133057) do
+ActiveRecord::Schema.define(:version => 20130209152055) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(:version => 20130209133057) do
 
   add_index "job_positions", ["member_id"], :name => "index_job_positions_on_member_id"
 
+  create_table "member_roles", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "member_roles", ["member_id"], :name => "index_member_roles_on_member_id"
+  add_index "member_roles", ["role_id"], :name => "index_member_roles_on_role_id"
+
   create_table "members", :force => true do |t|
     t.string   "full_name"
     t.string   "email"
@@ -55,13 +65,6 @@ ActiveRecord::Schema.define(:version => 20130209133057) do
     t.datetime "updated_at",                         :null => false
     t.datetime "last_login"
   end
-
-  create_table "members_roles", :id => false, :force => true do |t|
-    t.integer "member_id", :null => false
-    t.integer "role_id",   :null => false
-  end
-
-  add_index "members_roles", ["member_id", "role_id"], :name => "index_members_roles_on_member_id_and_role_id"
 
   create_table "memberships", :force => true do |t|
     t.integer  "member_id"
