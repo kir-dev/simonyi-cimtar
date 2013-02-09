@@ -35,8 +35,7 @@ Fejlesztői környezet összeállítása
 
         $ # legyen configurációs fájlod
         $ cp config/database.yml.sqlite-example config/database.yml
-        $ rake db:migrate   # hozd letre az adatbazist
-        $ rake db:seed      # legyen par teszt adatod is
+        $ rake db:setup
 
 5. futtasd le a teszteket
     

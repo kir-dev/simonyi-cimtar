@@ -131,6 +131,9 @@ hu:
         min_scholarship_index: "Minimális ösztöndíj index"
       valuation:
         scholarship_index: "Ösztöndíj index"
+      post:
+        title: Megnevezés
+        from: Kezdet
 
     errors:
       messages:

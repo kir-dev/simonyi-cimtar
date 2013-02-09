@@ -86,7 +86,7 @@ ms.accepted = true
 ms.save
 
 # group admin for KirDev
-role = MemberRole.new
+role = Role.new
 role.name = "group_admin"
 role.group_id = kirdev.id
 role.save

@@ -1,0 +1,47 @@
+<h2>Posztok adminisztációja a <%= @group.name %> körben</h2>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Körtag neve</th>
+      <th>Betöltött posztjai</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td>
+          <% if member.posts(@group, :all).empty? %>
+            nincsenek nevesített posztjai
+          <% else %>
+            <% member.posts(@group).each do |p| %>
+              <div>
+                <%= translate_post_title p %>
+
+                <%# predifened posts are not editable in any way %>
+                <% if can_edit_post? p %>
+                  <%= link_to edit_group_admin_post_path(p, member_id: member, group_id: @group), title: "Szerkesztés" do %>
+                    <i class="icon-edit"></i>
+                  <% end -%>
+                  <%= link_to group_admin_post_path(p), method: :delete, title: "Törlés" do %>
+                    <i class="icon-remove"></i>
+                  <% end -%>
+                <% end -%>
+              </div>
+            <% end -%>
+
+            <% member.posts(@group, :old).each do |p| %>
+              <div class="muted"><%= translate_post_title p %></div>
+            <% end -%>
+
+          <% end -%>
+        </td>
+        <td>
+          <%= link_to "Új szerepkör", new_group_admin_post_path(member_id: member, group_id: @group) %>
+        </td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>

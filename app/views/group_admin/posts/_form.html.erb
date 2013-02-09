@@ -1,0 +1,15 @@
+<%= render "shared/form_error", model: @post %>
+
+<%= form_for [:group_admin, @post] do |f| %>
+  <%= hidden_field_tag :membership_id, @membership.id %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :from %>
+  <%= f.date_select :from, start_year: 2000, end_year: Date.today.year %>
+
+  <div>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end -%>

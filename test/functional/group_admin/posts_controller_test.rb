@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MemberRoleTest < ActiveSupport::TestCase
+class GroupAdmin::PostsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

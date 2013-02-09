@@ -18,6 +18,7 @@ class Membership < ActiveRecord::Base
 
   belongs_to :group
   belongs_to :member
+  has_many :posts
 
   validates_date :from_date,
                  :on_or_before => lambda { Date.today }

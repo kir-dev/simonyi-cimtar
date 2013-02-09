@@ -8,6 +8,8 @@
         <% if valuation_period? %>
           <li><%= link_to "Tagok féléves értékelése", group_admin_valuations_path(:group_id => @group) %></li>
         <% end -%>
+
+        <li><%= link_to "Posztok admin", group_admin_posts_path(:group_id => @group) %></li>
       </ul>
     </div>
 <% end %>
