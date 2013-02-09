@@ -39,7 +39,7 @@ class Member < ActiveRecord::Base
   has_many :job_positions, order: 'from_date DESC'
 
   has_many :member_roles
-  has_many :roles, :through => :member_roles
+  has_many :roles, :through => :member_roles, :before_remove => :before_role_destroyed
 
   # mandatory fields
   validates :full_name,
@@ -88,5 +88,16 @@ class Member < ActiveRecord::Base
       acting_roles << ActingRole.create_role(role.name.to_sym, self, role.group)
     end
     acting_roles
+  end
+
+  def before_role_destroyed(role)
+    member_role = member_roles.where(role_id: role).first
+    # HACK: call observer directly
+    if ActiveRecord::Base.observers.include? :member_role_observer
+      # observers are singletons
+      MemberRoleObserver.instance.before_destroy(member_role)
+    end
+    # returning true, so the callback chain never gets interrupted
+    true
   end
 end

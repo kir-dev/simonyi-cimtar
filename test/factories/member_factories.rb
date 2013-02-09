@@ -9,8 +9,9 @@ FactoryGirl.define do
 
     factory :user_with_group do
       after(:create) do |user, e|
-        ms = user.memberships.build
-        ms.group = FactoryGirl.build :group
+        ms = FactoryGirl.build :membership
+        user.memberships << ms
+        user.save
       end
     end
 
@@ -32,6 +33,13 @@ FactoryGirl.define do
       end
     end
 
+  end
+
+  factory :membership do
+    from_date { Date.today }
+    accepted true
+
+    group
   end
 
 end
