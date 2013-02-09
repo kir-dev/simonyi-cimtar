@@ -12,7 +12,6 @@ class JobPositionsController < ApplicationController
   end
 
   def create
-    authorize! :create, JobPosition
     @job_position = JobPosition.new(params[:job_position])
     @job_position.member = Member.find(params[:member_id])
 
@@ -27,7 +26,6 @@ class JobPositionsController < ApplicationController
 
   def update
     @job_position = JobPosition.find(params[:id])
-    authorize! :update, @job_position
 
     respond_to do |format|
       if @job_position.update_attributes(params[:job_position])
@@ -40,7 +38,6 @@ class JobPositionsController < ApplicationController
 
   def destroy
     @job_position = JobPosition.find(params[:id])
-    authorize! :destroy, @job_position
 
     @job_position.destroy
 
