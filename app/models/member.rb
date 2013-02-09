@@ -38,9 +38,7 @@ class Member < ActiveRecord::Base
 
   has_many :job_positions, order: 'from_date DESC'
 
-  has_and_belongs_to_many :roles, 
-                          :association_foreign_key => :member_role_id, 
-                          :class_name => "MemberRole",
+  has_and_belongs_to_many :roles,
                           :include => :group
 
   # mandatory fields

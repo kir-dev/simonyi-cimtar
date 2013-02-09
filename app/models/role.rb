@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: member_roles
+# Table name: roles
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class MemberRole < ActiveRecord::Base
+class Role < ActiveRecord::Base
   belongs_to :group
   attr_accessible :name
 

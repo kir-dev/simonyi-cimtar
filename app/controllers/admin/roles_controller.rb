@@ -13,10 +13,10 @@ class Admin::RolesController < ApplicationController
   def create
     # TODO: permission check
     @member = Member.find params[:member_id]
-    roles = MemberRole.where name: params[:role][:name], group_id: params[:role][:group_id]
+    roles = Role.where name: params[:role][:name], group_id: params[:role][:group_id]
 
     if roles.size > 1
-      logger.error "More than one member_role in db for one role type and group!"
+      logger.error "More than one role in db for one role type and group!"
       flash.now[:error] = "Something went really wrong. Contact maintainers!"
       render :manage
       return

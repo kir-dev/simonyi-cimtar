@@ -37,22 +37,6 @@ ActiveRecord::Schema.define(:version => 20130209133057) do
 
   add_index "job_positions", ["member_id"], :name => "index_job_positions_on_member_id"
 
-  create_table "member_roles", :force => true do |t|
-    t.string   "name"
-    t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "member_roles", ["group_id"], :name => "index_member_roles_on_group_id"
-
-  create_table "member_roles_members", :id => false, :force => true do |t|
-    t.integer "member_id",      :null => false
-    t.integer "member_role_id", :null => false
-  end
-
-  add_index "member_roles_members", ["member_id", "member_role_id"], :name => "index_member_roles_members_on_member_id_and_member_role_id"
-
   create_table "members", :force => true do |t|
     t.string   "full_name"
     t.string   "email"
@@ -71,6 +55,13 @@ ActiveRecord::Schema.define(:version => 20130209133057) do
     t.datetime "updated_at",                         :null => false
     t.datetime "last_login"
   end
+
+  create_table "members_roles", :id => false, :force => true do |t|
+    t.integer "member_id", :null => false
+    t.integer "role_id",   :null => false
+  end
+
+  add_index "members_roles", ["member_id", "role_id"], :name => "index_members_roles_on_member_id_and_role_id"
 
   create_table "memberships", :force => true do |t|
     t.integer  "member_id"
@@ -96,6 +87,15 @@ ActiveRecord::Schema.define(:version => 20130209133057) do
   end
 
   add_index "posts", ["membership_id"], :name => "index_posts_on_membership_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "roles", ["group_id"], :name => "index_roles_on_group_id"
 
   create_table "semesters", :force => true do |t|
     t.string   "semester"

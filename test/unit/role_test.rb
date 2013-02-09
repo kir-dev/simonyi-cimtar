@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class MemberRoleTest < ActiveSupport::TestCase
+class RoleTest < ActiveSupport::TestCase
 
-  test "member_role has many members" do
+  test "role has many members" do
     user = FactoryGirl.create :user
 
-    role = MemberRole.new name: "admin"
+    role = Role.new name: "admin"
     role.members << user
     role.save
 
