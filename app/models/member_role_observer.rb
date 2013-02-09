@@ -30,7 +30,7 @@ private
     role = member_role.role
     # if the role has a group -> record it in the history table
     if role.group.present?
-      ms = Membership.where(member_id: member_role.member, group_id: role.group).first
+      ms = Membership.active.where(member_id: member_role.member, group_id: role.group).first
       yield(ms, role)
     end
   end

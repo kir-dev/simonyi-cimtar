@@ -13,4 +13,6 @@ class Post < ActiveRecord::Base
                  :on_or_before => lambda { Date.current },
                  :allow_nil => true
 
+  scope :active, where(:to => nil)
+
 end

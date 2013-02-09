@@ -90,6 +90,19 @@ class Member < ActiveRecord::Base
     acting_roles
   end
 
+  def posts(group, what = :active)
+    posts = self.memberships.active.where(group_id: group).first.posts
+    if what == :active
+      posts.where(to: nil)
+    elsif what == :old
+      posts.where('"to" IS NOT NULL')
+    else
+      posts
+    end
+  end
+
+private  
+
   def before_role_destroyed(role)
     member_role = member_roles.where(role_id: role).first
     # HACK: call observer directly
