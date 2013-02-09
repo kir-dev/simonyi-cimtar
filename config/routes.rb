@@ -1,4 +1,6 @@
 SzkCimtar::Application.routes.draw do
+  get "home/index"
+
   match '/members/reg' => 'members#reg_with_sso'
 
   resources :members, :except => [:edit, :destroy] do
@@ -33,14 +35,12 @@ SzkCimtar::Application.routes.draw do
   end
 
   # for the time being it redirected to semesters admin page
-  get "admin" => "admin/semesters#index"
+  get "admin" => "admin/home#index"
 
   match '/memberships/:id/deny' => 'groups#deny_pending_membership',
         :as => :deny_membership
   match '/memberships/:id/accept' => 'groups#accept_pending_membership',
         :as => :accept_membership
-
-  get 'home/index'
 
   match '/logout' => 'members#logout'
 
