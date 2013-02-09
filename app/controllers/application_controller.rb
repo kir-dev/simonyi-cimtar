@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   include AppAuthHelper
 
-  helper_method :valuation_period?
+  helper_method :valuation_period?, :permitted_to?
 
   protect_from_forgery
 
@@ -26,17 +26,27 @@ protected
     @is_valuation_period ||= Semester.current_valuation_period.present?
   end
 
-  def authorize!(action, resource, *args)
-    roles = current_user.get_acting_roles
+  def authorize!(action, resource, group, *args)
+    authorization_check(action, resource, group) { raise NotAuthorized }
+  end
 
-    roles.each do |r|
-      unless r.check(action, resource)
-        raise NotAuthorized
-      end
-    end
+  def permitted_to?(action, resource, group, *args)
+    permitted_to = true
+    authorization_check(action, resource, group) { permitted_to = false }
+    permitted_to
   end
 
 private
+
+  def authorization_check(action, resource, group)
+    roles = current_user.get_acting_roles
+
+    roles.each do |r|
+      unless r.check(action, resource, group)
+        yield
+      end
+    end
+  end
 
   def authenticate
     case authenticate_logic
