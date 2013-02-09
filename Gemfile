@@ -25,16 +25,18 @@ group :migration do
 end
 
 group :test do
-  gem 'factory_girl', '~> 4.0', :require => false
   gem 'spork-testunit', :require => false
   gem 'spork-rails', :require => false
   gem 'mocha', :require => false
 end
 
-gem 'sqlite3', :group => [ :development, :test ]
+group :development, :test do
+  gem 'sqlite3'
+  gem 'factory_girl_rails', '~> 4.0'
 
-if ENV['CI'] != "true"
-  gem 'debugger', :group => [ :development, :test ]
+  if ENV['CI'] != "true"
+    gem 'debugger'
+  end
 end
 
 # Gems used only for assets and not required
