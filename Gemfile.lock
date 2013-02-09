@@ -112,6 +112,8 @@ GEM
     spork-rails (3.2.1)
       rails (>= 3.0.0, < 3.3.0)
       spork (>= 1.0rc0)
+    spork-testunit (0.0.8)
+      spork (>= 0.6.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -147,7 +149,7 @@ DEPENDENCIES
   debugger
   factory_girl (~> 4.0)
   gravtastic
-  jquery-rails
+  jquery-rails (~> 2.1.4)
   less-rails
   libv8 (~> 3.11.8)
   mocha
@@ -159,6 +161,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sequel
   spork-rails
+  spork-testunit
   sqlite3
   therubyracer (~> 0.11.0)
   twitter-bootstrap-rails (~> 2.1.9)
