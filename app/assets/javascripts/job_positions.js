@@ -14,7 +14,7 @@
 //maxDate: "2025",
 //})
 
-$('#job_position_present_job').bind('click', function (event) {
+$('#job_position_present_job').bind('change', function (event) {
   if ($('#job_position_present_job').is(':checked'))
     $('#to_date_container').hide()
   else

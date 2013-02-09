@@ -26,11 +26,11 @@ protected
     @is_valuation_period ||= Semester.current_valuation_period.present?
   end
 
-  def authorize!(action, resource, group, *args)
+  def authorize!(action, resource, group = nil, *args)
     authorization_check(action, resource, group) { raise NotAuthorized }
   end
 
-  def permitted_to?(action, resource, group, *args)
+  def permitted_to?(action, resource, group = nil, *args)
     permitted_to = true
     authorization_check(action, resource, group) { permitted_to = false }
     permitted_to

@@ -32,7 +32,7 @@ class ActingRole
   # @param  group [Group] a kor, amihez kapcsolodik az eroforras/akcio
   # 
   # @return [true, false] true-val ter vissza, ha az adott szerepkor
-  def check(action, resource, group)
+  def check(action, resource, group = nil)
     return false unless valid_group? group
 
     # rules precedence is bigger than inner_check
