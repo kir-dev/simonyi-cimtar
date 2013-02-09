@@ -36,7 +36,7 @@ class MembersController < ApplicationController
       @member = Member.new
       set_attributes @member
     else
-      @member.last_login = Time.now
+      @member.last_active = Time.now
     end
 
     respond_to do |format|
@@ -49,7 +49,7 @@ class MembersController < ApplicationController
     if @user.nil? # registration with sso, or first login
       @member = Member.new(params[:member].except(:login))
       @member.set_login_attr(get_attribute_value(:login))
-      @member.last_login = Time.now
+      @member.last_active = Time.now
     else
       if @user.admin?
         @member = Member.new(params[:member])

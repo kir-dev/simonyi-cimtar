@@ -18,7 +18,7 @@
 #  admin           :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  last_login      :datetime
+#  last_active     :datetime
 #
 
 class Member < ActiveRecord::Base
@@ -29,7 +29,7 @@ class Member < ActiveRecord::Base
 
   attr_readonly :login, :deleted
   attr_accessible :email, :full_name, :nick, :address, :hobby, :intro,
-                  :phone, :univ_year, :enrollment_year, :room, :last_login
+                  :phone, :univ_year, :enrollment_year, :room, :last_active
 
   has_many :memberships
 

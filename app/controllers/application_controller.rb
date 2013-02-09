@@ -54,7 +54,7 @@ private
       redirect_to Rails.application.config.login_url
     when :ok
       # nothing for now
-      @user.last_login = Time.now
+      @user.last_active = Time.now
       @user.save
     when :reg
 
@@ -86,11 +86,11 @@ private
         if @user.deleted?
           :deleted
         else
-          if @user.last_login.blank?
+          if @user.last_active.blank?
             :reg
           else
             :ok
-          end # last_login check
+          end # last_active check
 
         end # deleted check
       end # user nil check
