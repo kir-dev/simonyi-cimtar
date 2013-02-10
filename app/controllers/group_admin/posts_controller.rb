@@ -12,9 +12,9 @@ class GroupAdmin::PostsController < ApplicationController
   end
 
   def create
-    authorize! :manage, Post, Group.find(params[:group_id])
     @post = Post.new params[:post]
     @membership = Membership.find params[:membership_id]
+    authorize! :manage, Post, @membership.group
     @post.membership = @membership
     if @post.save
       redirect_to group_admin_posts_path(group_id: @membership.group)
@@ -30,8 +30,8 @@ class GroupAdmin::PostsController < ApplicationController
   end
 
   def update
-    authorize! :manage, Post, Group.find(params[:group_id])
     @post = Post.active.find params[:id]
+    authorize! :manage, Post, @post.membership.group
     @membership = @post.membership
     if @post.update_attributes(params[:post])
       redirect_to group_admin_posts_path(group_id: @post.membership.group)
@@ -41,8 +41,8 @@ class GroupAdmin::PostsController < ApplicationController
   end
 
   def destroy
-    authorize! :manage, Post, Group.find(params[:group_id])
     post = Post.active.find params[:id]
+    authorize! :manage, Post, post.membership.group
     post.to = Date.current
     post.save
 
