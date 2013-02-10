@@ -14,7 +14,10 @@
   <% @member.roles.each do |role| %>
     <li>
       <%= translate_role(role) %>
-      (<%= role.group.name %>)
+      <%=
+        unless role.group.nil?
+          '(' + role.group.name + ')'
+        end %>
       <a href="javascript:void(0)" class="remove-role-link" data-role-id="<%= role.id %>" data-member-id="<%= @member.id %>">Elvesz</a>
     </li>
   <% end -%>
