@@ -5,7 +5,7 @@
     <span class="pull-left">
       <i class="icon-briefcase"></i>
       <%=
-        if is_own_profile?
+        if @user.id == job.member.id
           best_in_place job, :company, :type => :input, :path => url_for([job.member, job])
         else
           job.company
@@ -14,7 +14,7 @@
     </span>
     <span class="pull-right">
       <%=
-        if is_own_profile?
+        if @user.id == job.member.id
           link_to(raw('<i class="icon-trash"></i>'),
                   url_for([job.member, job]),
                   :method => :delete,
@@ -30,7 +30,7 @@
   <div>
     <i class="icon-globe"></i>
     <%=
-        if is_own_profile?
+        if @user.id == job.member.id
           best_in_place job, :location, :type => :input, :path => url_for([job.member, job])
         else
           job.location
@@ -41,7 +41,7 @@
   <div>
     <i class="icon-user"></i>
     <%=
-        if is_own_profile?
+        if @user.id == job.member.id
           best_in_place job, :title, :type => :input, :path => url_for([job.member, job])
         else
           job.title

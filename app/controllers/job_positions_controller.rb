@@ -1,7 +1,5 @@
 class JobPositionsController < ApplicationController
 
-  helper_method :is_own_profile?
-
   def create
     member = Member.find(params[:member_id])
     if @user.id == member.id
@@ -48,10 +46,6 @@ class JobPositionsController < ApplicationController
         end
       end
     end
-  end
-
-  def is_own_profile?
-    @user.id == @member.id
   end
 
 end
