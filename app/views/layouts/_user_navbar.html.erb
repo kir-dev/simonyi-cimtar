@@ -10,18 +10,19 @@
         <span class="app-name">Simonyi Címtár</span>
       </a>
 
-      <a href="#" class="notification-indicator">
+<!--       <a href="#" class="notification-indicator">
         <span class="mail-status"></span>
-      </a>
+      </a> -->
 
       <div class="nav-collapse">
-        <form class="navbar-search pull-left" action="">
+<!--         <form class="navbar-search pull-left" action="">
           <input type="text" class="search-query span2" placeholder="Keresés">
-        </form>
+        </form> -->
 
-        <%= link_to("/admin", {:class => 'app-admin-icon'}) do %>
-          <i class="icon-cog icon-large"></i>
-        <% end %>
+        <%= if !@user.nil? && (permitted_to?(:manage, Semester) || permitted_to?(:manage, Role))
+              link_to("/admin", {:class => 'app-admin-icon'}) do %>
+              <i class="icon-cog icon-large"></i>
+        <% end end %>
 
         <ul class="nav pull-right">
           <% unless @user.nil? %>

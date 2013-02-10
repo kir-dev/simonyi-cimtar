@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
 
   # GET /groups
   def index
+    authorize! :list, Group
     @groups = Group.all
 
     respond_to do |format|

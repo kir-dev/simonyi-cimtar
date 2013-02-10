@@ -6,6 +6,7 @@ class MembersController < ApplicationController
   # GET /members
   def index
     @members = Member.all
+    authorize! :manage, Member
 
     respond_to do |format|
       format.html # index.html.erb
