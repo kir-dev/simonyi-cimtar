@@ -114,13 +114,13 @@ class GroupsController < ApplicationController
     case
       when tab == 'old_memberships'
         partial_name = tab
-        memberships = @group.memberships.old
+        memberships = @group.memberships.old.includes(:member).order 'members.full_name'
       when tab == 'pending_memberships'
         partial_name = tab
-        memberships = @group.memberships.pending
+        memberships = @group.memberships.pending.includes(:member).order 'created_at desc'
       else
         partial_name = 'active_memberships'
-        memberships = @group.memberships.active
+        memberships = @group.memberships.active.includes(:member).order 'members.full_name'
     end
 
     update_memberships_tab_content(memberships, partial_name)
@@ -133,7 +133,7 @@ class GroupsController < ApplicationController
     #todo notification
     membership.delete
 
-    update_memberships_tab_content(group.memberships.pending,
+    update_memberships_tab_content(group.memberships.pending.includes(:member).order 'created_at desc',
                                    'pending_memberships')
   end
 
@@ -156,7 +156,7 @@ class GroupsController < ApplicationController
       ms.save
     end
 
-    update_memberships_tab_content(group.memberships.pending,
+    update_memberships_tab_content(group.memberships.pending.includes(:member).order 'created_at desc',
                                    'pending_memberships')
   end
 
@@ -167,7 +167,7 @@ class GroupsController < ApplicationController
     membership.to_date = Time.now
     membership.save
 
-    update_memberships_tab_content(group.memberships.active,
+    update_memberships_tab_content(group.memberships.active.includes(:member).order 'members.full_name',
                                    'active_memberships')
   end
 
@@ -178,7 +178,7 @@ class GroupsController < ApplicationController
     membership.deleted = true
     membership.save
 
-    update_memberships_tab_content(group.memberships.active,
+    update_memberships_tab_content(group.memberships.active.includes(:member).order 'members.full_name',
                                    'active_memberships')
   end
 

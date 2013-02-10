@@ -84,5 +84,5 @@
 
 <div id="content-memberships">
   <%= render :partial => 'memberships/active_memberships',
-             :locals => {:memberships => @group.memberships.active} %>
+             :locals => {:memberships => @group.memberships.active.includes(:member).order('members.full_name')} %>
 </div>
