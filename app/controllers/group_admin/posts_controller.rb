@@ -2,7 +2,7 @@ class GroupAdmin::PostsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
-    @members = @group.members
+    @memberships = @group.memberships.active
   end
 
   def new

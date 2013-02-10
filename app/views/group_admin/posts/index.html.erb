@@ -9,7 +9,8 @@
     </tr>
   </thead>
   <tbody>
-    <% @members.each do |member| %>
+    <% @memberships.each do |ms| %>
+    <% member = ms.member %>
       <tr>
         <td><%= member.name %></td>
         <td>
