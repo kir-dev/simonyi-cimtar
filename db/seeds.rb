@@ -114,11 +114,21 @@ ms.member = m
 ms.accepted = true
 ms.save
 
-# group admin for KirDev
+# system_admin
 role = Role.new
-role.name = "group_admin"
-role.group_id = kirdev.id
+role.name = "system_admin"
 role.save
-
-# make test user group admin in KirDev
 m.roles << role
+
+# group_admin for all group
+Group.all.each { |group|
+    role = Role.new
+    role.name = "group_admin"
+    role.group_id = group.id
+    role.save
+
+    # make test user group admin in KirDev
+    if group.id == kirdev.id
+        m.roles << role
+    end
+}
