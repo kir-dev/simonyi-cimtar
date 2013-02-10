@@ -3,7 +3,9 @@
 <p>
   <i class="icon-th-list"></i>
   <%= link_to(group) do %>
-      <span><%= group.name %></span>
-      <span>(<%= group.shortname %>)</span>
+	<span><%= group.name %></span>
+	<% unless group.shortname.empty? %>
+		<span>(<%= group.shortname %>)</span>
+	<% end %>
   <% end %>
 </p>

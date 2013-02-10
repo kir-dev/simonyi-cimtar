@@ -1,12 +1,42 @@
 # encoding: UTF-8
 # groups seed data
 
-szk = Group.create(name: 'Simonyi Károly Szakkollégium',
-                   founded: '2003',
-                   url: 'http://simonyi.bme.hu',
-                   mail_list: 'szk@sch.bme.hu',
-                   shortname: 'Szk')
-szk.save
+mgmt = Group.create(name: 'Vezetőség',
+             founded: '2003',
+             url: 'http://simonyi.bme.hu/',
+             mail_list: 'szk-vez@sch.bme.hu',
+             shortname: '')
+mgmt.save
+
+Group.create(name: 'Gazdasági csoport',
+             founded: '2003',
+             url: '',
+             mail_list: '',
+             shortname: 'GCS').save
+
+Group.create(name: 'Marketing és PR csoport',
+             founded: '2003',
+             url: '',
+             mail_list: '',
+             shortname: 'PR').save
+
+Group.create(name: 'Oktatási csoport',
+             founded: '2003',
+             url: '',
+             mail_list: '',
+             shortname: 'OCS').save
+
+Group.create(name: 'HR csoport',
+             founded: '2003',
+             url: '',
+             mail_list: '',
+             shortname: 'HR').save
+
+Group.create(name: 'Külkapcsolat csoport',
+             founded: '2003',
+             url: '',
+             mail_list: '',
+             shortname: 'KCS').save
 
 kirdev = Group.create name: "KIR fejlesztők és üzemeltetők",
                       founded: 2001,
@@ -74,10 +104,10 @@ m = Member.new full_name: "Teszt Janos",
 m.set_login_attr "test"
 m.save
 
-szk_ms = szk.memberships.build from_date: 2.year.ago
-szk_ms.accepted = true
-szk_ms.member = m
-szk_ms.save
+mgmt_ms = mgmt.memberships.build from_date: 2.year.ago
+mgmt_ms.accepted = true
+mgmt_ms.member = m
+mgmt_ms.save
 
 ms = kirdev.memberships.build from_date: 1.year.ago
 ms.member = m

@@ -5,8 +5,8 @@ NEPTUN_URN = 'urn:mace:terena.org:schac:personalUniqueCode:hu:BME-NEPTUN:'
 VIRID_URN = 'urn:mace:terena.org:schac:personalUniqueID:hu:BME-SCH-VIR:person:'
 
 # virdb::grp_id, array index = APP DB group id
-GROUPS_VIR_IDS = [0, #dummy
-    16, #szk
+SZK_VIR_ID = 16
+GROUPS_VIR_IDS = [0, 0, 0, 0, 0, 0, 0, #dummy
     106, #kirdev
     57, #ac
     38, #bss
@@ -62,6 +62,7 @@ def migrate_members(ds_conn, db_conn)
         member.enrollment_year = row['begin_yr']
         member.login = row['login']
         member.neptun = row['neptun']
+        group = row['group']
 
         get_from_ds(ds_conn, member)
 
@@ -77,7 +78,7 @@ def migrate_members(ds_conn, db_conn)
                 end
                 member.save(:validate => false)
 
-                szk_ms_created = false;
+                ms_created = false;
                 unless member.vir_id.nil?
                     db_conn.fetch('SELECT grp_id, membership_start
                     FROM grp_membership
@@ -89,15 +90,25 @@ def migrate_members(ds_conn, db_conn)
                         from_date = vir_membership[:membership_start]
 
                         new_membership(GROUPS_VIR_IDS.index(group_virid), from_date, member)
-
-                        if group_virid == GROUPS_VIR_IDS[1]
-                            szk_ms_created = true
-                        end
+                        ms_created = true
                     end
                 end
 
-                unless szk_ms_created
-                    new_membership(1, Date.today, member)
+                unless ms_created
+                    from_date = nil
+                    unless member.vir_id.nil?
+                        db_conn.fetch('SELECT grp_id, membership_start
+                        FROM grp_membership
+                        WHERE usr_id = ' + member.vir_id + '
+                        AND grp_id = ' + SZK_VIR_ID.to_s +
+                        ' AND membership_end IS NULL') do |vir_membership|
+
+                            from_date = vir_membership[:membership_start]
+                        end
+                    end
+
+                    from_date ||= Date.today
+                    new_membership(group, from_date, member) # put groups from csv 'group' field
                 end
             rescue Exception => e  # i know it's bad Pokemon exception handling...
                 p 'sg went wrong on member=' + member.full_name + '; msg=' + e.message

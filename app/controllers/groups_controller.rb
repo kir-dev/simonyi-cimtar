@@ -151,17 +151,6 @@ class GroupsController < ApplicationController
     membership.accepted = true
     membership.save
 
-    # if szk membership doesn't exist, creates it
-    szk_grp = Group.find(Group::SZK_GRP_ID)
-    unless szk_grp.has_member?(membership.member)
-      ms = Membership.new
-      ms.group = szk_grp
-      ms.member = membership.member
-      ms.from_date = Time.now
-      ms.accepted = true
-      ms.save
-    end
-
     update_memberships_tab_content(group.memberships.pending.includes(:member).order('created_at desc'),
                                    'pending_memberships')
   end
