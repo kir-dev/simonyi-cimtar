@@ -19,6 +19,7 @@ end
 
 group :migration do
   gem 'sequel', :require => false
+  gem 'pg'
 
   # apt-get install libldap2-dev libsasl2-dev
   gem 'ruby-ldap', '~> 0.9.12', :require => false
