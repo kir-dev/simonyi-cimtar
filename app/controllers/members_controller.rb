@@ -1,6 +1,8 @@
 class MembersController < ApplicationController
   layout 'logout', :only => :logout
 
+  helper_method :is_own_profile?
+
   # GET /members
   def index
     @members = Member.all
@@ -46,7 +48,7 @@ class MembersController < ApplicationController
 
   # POST /members
   def create
-    if @user.nil? # not in the db
+    if @user.nil? # current user is not in the db, creates himself
       @member = Member.new(params[:member].except(:login).except(:join_groups))
       @member.set_login_attr(get_attribute_value(:login))
       @member.last_active = Time.now
@@ -65,10 +67,6 @@ class MembersController < ApplicationController
           end
         end
       }
-    else
-      if @user.admin?
-        @member = Member.new(params[:member])
-      end
     end
 
     respond_to do |format|
@@ -89,13 +87,15 @@ class MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
 
-    respond_to do |format|
-      if @member.update_attributes(params[:member])
-        format.html { redirect_to @member }
-        format.json { respond_with_bip(@member) }
-      else
-        format.html { render :edit }
-        format.json { respond_with_bip(@member) }
+    if is_own_profile? # update only himself
+      respond_to do |format|
+        if @member.update_attributes(params[:member])
+          format.html { redirect_to @member }
+          format.json { respond_with_bip(@member) }
+        else
+          format.html { render :edit }
+          format.json { respond_with_bip(@member) }
+        end
       end
     end
   end
@@ -112,5 +112,9 @@ class MembersController < ApplicationController
     respond_to do |format|
       format.html { render action: "wait_for_accept" }
     end
+  end
+
+  def is_own_profile?
+    @user.id == @member.id
   end
 end

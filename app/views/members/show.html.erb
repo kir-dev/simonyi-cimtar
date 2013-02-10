@@ -7,7 +7,13 @@
 
     <div class="profile-nick">
       <strong>
-        <%= best_in_place @member, :nick, :type => :input %>
+        <%=
+          if is_own_profile?
+            best_in_place @member, :nick, :type => :input
+          else
+            @member.nick
+          end
+        %>
       </strong>
     </div>
 
@@ -34,27 +40,63 @@
     <table id="member-data" class="">
       <tr>
         <td><label>E-mail:</label></td>
-        <td><%= best_in_place @member, :email, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :email, :type => :input
+            else
+              @member.email
+            end
+            %></td>
       </tr>
       <tr>
         <td><label>Telefonszám:</label></td>
-        <td><%= best_in_place @member, :phone, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :phone, :type => :input
+            else
+              @member.phone
+            end
+        %></td>
       </tr>
       <tr>
         <td><label>Koliszoba:</label></td>
-        <td><%= best_in_place @member, :room, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :room, :type => :input
+            else
+              @member.room
+            end
+        %></td>
       </tr>
       <tr>
         <td><label>Levelezési cím:</label></td>
-        <td><%= best_in_place @member, :address, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :address, :type => :input
+            else
+              @member.address
+            end
+        %></td>
       </tr>
       <tr>
         <td><label>Egyetem kezdési éve:</label></td>
-        <td><%= best_in_place @member, :univ_year, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :univ_year, :type => :input
+            else
+              @member.univ_year
+            end
+        %></td>
       </tr>
       <tr>
         <td><label>Felvétel éve:</label></td>
-        <td><%= best_in_place @member, :enrollment_year, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :enrollment_year, :type => :input
+            else
+              @member.enrollment_year
+            end
+        %></td>
       </tr>
       <tr>
         <td><label>VIR Profil:</label></td>
@@ -64,15 +106,28 @@
       </tr>
       <tr>
         <td><label>Tagline:</label></td>
-        <td><%= best_in_place @member, :hobby, :type => :input %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :hobby, :type => :input
+            else
+              @member.hobby
+            end
+        %></td>
       </tr>
       <tr>
         <td><label>Magadról:</label></td>
-        <td><%= best_in_place @member, :intro, :type => :textarea %></td>
+        <td><%=
+            if is_own_profile?
+              best_in_place @member, :intro, :type => :textarea
+            else
+              @member.intro
+            end
+        %></td>
       </tr>
       <tr class="joblist">
         <td><label>Munkahelyek:</label></td>
         <td>
+          <% if is_own_profile? %>
           <div class="accordion" id="accordion1">
             <div class="accordion-group">
               <div class="accordion-heading">
@@ -85,6 +140,7 @@
               <%= render :partial => 'job_positions/ajaxform' %>
             </div>
           </div>
+          <% end %>
 
           <ul id="member_jobs_list">
             <%= render @member.job_positions %>

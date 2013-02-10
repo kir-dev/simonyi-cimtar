@@ -5,17 +5,23 @@
     <span class="pull-left">
       <i class="icon-briefcase"></i>
       <%=
+        if is_own_profile?
           best_in_place job, :company, :type => :input, :path => url_for([job.member, job])
+        else
+          job.company
+        end
       %>
     </span>
     <span class="pull-right">
       <%=
+        if is_own_profile?
           link_to(raw('<i class="icon-trash"></i>'),
                   url_for([job.member, job]),
                   :method => :delete,
                   :remote => true,
                   :confirm => "Biztos, hogy törlöd a munkahelyet?",
                   :class => 'delete-link')
+        end
       %>
     </span>
   </div>
@@ -24,14 +30,22 @@
   <div>
     <i class="icon-globe"></i>
     <%=
-        best_in_place job, :location, :type => :input, :path => url_for([job.member, job])
+        if is_own_profile?
+          best_in_place job, :location, :type => :input, :path => url_for([job.member, job])
+        else
+          job.location
+        end
     %>
   </div>
 
   <div>
     <i class="icon-user"></i>
     <%=
-        best_in_place job, :title, :type => :input, :path => url_for([job.member, job])
+        if is_own_profile?
+          best_in_place job, :title, :type => :input, :path => url_for([job.member, job])
+        else
+          job.title
+        end
     %>
   </div>
 
