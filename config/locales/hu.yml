@@ -86,7 +86,7 @@ hu:
   #groups
   group_join: 'Csatlakozás'
   group_join_msg: 'A körvezetőnek jóvá kell hagynia a kérelmed'
-  group_leave: 'Kilépés'
+  group_leave: 'Öregtag leszek'
   group_leave_msg: 'Sikeresen kiléptél a körből'
   group_leave_msg_failed: 'Kilépés sikertelen. Kérlek jelezd a hibát a fejlesztőknek!'
 

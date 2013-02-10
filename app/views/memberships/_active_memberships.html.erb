@@ -12,7 +12,7 @@
       <tr>
         <td><%= link_to ms.member.full_name, ms.member %></td>
         <td><%= ms.member.nick %></td>
-        <td><%# ms.posts.map(&:title).join ", " %></td>
+        <td><%= ms.posts.active.map(&:title).join ", " %></td>
         <td>
           <%= link_to t('memberships_change_to_old'),
                 change_to_old_membership_url(:id => ms.id),

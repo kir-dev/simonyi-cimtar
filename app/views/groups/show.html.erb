@@ -6,10 +6,27 @@
         <%# TODO: authorize stuff %>
         <li class="nav-header">Műveletek</li>
         <% if valuation_period? %>
-          <li><%= link_to "Tagok féléves értékelése", group_admin_valuations_path(:group_id => @group) %></li>
+          <li><%= link_to raw('<i class="icon-star"></i>') + "Tagok féléves értékelése",
+                    group_admin_valuations_path(:group_id => @group) %></li>
         <% end -%>
 
-        <li><%= link_to "Posztok admin", group_admin_posts_path(:group_id => @group) %></li>
+        <li><%= link_to raw('<i class="icon-tags"></i>') + "Posztok admin",
+                    group_admin_posts_path(:group_id => @group) %></li>
+
+        <% if true #TODO permission check %>
+          <li><%= link_to raw('<i class="icon-pencil"></i>') + t('edit'),
+                    edit_group_path(@group), :title => t('edit') %></li>
+        <% end %>
+        <li><%=
+            if @group.has_member?(@user) # if active member
+              link_to raw('<i class="icon-share"></i>') + t('group_leave'), {:action => 'leave'}, :method => :post
+            else
+              # hide if pending
+              unless @group.memberships.pending.where(:member_id => @user).any?
+                link_to raw('<i class="icon-plus-sign"></i>') + t('group_join'), {:action => 'join'}, :method => :post
+              end
+            end
+        %></li>
       </ul>
     </div>
 <% end %>
@@ -29,33 +46,6 @@
   <dd><%= @group.mail_list %></dd>
   <dt><strong><%= model_class.human_attribute_name(:shortname) %>:</strong></dt>
   <dd><%= @group.shortname %></dd>
-  <dt><%= t('operations') %>:</dt>
-  <dd>
-    <div>
-      <%=
-          # TODO: permission check
-          link_to t('edit'),
-                  edit_group_path(@group),
-                  :class => 'btn btn-mini btn-info',
-                  :title => t('edit')
-      %>
-      <%=
-          if @group.has_member?(@user) # if active member
-            link_to t('group_leave'), {:action => 'leave'},
-                    :method => :post,
-                    :class => "btn btn-mini btn-danger"
-          else 
-            # hide if pending
-            unless @group.memberships.pending.where(:member_id => @user).any?
-              link_to t('group_join'), {:action => 'join'},
-                      :method => :post,
-                      :class => "btn btn-mini btn-success"
-            end
-
-          end
-      %>
-    </div>
-  </dd>
 </dl>
 
 <ul class="nav nav-tabs">
