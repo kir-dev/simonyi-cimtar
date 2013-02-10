@@ -4,8 +4,8 @@ class GroupAdmin::ValuationsController < ApplicationController
   before_filter :check_valuation_period
 
   def index
-    # TODO: authorization
     @group = Group.find params[:group_id]
+    authorize! :edit, Valuation, @group
     @members = Membership.includes(:member).active.where(:group_id => params[:group_id]).map { |ms| ms.member }
     @valuations = Semester.current_valuation_period.valuations.where(:member_id => @members)
 
@@ -16,7 +16,7 @@ class GroupAdmin::ValuationsController < ApplicationController
 
   def update_multiple
     valuations = Valuation.find params[:valuations].keys
-    # TODO: authorization
+    authorize! :edit, Valuation, Group.find(params[:group_id])
 
     # update all validations at once
     valuations.each do |valuation|
