@@ -8,14 +8,14 @@ class ValuationsController < ApplicationController
   # new action creates a new valuation if not exsits and redericest to edit
   def new
     # find the valuation for the member and given valuation period
-    valuation = Valuation.where(:member_id => params[:member_id], :semester_id => @semester).first
-    if valuation
-      authorize! :update, valuation
-    else
-      authorize! :create, Valuation
+    valuation = Valuation.where(:member_id => @user.id, :semester_id => @semester).first
+    # if valuation
+      # authorize! :update, valuation
+    unless valuation
+      # authorize! :create, Valuation
       valuation = Valuation.new
       valuation.scholarship_index = 0.0
-      valuation.member_id = params[:member_id]
+      valuation.member_id = @user.id
       valuation.semester = @semester
       valuation.save
     end
@@ -24,11 +24,11 @@ class ValuationsController < ApplicationController
   end
 
   def edit
-    authorize! :update, @valuation
+    # authorize! :update, @valuation
   end
 
   def update
-    authorize! :update, @valuation
+    # authorize! :update, @valuation
     @valuation.scholarship_index = params[:valuation][:scholarship_index]
     if @valuation.save
       flash[:success] = t("messages.valuation.successfully_updated")
