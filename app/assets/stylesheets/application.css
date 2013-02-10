@@ -114,6 +114,10 @@ a.app-admin-icon, a.app-admin-icon:hover {
     margin-left: 10px;
 }
 
+a.app-admin-icon > i {
+    height: 20px;
+}
+
 .error {
     color: red;
 }
