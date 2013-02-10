@@ -70,7 +70,6 @@ m = Member.new full_name: "Teszt Janos",
                univ_year: 2010,
                enrollment_year: 2011,
                nick: "janika"
-m.admin = true
 
 m.set_login_attr "test"
 m.save
