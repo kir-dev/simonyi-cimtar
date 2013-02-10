@@ -2,7 +2,7 @@ class Admin::RolesController < ApplicationController
 
   def index
     # TODO: make it searchable
-    @members = Member.all
+    @members = Member.order('full_name')
   end
 
   def manage
@@ -53,7 +53,7 @@ class Admin::RolesController < ApplicationController
     # TODO: make searching smart
     name = params[:member_name]
 
-    @members = Member.where "full_name LIKE ?", "#{name}%"
+    @members = Member.where("full_name LIKE ?", "#{name}%").order('full_name')
     render "member_search_result", layout: false
   end
 
