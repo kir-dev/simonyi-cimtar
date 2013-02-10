@@ -2,6 +2,7 @@ class GroupAdmin::PostsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
+    authorize! :manage, Post, @group
     @memberships = @group.memberships.active
   end
 
@@ -11,6 +12,7 @@ class GroupAdmin::PostsController < ApplicationController
   end
 
   def create
+    authorize! :manage, Post, Group.find(params[:group_id])
     @post = Post.new params[:post]
     @membership = Membership.find params[:membership_id]
     @post.membership = @membership
@@ -22,11 +24,13 @@ class GroupAdmin::PostsController < ApplicationController
   end
 
   def edit
+    authorize! :manage, Post, Group.find(params[:group_id])
     @post = Post.active.find params[:id]
     @membership = Membership.active.where(group_id: params[:group_id], member_id: params[:member_id]).first
   end
 
   def update
+    authorize! :manage, Post, Group.find(params[:group_id])
     @post = Post.active.find params[:id]
     @membership = @post.membership
     if @post.update_attributes(params[:post])
@@ -37,7 +41,7 @@ class GroupAdmin::PostsController < ApplicationController
   end
 
   def destroy
-    # TODO: authorize
+    authorize! :manage, Post, Group.find(params[:group_id])
     post = Post.active.find params[:id]
     post.to = Date.current
     post.save

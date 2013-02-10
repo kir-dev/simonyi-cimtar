@@ -3,17 +3,18 @@
 <% content_for :operations do %>
     <div class="well sidebar-nav">
       <ul class="nav nav-list">
-        <%# TODO: authorize stuff %>
         <li class="nav-header">Műveletek</li>
-        <% if valuation_period? %>
+        <% if valuation_period? and permitted_to?(:edit, Valuation, @group) %>
           <li><%= link_to raw('<i class="icon-star"></i>') + "Tagok féléves értékelése",
                     group_admin_valuations_path(:group_id => @group) %></li>
         <% end -%>
 
-        <li><%= link_to raw('<i class="icon-tags"></i>') + "Posztok admin",
+        <% if permitted_to?(:manage, Post, @group) %>
+          <li><%= link_to raw('<i class="icon-tags"></i>') + "Posztok admin",
                     group_admin_posts_path(:group_id => @group) %></li>
+        <% end %>
 
-        <% if true #TODO permission check %>
+        <% if permitted_to?(:update, Group, @group) %>
           <li><%= link_to raw('<i class="icon-pencil"></i>') + t('edit'),
                     edit_group_path(@group), :title => t('edit') %></li>
         <% end %>
@@ -63,13 +64,15 @@
                  :tab => 'old_memberships'},
                 :remote => true %>
   </li>
-  <li id="tab-members-pending_memberships">
-    <%= link_to t('memberships_pending', :count => @group.memberships.pending.count),
-                {:controller => 'groups',
-                 :action => 'get_memberships_tab_content',
-                 :tab => 'pending_memberships'},
-                :remote => true %>
-  </li>
+  <% if permitted_to?(:manage, Membership, @group) %>
+    <li id="tab-members-pending_memberships">
+      <%= link_to t('memberships_pending', :count => @group.memberships.pending.count),
+                  {:controller => 'groups',
+                   :action => 'get_memberships_tab_content',
+                   :tab => 'pending_memberships'},
+                  :remote => true %>
+    </li>
+  <% end %>
 </ul>
 
 <div id="content-memberships">

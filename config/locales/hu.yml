@@ -20,6 +20,8 @@ hu:
       successfully_updated: "Félévi követelmény sikeresen módosítva"
     valuation:
       successfully_updated: "Félévi értékelés sikeresen módosítva"
+    group:
+      successfully_updated: "A csoport adatai sikeresen módosítva"
 
   roles:
     group_admin: "Körvezető"

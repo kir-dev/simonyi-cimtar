@@ -19,5 +19,8 @@ protected
 
   def initialize_rules
     has_permission_to :update, Group
+    has_permission_to :manage, Post
+    has_permission_to :manage, Membership
+    has_permission_to :edit, Valuation
   end
 end
