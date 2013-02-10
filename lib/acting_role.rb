@@ -108,7 +108,7 @@ protected
 
   def valid_group?(group)
     if !global?
-      self.group == group
+      self.group.present? && self.group == group
     else
       # if it is a global role, group should not
       # be taken into account
