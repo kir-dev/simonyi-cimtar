@@ -2,16 +2,18 @@ class Admin::RolesController < ApplicationController
 
   def index
     # TODO: make it searchable
+    authorize! :manage, Role
     @members = Member.order('full_name')
   end
 
   def manage
+    authorize! :manage, Role
     @member = Member.find(params[:member_id])
   end
 
   # adds a role to a member's role list
   def create
-    # TODO: permission check
+    authorize! :manage, Role
     @member = Member.find params[:member_id]
     roles = Role.where name: params[:role][:name], group_id: params[:role][:group_id]
 
@@ -38,6 +40,7 @@ class Admin::RolesController < ApplicationController
   # removes a role from a member's role list
   # called via ajax
   def destroy
+    authorize! :manage, Role
     @member = Member.find params[:member_id]
     @role = @member.roles.find params[:id]
     if @member.roles.delete @role
@@ -51,6 +54,7 @@ class Admin::RolesController < ApplicationController
   # kereses a tagok kozott
   def member_search
     # TODO: make searching smart
+    authorize! :manage, Role
     name = params[:member_name]
 
     @members = Member.where("full_name LIKE ?", "#{name}%").order('full_name')
