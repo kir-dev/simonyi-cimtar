@@ -11,7 +11,7 @@
   <div class="content">
     <div class="row">
       <div class="span9">
-        <%= render "shared/valuation_period" if valuation_period? %>
+        <%= render "shared/valuation_period" if valuation_period? and !@user.nil? and !@user.new_record? %>
         <%= render "shared/flash_message" %>
         <%= yield %>
       </div>
