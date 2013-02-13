@@ -19,13 +19,8 @@
                     edit_group_path(@group), :title => t('edit') %></li>
         <% end %>
         <li><%=
-            if @group.has_member?(@user) # if active member
-              link_to raw('<i class="icon-share"></i>') + t('group_leave'), {:action => 'leave'}, :method => :post
-            else
-              # hide if pending
-              unless @group.memberships.pending.where(:member_id => @user).any?
+            unless @group.has_member?(@user) || @group.memberships.pending.where(:member_id => @user).any?
                 link_to raw('<i class="icon-plus-sign"></i>') + t('group_join'), {:action => 'join'}, :method => :post
-              end
             end
         %></li>
       </ul>

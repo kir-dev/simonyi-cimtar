@@ -81,28 +81,6 @@ class GroupsController < ApplicationController
     redirect_to @group
   end
 
-  # POST /groups/1/leave
-  def leave
-    @group = Group.find(params[:id])
-    if @group.has_member?(@user)
-      ms = @group.memberships
-                 .active
-                 .where(:member_id => @user)
-                 .order('from_date DESC')
-                 .first
-
-      ms.to_date = Date.today
-
-      if ms.save
-        flash[:success] = t('group_leave_msg')
-      else
-        flash[:error] = t('group_leave_msg_failed')
-      end
-    end
-
-    redirect_to @group
-  end
-
   def update_memberships_tab_content(memberships, partial_name)
     respond_to do |format|
       format.js { render :partial => 'memberships_tab_change',
