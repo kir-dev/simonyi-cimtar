@@ -1,5 +1,6 @@
 <p>
   <%= member.full_name %>
   (<%= member.email %>)
+  <%= link_to raw('<i class="icon-user"></i>'), member %>
   <%= link_to "Szerepkör hozzárendelése", manage_admin_roles_path(:member_id => member.id) %>
 </p>
