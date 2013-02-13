@@ -54,7 +54,7 @@ hu:
       too_long: túl hosszú (nem lehet több %{count} karakternél)
       too_short: túl rövid (legalább %{count} karakter kell legyen)
       wrong_length: nem megfelelő hosszúságú (%{count} karakter szükséges)
-  
+
   helpers:
     submit:
       create: "Mentés" # %{model} could be used to refer to the model class
@@ -135,7 +135,7 @@ hu:
         valuation_date_to: "Értékelési időszak vége"
         min_scholarship_index: "Minimális ösztöndíj index"
       valuation:
-        scholarship_index: "Ösztöndíj index"
+        scholarship_index: "Ösztöndíj index (ponttal megadva, pl. 3.76)"
       post:
         title: Megnevezés
         from: Kezdet

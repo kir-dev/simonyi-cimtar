@@ -17,7 +17,10 @@ class Valuation < ActiveRecord::Base
   belongs_to :member
   attr_accessible :community, :professional
 
-  validates :scholarship_index, :presence => true
+  validates :scholarship_index, 
+                  :presence => true, 
+                  :numericality => { :greater_than_or_equal_to => 0 }
+
   validates :professional, :community, :inclusion => { :in => [true, false] }
 
   # passes if passes 2 out of 3 requirements
