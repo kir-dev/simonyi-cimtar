@@ -34,7 +34,7 @@ function setup_manage_view () {
 
         $.ajax({
             url: "/admin/roles/" + roleId,
-            method: "POST",
+            type: "post",
             data: {
                 member_id: memberId,
                 _method: "delete"
