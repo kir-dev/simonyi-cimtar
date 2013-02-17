@@ -70,7 +70,7 @@ class Member < ActiveRecord::Base
 
   validates :address, :hobby, :length => {:maximum => 250}
   validates :intro, :length => {:maximum => 1000}
-  validates :phone, :length => {:maximum => 12}
+  validates :phone, :length => {:maximum => 20}
   validates :room, :length => {:maximum => 10}
   validates :nick, :length => {:maximum => 100}
 

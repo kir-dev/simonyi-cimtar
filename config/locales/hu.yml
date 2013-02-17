@@ -24,7 +24,7 @@ hu:
       successfully_updated: "A csoport adatai sikeresen módosítva"
 
   roles:
-    group_admin: "Körvezető"
+    group_admin: "Vezető"
 
   attributes:
     id: 'Azonosító'
