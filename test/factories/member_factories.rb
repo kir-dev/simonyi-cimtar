@@ -2,8 +2,8 @@ FactoryGirl.define do
 
   factory :user, :class => Member do
     full_name "John Doe"
-    email "test@test.cc"
-    login "test"
+    sequence(:email, 100) { |n| "test#{n}@test.cc" }
+    sequence(:login) { |n| "test#{n}"}
     univ_year 2005
     enrollment_year 2006
 
