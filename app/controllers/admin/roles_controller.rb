@@ -57,7 +57,7 @@ class Admin::RolesController < ApplicationController
     authorize! :manage, Role
     name = params[:member_name]
 
-    @members = Member.where("full_name LIKE ?", "#{name}%").order('full_name')
+    @members = Member.where("lower(full_name) LIKE ?", "#{name.downcase}%").order('full_name')
     render "member_search_result", layout: false
   end
 
