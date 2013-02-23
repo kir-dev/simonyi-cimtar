@@ -66,12 +66,8 @@ A spork szervert indítsuk el a `$ spork` paranccsal.
 
 A tesztek futtatásához használjuk a `testdrb` parancsot:
 
-    # unit tesztek futtatása
-    $ testdrb -Itest test/unit/*.rb
-    $ testdrb -Itest test/unit/**/*.rb
-    # funkcionális tesztek futtatása
-    $ testdrb -Itest test/functional/*.rb
-    $ testdrb -Itest test/functional/**/*.rb
+    # összes teszt futtatása
+    $ testdrb -Itest test/unit/*.rb test/unit/**/*.rb test/functional/*.rb test/functional/**/*.rb
 
 A sporkot megkerülni a `rake test` és társai segítségével lehet. Például
 
