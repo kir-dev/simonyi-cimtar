@@ -1,38 +1,52 @@
 <%= form_for @group, :html => {:class => 'form-horizontal'} do |f| %>
-    <div class="control-group">
+
+    <div>
+      <% if @group.errors.any? %>
+          <div class="alert alert-error">
+            <%= t('error_in_form_html') %>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="control-group <%= form_input_feedback_css(@group, :name, 'error') %>">
       <%= f.label :name, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :name, :class => 'text_field' %>
+        <%= form_input_feedback_text(@group, :name) %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= form_input_feedback_css(@group, :founded, 'error') %>">
       <%= f.label :founded, :class => 'control-label' %>
       <div class="controls">
         <%= f.number_field :founded, :class => 'number_field' %>
+        <%= form_input_feedback_text(@group, :founded) %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= form_input_feedback_css(@group, :url, 'error') %>">
       <%= f.label :url, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :url, :class => 'text_field' %>
+        <%= form_input_feedback_text(@group, :url) %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= form_input_feedback_css(@group, :mail_list, 'error') %>">
       <%= f.label :mail_list, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :mail_list, :class => 'text_field' %>
+        <%= form_input_feedback_text(@group, :mail_list) %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= form_input_feedback_css(@group, :shortname, 'error') %>">
       <%= f.label :shortname, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :shortname, :class => 'text_field' %>
+        <%= form_input_feedback_text(@group, :shortname) %>
       </div>
     </div>
 
     <div class="form-actions">
       <%= f.submit t('save'), :class => 'btn btn-primary' %>
       <%= link_to t('cancel'),
-                  groups_path, :class => 'btn' %>
+                  @group, :class => 'btn' %>
     </div>
 <% end %>
