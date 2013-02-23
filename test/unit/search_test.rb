@@ -58,4 +58,22 @@ class SearchTest < ActiveSupport::TestCase
     assert_equal company_name, res.jobs.first.company
   end
 
+  test "searching for group full name" do
+    FactoryGirl.create :group, name: "Group A"
+    FactoryGirl.create :group, name: "Group B"
+
+    res = Search.do "group"
+
+    assert_not_nil res.groups
+    assert_equal 2, res.groups.count
+  end
+
+  test "groups can be search by short name" do
+    FactoryGirl.create :group, shortname: "AAA"
+    FactoryGirl.create :group, shortname: "BAAAB"
+    
+    res = Search.do "aa"
+    assert_not_nil res.groups
+    assert_equal 2, res.groups.count
+  end
 end

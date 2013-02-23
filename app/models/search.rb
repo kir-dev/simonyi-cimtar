@@ -8,8 +8,9 @@ class Search
   def execute
     members = search_members term
     jobs = search_jobs term
+    groups = search_groups term
 
-    SearchResult.new members, jobs
+    SearchResult.new members, jobs, groups
   end
 
   def self.do(term)
@@ -40,6 +41,11 @@ private
     JobPosition.where "lower(company) LIKE ?", "%#{company.downcase}%"
   end
 
+  def search_groups(group)
+    args = []
+    2.times { args << "%#{group.downcase}%" }
+    Group.where "lower(name) LIKE ? OR lower(shortname) LIKE ?", *args
+  end
 end
 
 SearchResult = Struct.new :members, :jobs, :groups

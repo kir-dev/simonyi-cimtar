@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :group do
-    name "Group"
-    shortname "g"
+    sequence(:name) { |n| "Group#{n}" }
+    sequence(:shortname) { |n| "G#{n}" }
     founded 2001
   end
 end
