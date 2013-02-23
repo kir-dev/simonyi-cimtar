@@ -18,7 +18,7 @@ class GroupAdminTest < ActiveSupport::TestCase
 
   test "can update Group" do
     group_admin = FactoryGirl.create :group_admin_role
-    other_group = FactoryGirl.create :group, name: "g1", shortname: "g1", founded: 2010
+    other_group = FactoryGirl.create :group, name: "otherg1", shortname: "og1", founded: 2010
 
     ga = Roles::GroupAdminRole.new(nil, group_admin.group)
 
