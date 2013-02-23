@@ -7,7 +7,9 @@ class Search
 
   def execute
     members = search_members term
-    SearchResult.new members
+    jobs = search_jobs term
+
+    SearchResult.new members, jobs
   end
 
   def self.do(term)
@@ -23,15 +25,19 @@ private
     query = <<-EOF
     lower(full_name) LIKE ? OR
     lower(nick) LIKE ? OR
-    lower(email) LIKE ?
+    lower(email) LIKE ? OR
+    lower(login) LIKE ?
     EOF
     
     args = []
-    3.times { args << "%#{name.downcase}%"}
+    4.times { args << "%#{name.downcase}%"}
 
     # check for the name every time
     Member.where query, *args
-    
+  end
+
+  def search_jobs(company)
+    JobPosition.where "lower(company) LIKE ?", "%#{company.downcase}%"
   end
 
 end

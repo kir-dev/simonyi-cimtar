@@ -27,15 +27,35 @@ class SearchTest < ActiveSupport::TestCase
     assert_equal user, sr.members.first
   end
 
-  test "searching for members looks into full_name, nick and email" do
+  test "searching for members looks into full_name, nick, login and email" do
     FactoryGirl.create :user, full_name: "Joe Black"
     FactoryGirl.create :user, nick: "joel"
     FactoryGirl.create :user, email: "my_man_joetro@example.com"
+    FactoryGirl.create :user, login: "joe_the_mighty"
 
     sr = Search.do "joe"
 
     assert_not_nil sr.members
-    assert_equal 3, sr.members.count
+    assert_equal 4, sr.members.count
+  end
+
+  test "searching in company names" do
+    FactoryGirl.create :ms
+
+    sr = Search.do "soft"
+
+    assert_not_nil sr.jobs
+    assert_equal 1, sr.jobs.count
+  end
+
+  test "searching in companies are case insensitive" do
+    company_name = "ALL CAPS COMPANY"
+    FactoryGirl.create :ms, company: company_name
+    
+    res = Search.do "company"
+
+    assert_equal 1, res.jobs.count
+    assert_equal company_name, res.jobs.first.company
   end
 
 end
