@@ -14,39 +14,52 @@ class AppControllerTest < ActionController::TestCase
     assert_equal :goto_login, @controller.send(:authenticate_logic)
   end
 
-  test "login with a not registered but member on vir user aka newuser" do
+  test "login with a not existing db user who is member on vir" do
     set_test_data @users[0]
     assert_equal :reg, @controller.send(:authenticate_logic)
+
+    set_test_data @users[1]
+    assert_equal :access_denied, @controller.send(:authenticate_logic)
   end
 
-  test "login with a registered and member on vir user aka user the first time" do
+  test "login with user with deleted flag" do
+    FactoryGirl.create :user, :login => "virmember", :deleted => true
+    set_test_data @users[0]
+    assert_equal :deleted, @controller.send(:authenticate_logic)
+
+    FactoryGirl.create :user, :login => "not_virmember", :deleted => true
+    set_test_data @users[1]
+    assert_equal :deleted, @controller.send(:authenticate_logic)
+  end
+
+  test "login with an existing db user without accepted membership" do
+    FactoryGirl.create :user, :login => "virmember"
+    set_test_data @users[0]
+    assert_equal :wait, @controller.send(:authenticate_logic)
+
+    FactoryGirl.create :user, :login => "not_virmember"
+    set_test_data @users[1]
+    assert_equal :wait, @controller.send(:authenticate_logic)
+  end
+
+  test "login with an imported user (with accepted membership), the first time" do
+    FactoryGirl.create :user_with_group, :login => "virmember"
+    set_test_data @users[0]
+    assert_equal :reg, @controller.send(:authenticate_logic)
+
+    FactoryGirl.create :user_with_group, :login => "not_virmember"
     set_test_data @users[1]
     assert_equal :reg, @controller.send(:authenticate_logic)
   end
 
-  test "login with a registered and member on vir user aka user not the first time" do
-    set_test_data @users[5]
+  test "login with an existing db user with accepted membership, not the first time" do
+    FactoryGirl.create :user_with_group, :login => "virmember", :last_active => "2012-08-15"
+    set_test_data @users[0]
     assert_equal :ok, @controller.send(:authenticate_logic)
-  end
 
-  test "login with a not registered and not member on vir user aka hacker" do
-    set_test_data @users[2]
-    assert_equal :access_denied, @controller.send(:authenticate_logic)
-  end
-
-  test "login with a registered and not member on vir user aka oldboy the first time" do
-    set_test_data @users[3]
-    assert_equal :reg, @controller.send(:authenticate_logic)
-  end
-
-  test "login with a registered and not member on vir user aka oldboy not the first time" do
-    set_test_data @users[6]
+    FactoryGirl.create :user_with_group, :login => "not_virmember", :last_active => "2012-08-15"
+    set_test_data @users[1]
     assert_equal :ok, @controller.send(:authenticate_logic)
-  end
-
-  test "login with a registered and deleted user aka banned troll" do
-    set_test_data @users[4]
-    assert_equal :deleted, @controller.send(:authenticate_logic)
   end
 
 private
@@ -58,7 +71,7 @@ private
     @controller.request.env[attribute_mapping[:entitlement]] = sso_user['entitlement']
   end
 
-  def clear_test_data()
+  def clear_test_data
     member_attributes.each do |attr|
       @controller.request.env[attribute_mapping[attr.to_sym]] = nil
     end
