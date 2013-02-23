@@ -39,7 +39,11 @@ module AppAuthHelper
 
   def get_attribute_value(attr_sym)
     if attribute_mapping.has_key?(attr_sym)
-      request.env[attribute_mapping[attr_sym]].force_encoding('utf-8')
+      attr = request.env[attribute_mapping[attr_sym]]
+
+      unless attr.nil?
+        attr.force_encoding('utf-8')
+      end
     else
       nil
     end
