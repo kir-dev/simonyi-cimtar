@@ -33,7 +33,7 @@ function setup_manage_view () {
             memberId = link.data("member-id");
 
         $.ajax({
-            url: "/admin/roles/" + roleId,
+            url: Routes.admin_role_path(roleId),
             type: "post",
             data: {
                 member_id: memberId,

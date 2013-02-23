@@ -11,6 +11,7 @@
  *= require_self
  *= require bootstrap_and_overrides
  *= require chosen
+ *= require select2
  *= require_tree .
  * require jquery.ui.datepicker
  */
@@ -110,7 +111,6 @@ a.app-admin-icon, a.app-admin-icon:hover {
     font-size: 18px;
     text-decoration: none;
     color: gray;
-    line-height: 38px;
     margin-left: 10px;
 }
 
@@ -121,3 +121,4 @@ a.app-admin-icon > i {
 .error {
     color: red;
 }
+

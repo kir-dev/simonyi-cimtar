@@ -111,6 +111,7 @@ hu:
     models:
       member: 'Tag'
       group: 'Szervezeti egység'
+      job_position: Munkahely
     attributes:
       member:
         login: 'VIR login'

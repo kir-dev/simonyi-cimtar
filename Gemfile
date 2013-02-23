@@ -53,6 +53,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails', '~> 2.1.9'
   gem 'less-rails'
+
+  gem "js-routes"
+  gem "select2-rails"
+
   # gem 'jquery-ui-rails'
 end
 
@@ -62,7 +66,7 @@ gem "jquery-rails", "~> 2.1.4"
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'

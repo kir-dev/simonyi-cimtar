@@ -1,0 +1,16 @@
+<ul>
+  <h3>Tagok</h3>
+  <% @result.members.each do |member| %>
+    <li><%= link_to member.name, member %></li>
+  <% end -%>
+
+  <h3>Cégek</h3>
+  <% @result.jobs.each do |job| %>
+    <li><%= job.company %></li>
+  <% end -%>
+
+  <h3>Egységek</h3>
+  <% @result.groups.each do |group| %>
+    <li><%= link_to group.name, group %></li>
+  <% end -%>
+</ul>

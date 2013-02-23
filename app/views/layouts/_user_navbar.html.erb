@@ -15,28 +15,32 @@
       </a> -->
 
       <div class="nav-collapse">
-<!--         <form class="navbar-search pull-left" action="">
-          <input type="text" class="search-query span2" placeholder="Keresés">
-        </form> -->
-
-        <%= if !@user.nil? && (permitted_to?(:manage, Semester) || permitted_to?(:manage, Role))
-              link_to("/admin", {:class => 'app-admin-icon'}) do %>
-              <i class="icon-cog icon-large"></i>
-        <% end end %>
+        <form class="navbar-search pull-left" action="">
+          <p class="search-query">
+            <input type="hidden" id="general-search" style="width: 400px;" />
+          </p>
+        </form>
 
         <ul class="nav pull-right">
-          <% unless @user.nil? %>
+          <% unless @user.blank? %>
+            <% if @user && (permitted_to?(:manage, Semester) || permitted_to?(:manage, Role)) %>
               <li>
-                <%= link_to(@user, :class => 'navbar-link-to-profile') do %>
-                    <%= image_tag @user.gravatar_url(:size => 20),
-                                  :alt => '', :width => 20 %>
-                    <span><%= @user.full_name %></span>
-                <% end %>
+                <%= link_to(admin_path, { :class => "app-admin-icon" }) do %>
+                  <i class="icon-cog icon-large"></i>
+                <% end -%>
               </li>
-              <li class="divider-vertical"></li>
-              <li>
-                <%= link_to "Kilépés", :controller => "members", :action => "logout" %>
-              </li>
+            <% end %>
+            <li>
+              <%= link_to(@user, :class => 'navbar-link-to-profile') do %>
+                <%= image_tag @user.gravatar_url(:size => 20),
+                              :alt => '', :width => 20 %>
+                <span><%= @user.full_name %></span>
+              <% end %>
+            </li>
+            <li class="divider-vertical"></li>
+            <li>
+              <%= link_to "Kilépés", :controller => "members", :action => "logout" %>
+            </li>
           <% end %>
         </ul>
       </div>
@@ -44,3 +48,5 @@
     </div>
   </div>
 </div>
+
+

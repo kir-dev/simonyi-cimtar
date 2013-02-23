@@ -9,8 +9,6 @@ SzkCimtar::Application.routes.draw do
 
     # new action creates a new valuation if not exsits and redericest to edit
     resources :valuations, :except => [:show, :index, :destroy, :create]
-
-
   end
 
   resources :groups, :except => [:destroy] do
@@ -20,6 +18,9 @@ SzkCimtar::Application.routes.draw do
       get 'get_memberships_tab_content'
     end
   end
+
+  # search
+  get "/search/:term" => "search#index", :as => "search"
 
   namespace :group_admin do
     resources :valuations, :only => [:index] do
