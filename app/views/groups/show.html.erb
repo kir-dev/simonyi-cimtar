@@ -34,14 +34,26 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @group.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:founded) %>:</strong></dt>
-  <dd><%= @group.founded %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:url) %>:</strong></dt>
-  <dd><%= @group.url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:mail_list) %>:</strong></dt>
-  <dd><%= @group.mail_list %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:shortname) %>:</strong></dt>
-  <dd><%= @group.shortname %></dd>
+
+  <% unless @group.founded.nil? %>
+    <dt><strong><%= model_class.human_attribute_name(:founded) %>:</strong></dt>
+    <dd><%= @group.founded %></dd>
+  <% end %>
+
+  <% unless @group.url.empty? %>
+    <dt><strong><%= model_class.human_attribute_name(:url) %>:</strong></dt>
+    <dd><%= @group.url %></dd>
+  <% end %>
+
+  <% unless @group.mail_list.empty? %>
+    <dt><strong><%= model_class.human_attribute_name(:mail_list) %>:</strong></dt>
+    <dd><%= @group.mail_list %></dd>
+  <% end %>
+
+  <% unless @group.shortname.empty? %>
+    <dt><strong><%= model_class.human_attribute_name(:shortname) %>:</strong></dt>
+    <dd><%= @group.shortname %></dd>
+  <% end %>
 </dl>
 
 <ul class="nav nav-tabs">
