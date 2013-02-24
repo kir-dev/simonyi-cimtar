@@ -115,6 +115,14 @@ class MembersController < ApplicationController
     end
   end
 
+  # list members by job positions
+  def by_job
+    member_ids = JobPosition.where(:company => params[:company]).select(:member_id).group(:member_id).map(&:member_id)
+    @members = Member.find member_ids
+  end
+
+protected 
+
   def is_own_profile?
     @user.id == @member.id
   end

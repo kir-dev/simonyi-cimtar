@@ -47,5 +47,4 @@ class JobPositionsController < ApplicationController
       end
     end
   end
-
 end

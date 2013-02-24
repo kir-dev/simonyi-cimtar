@@ -45,7 +45,6 @@ class SearchTest < ActiveSupport::TestCase
     sr = Search.do "soft"
 
     assert_not_nil sr.jobs
-    assert_equal 1, sr.jobs.count
   end
 
   test "searching in companies are case insensitive" do
@@ -54,7 +53,6 @@ class SearchTest < ActiveSupport::TestCase
     
     res = Search.do "company"
 
-    assert_equal 1, res.jobs.count
     assert_equal company_name, res.jobs.first.company
   end
 

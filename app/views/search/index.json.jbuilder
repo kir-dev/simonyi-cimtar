@@ -12,7 +12,7 @@ json.members do |json|
 end
 json.jobs do |json|
   json.array!(@result.jobs) do |job|
-    json.id "job##{job.id}"
+    json.id "job##{job.company}"
     json.text job.company
   end
 end

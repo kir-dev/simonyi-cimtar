@@ -20,10 +20,10 @@
 //= require best_in_place.purr
 //= require select2
 //= require select2_hu
+//= require js-routes
 //= require_tree .
 // require jquery.ui.datepicker
 // require jquery.ui.datepicker-hu
-//= require js-routes
 
 $(document).ready(function () {
     jQuery(".best_in_place").best_in_place();
@@ -59,8 +59,7 @@ $(document).ready(function () {
                 window.location = Routes.group_path(selected[1]);
                 break;
             case "job":
-                //window.location = Routes.job_path(selected[1]);
-                alert("TODO: kell egy view a munkahely megjelenítésére");
+                window.location = Routes.by_job_members_path(selected[1]);
                 break;
         }
     });

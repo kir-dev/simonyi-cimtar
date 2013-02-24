@@ -38,7 +38,7 @@ private
   end
 
   def search_jobs(company)
-    JobPosition.where "lower(company) LIKE ?", "%#{company.downcase}%"
+    JobPosition.where("lower(company) LIKE ?", "%#{company.downcase}%").select(:company).group(:company)
   end
 
   def search_groups(group)
