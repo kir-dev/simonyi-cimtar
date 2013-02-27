@@ -2,3 +2,7 @@ AuthType shibboleth
 require shibboleth
 
 RewriteEngine On
+
+#force sso login
+ShibRequireSession On
+ShibRequireAll On
