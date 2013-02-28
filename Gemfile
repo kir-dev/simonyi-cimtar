@@ -7,6 +7,7 @@ gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
 gem 'nested_form'
 gem 'chosen-rails'
+gem 'js-routes'
 
 group :production do
   gem 'pg'
@@ -54,7 +55,6 @@ group :assets do
   gem 'twitter-bootstrap-rails', '~> 2.1.9'
   gem 'less-rails'
 
-  gem "js-routes"
   gem "select2-rails"
 
   # gem 'jquery-ui-rails'
