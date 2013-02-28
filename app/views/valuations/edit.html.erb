@@ -13,6 +13,11 @@
   </div>
 <% end -%>
 
+<p class="muted">
+  Az ösztöndíjindex megadása nem kötelező, de a tagság megtartásához szükséges lehet (konzultálj a körvezetőddel).
+  <br/>
+  Az átlag megadásával elfogadod, hogy az ösztöndíjindexed tároljuk és kezeljük, azt harmadik félnek nem adjuk ki.
+</p>
 <%= form_for [@user, @valuation] do |f| %>
   <%= f.label :scholarship_index %>
   <%= f.text_field :scholarship_index %>
