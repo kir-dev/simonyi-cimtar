@@ -59,7 +59,7 @@ $(document).ready(function () {
                 window.location = Routes.group_path(selected[1]);
                 break;
             case "job":
-                window.location = Routes.by_job_members_path(selected[1]);
+                window.location = Routes.by_job_members_path({company: selected[1]});
                 break;
         }
     });

@@ -10,7 +10,7 @@ SzkCimtar::Application.routes.draw do
     # new action creates a new valuation if not exsits and redericest to edit
     resources :valuations, :except => [:show, :index, :destroy, :create]
 
-    get "by_job/:company" => :by_job, :as => "by_job", :on => :collection
+    get "by_job" => :by_job, :as => "by_job", :on => :collection
   end
 
   resources :groups, :except => [:destroy] do
