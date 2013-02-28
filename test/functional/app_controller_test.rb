@@ -14,12 +14,12 @@ class AppControllerTest < ActionController::TestCase
     assert_equal :goto_login, @controller.send(:authenticate_logic)
   end
 
-  test "login with a not existing db user who is member on vir" do
+  test "login with a not existing db user" do
     set_test_data @users[0]
     assert_equal :reg, @controller.send(:authenticate_logic)
 
     set_test_data @users[1]
-    assert_equal :access_denied, @controller.send(:authenticate_logic)
+    assert_equal :reg, @controller.send(:authenticate_logic)
   end
 
   test "login with user with deleted flag" do

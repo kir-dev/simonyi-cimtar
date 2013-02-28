@@ -84,11 +84,7 @@ private
     else
       @user = Member.find_by_login(remote_user)
       if @user.nil?
-        if member_on_vir?
           :reg
-        else
-          :access_denied
-        end
       else
         if @user.deleted?
           :deleted

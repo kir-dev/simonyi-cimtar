@@ -4,8 +4,6 @@
 module AppAuthHelper
   unloadable
 
-  ENTITLEMENT_SZK = 'urn:geant:niif.hu:sch.bme.hu:entitlement:tag:Simonyi Károly Szakkollégium:16'
-
   def member_attributes
     %w(login email full_name nick)
   end
@@ -26,15 +24,6 @@ module AppAuthHelper
 
   def remote_user
     get_attribute_value :login
-  end
-
-  def member_on_vir?
-    entitlement = get_attribute_value :entitlement
-    if entitlement and entitlement.include? ENTITLEMENT_SZK
-      true
-    else
-      false
-    end
   end
 
   def get_attribute_value(attr_sym)
