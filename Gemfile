@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
-gem 'best_in_place'
+gem 'best_in_place', '2.1.0'
 gem 'validates_timeliness', '~> 3.0'
 gem 'gravtastic'
 gem 'nested_form'
