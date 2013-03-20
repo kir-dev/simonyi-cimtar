@@ -26,6 +26,14 @@
     <h2>
       <%= best_in_place_if false, @member, :full_name, :type => :input %>
     </h2>
+    <div class="profile-tagline">
+      <%  if is_own_profile? %>
+            <label class="profile-tagline-label">Tagline:</label>
+            <%= best_in_place @member, :hobby, :type => :input %>
+      <% else %>
+            <div class="profile-tagline-content"><%= @member.hobby %></div>
+      <% end %>
+    </div>
 
     <ul class="nav nav-tabs">
       <li class="active">
@@ -103,16 +111,6 @@
         <td>
           <a href="https://profile.sch.bme.hu/profile/show/uid/<%= @member.login %>"><%= @member.login %></a>
         </td>
-      </tr>
-      <tr>
-        <td><label>Tagline:</label></td>
-        <td><%=
-            if is_own_profile?
-              best_in_place @member, :hobby, :type => :input
-            else
-              @member.hobby
-            end
-        %></td>
       </tr>
       <tr>
         <td><label>Magadról:</label></td>

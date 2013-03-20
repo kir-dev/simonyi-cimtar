@@ -28,6 +28,19 @@
   padding-right: 0.1em;
 }
 
+.profile-tagline-label {
+  display: inline-block;
+}
+
+.profile-tagline {
+  margin: 10px;
+}
+
+.profile-tagline-content {
+  color: gray;
+  font-style: italic;
+}
+
 #member-data td:first-child {
   width: 150px;
 }
