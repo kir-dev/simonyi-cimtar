@@ -1,3 +1,17 @@
+<% content_for :stat_sidebar do %>
+<%
+  @active_members = Membership.active.select(:member_id).uniq
+  @old_memberships = Membership.old.select(:member_id).uniq - @active_members
+%>
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header">Statisztika</li>
+          <li><i class="icon-user"></i> Tagok: <%= @active_members.count %></li>
+          <li><i class="icon-heart"></i> Öregtagok: <%= @old_memberships.count %></li>
+      </ul>
+    </div>
+<% end %>
+
 <div class="row" style="margin-top: 35px;">
   <div class="span2">&nbsp;</div>
   <div class="span6">
