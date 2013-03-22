@@ -10,6 +10,13 @@ hu:
   operations: 'Műveletek'
   error_in_form_html: '<b>Művelet sikertelen!</b> Kérlek javítsd a hibás adatokat!'
 
+  posts:
+    group_admin: Vezető
+
+  roles:
+    system_admin: Alkalmazás admin
+    group_admin: Vezető
+
   messages:
     are_you_sure: "Biztos vagy benne?"
     not_valuation_period: "Nincs értékelési időszak"
@@ -22,9 +29,6 @@ hu:
       successfully_updated: "Félévi értékelés sikeresen módosítva"
     group:
       successfully_updated: "A csoport adatai sikeresen módosítva"
-
-  roles:
-    group_admin: "Vezető"
 
   attributes:
     id: 'Azonosító'

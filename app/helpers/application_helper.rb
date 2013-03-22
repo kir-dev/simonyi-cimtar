@@ -14,4 +14,8 @@ module ApplicationHelper
     end
   end
 
+  def translate_post_title(post)
+    t "posts.#{post.title}", :default => post.title
+  end
+
 end

@@ -12,7 +12,9 @@
       <tr>
         <td><%= link_to ms.member.full_name, ms.member %></td>
         <td><%= ms.member.nick %></td>
-        <td><%= ms.posts.active.map(&:title).join ", " %></td>
+        <td><%= ms.posts.active.map { |post|
+            translate_post_title(post)
+        }.join ", " %></td>
         <td>
           <% if permitted_to?(:manage, Membership, ms.group) %>
             <%= link_to t('memberships_change_to_old'),
