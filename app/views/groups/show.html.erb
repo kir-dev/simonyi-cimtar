@@ -35,7 +35,7 @@
           <% if permitted_to?(:manage, Membership, @group) %>
             <li><i class="icon-time"></i> Elfogadásra vár: <%= @group.memberships.pending.count %></li>
           <% end %>
-          <li><i class="icon-heart"></i> Öregtagok: <%= @group.memberships.old.count %></li>
+          <li><i class="icon-heart"></i> Öregtagok: <%= @group.memberships.old.select('distinct(member_id)').count %></li>
       </ul>
     </div>
 <% end %>
