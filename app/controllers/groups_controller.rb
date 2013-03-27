@@ -138,6 +138,8 @@ class GroupsController < ApplicationController
     group = membership.group
     authorize! :manage, Membership, group
     membership.to_date = Time.now
+    invalidate_posts_and_roles membership
+
     membership.save
 
     update_memberships_tab_content(group.memberships.active.includes(:member).order('members.full_name'),
@@ -148,11 +150,20 @@ class GroupsController < ApplicationController
     membership = Membership.find(params[:id])
     group = membership.group
     authorize! :manage, Membership, group
+    membership.to_date = Time.now
     membership.deleted = true
+    invalidate_posts_and_roles membership
+
     membership.save
 
     update_memberships_tab_content(group.memberships.active.includes(:member).order('members.full_name'),
                                    'active_memberships')
   end
+
+  private
+    def invalidate_posts_and_roles(membership)
+      membership.member.member_roles.joins(:role).where('roles.group_id' => membership.group.id).destroy_all
+      membership.posts.active.map! { |post| post.to = membership.to_date }
+    end
 
 end
