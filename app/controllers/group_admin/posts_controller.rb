@@ -16,6 +16,11 @@ class GroupAdmin::PostsController < ApplicationController
     @membership = Membership.find params[:membership_id]
     authorize! :manage, Post, @membership.group
     @post.membership = @membership
+
+    unless params[:post][:old_post] == '1'
+      @post.to = nil
+    end
+
     if @post.save
       redirect_to group_admin_posts_path(group_id: @membership.group)
     else

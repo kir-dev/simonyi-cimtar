@@ -7,7 +7,17 @@
   <%= f.text_field :title %>
 
   <%= f.label :from %>
-  <%= f.date_select :from, start_year: 2000, end_year: Date.today.year %>
+  <%= f.date_select :from, { start_year: 2000, end_year: Date.today.year, use_short_month: true }, :class => 'date' %>
+
+  <div style="padding-bottom: 15px;">
+	<label class="checkbox">
+      <%= f.check_box :old_post %> Korábbi poszt
+    </label>
+  </div>
+
+  <div id="post_to_field">
+	  <%= f.date_select :to, { start_year: 2000, end_year: Date.today.year, use_short_month: true }, :class => 'date' %>
+  </div>
 
   <div>
     <%= f.submit class: "btn btn-primary" %>

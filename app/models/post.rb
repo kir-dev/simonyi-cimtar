@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
   belongs_to :membership
-  attr_accessible :from, :title, :to
+  attr_accessor :old_post # bool, transient attribute, used when saving post from the past
+
+  attr_accessible :from, :title, :to, :old_post
 
   validates :title, :from, :presence => true
 
